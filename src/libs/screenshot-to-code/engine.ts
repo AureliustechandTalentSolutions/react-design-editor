@@ -3,14 +3,9 @@
  * Uses Claude Vision API to analyze screenshots and generate code
  */
 
-import {
-	ScreenshotImportRequest,
-	ConversionResult,
-	AnalysisResult,
-	DetectedElement,
-	AnalysisOptions,
-} from './types';
-import { safeParseDesign } from '../ai/parsers';
+/* eslint-disable no-use-before-define */
+
+import { ScreenshotImportRequest, ConversionResult, AnalysisResult, DetectedElement, AnalysisOptions } from './types';
 
 /**
  * Get API key from environment
@@ -29,10 +24,7 @@ const hasApiKey = (): boolean => {
 /**
  * Analyze screenshot using Claude Vision API
  */
-export const analyzeScreenshot = async (
-	imageBase64: string,
-	options: AnalysisOptions
-): Promise<AnalysisResult> => {
+export const analyzeScreenshot = async (imageBase64: string, options: AnalysisOptions): Promise<AnalysisResult> => {
 	if (!hasApiKey()) {
 		// Return mock analysis in demo mode
 		return createMockAnalysis();
@@ -56,7 +48,8 @@ export const analyzeScreenshot = async (
 
 Return a JSON object with this structure:
 {
-  "elements": [{"type": "button", "bounds": {"x": 0, "y": 0, "width": 100, "height": 40}, "properties": {}, "text": "Click", "confidence": 0.95}],
+  "elements": [{"type": "button", "bounds": {"x": 0, "y": 0, "width": 100, "height": 40}, 
+    "properties": {}, "text": "Click", "confidence": 0.95}],
   "colorPalette": ["#hex1", "#hex2"],
   "typography": {"fontFamilies": ["Inter", "Arial"], "fontSizes": [14, 16, 20]},
   "layout": {"type": "flex", "columns": 1},
@@ -81,11 +74,10 @@ Return a JSON object with this structure:
 						},
 						{
 							type: 'text',
-							text: `Analyze this UI screenshot and extract all elements, colors, typography, layout, and accessibility information. ${
-								options.designSystem
-									? `Map elements to ${options.designSystem} design system components.`
-									: ''
-							}`,
+							text: `Analyze this UI screenshot and extract all elements, colors, typography, layout,
+ and accessibility information. ${
+		options.designSystem ? `Map elements to ${options.designSystem} design system components.` : ''
+ }`,
 						},
 					],
 				},
@@ -99,8 +91,10 @@ Return a JSON object with this structure:
 		}
 
 		throw new Error('Unexpected response format from Claude API');
-	} catch (error: any) {
-		console.error('Error analyzing screenshot:', error);
+	} catch (error: unknown) {
+		if (error instanceof Error) {
+			console.error('Error analyzing screenshot:', error);
+		}
 		return createMockAnalysis();
 	}
 };
@@ -108,9 +102,7 @@ Return a JSON object with this structure:
 /**
  * Convert screenshot to code
  */
-export const convertScreenshotToCode = async (
-	request: ScreenshotImportRequest
-): Promise<ConversionResult> => {
+export const convertScreenshotToCode = async (request: ScreenshotImportRequest): Promise<ConversionResult> => {
 	// First analyze the screenshot
 	const analysis = await analyzeScreenshot(request.data, request.options);
 
@@ -132,8 +124,13 @@ export const convertScreenshotToCode = async (
  */
 const generateDesignFromAnalysis = async (
 	analysis: AnalysisResult,
-	options: any
-): Promise<any> => {
+	options: ConversionOptions,
+): Promise<{
+	design: { objects: unknown[]; background?: string };
+	styles: Record<string, unknown>;
+	colorPalette: string[];
+	metadata: { screenName: string; description: string; components: string[]; timestamp: number };
+}> => {
 	// Convert detected elements to Fabric.js objects
 	const objects = analysis.elements.map((element: DetectedElement) => {
 		return convertElementToFabricObject(element, options);
@@ -158,10 +155,13 @@ const generateDesignFromAnalysis = async (
 /**
  * Convert detected element to Fabric.js object
  */
-const convertElementToFabricObject = (element: DetectedElement, options: any): any => {
+const convertElementToFabricObject = (
+	element: DetectedElement,
+	_options: ConversionOptions,
+): Record<string, unknown> => {
 	const { type, bounds, properties, text } = element;
 
-	const baseObject = {
+	const baseObject: Record<string, unknown> = {
 		id: `element-${Date.now()}-${Math.random()}`,
 		type: mapElementTypeToFabricType(type),
 		left: bounds.x,
@@ -177,9 +177,9 @@ const convertElementToFabricObject = (element: DetectedElement, options: any): a
 			...baseObject,
 			type: 'textbox',
 			text,
-			fontSize: properties.fontSize || 16,
-			fontFamily: properties.fontFamily || 'Arial',
-			fill: properties.color || '#000000',
+			fontSize: (properties.fontSize as number) || 16,
+			fontFamily: (properties.fontFamily as string) || 'Arial',
+			fill: (properties.color as string) || '#000000',
 		};
 	}
 
@@ -208,7 +208,15 @@ const mapElementTypeToFabricType = (elementType: string): string => {
 /**
  * Generate code from design
  */
-const generateCodeFromDesign = async (design: any, options: any): Promise<any> => {
+const generateCodeFromDesign = async (
+	design: {
+		design: { objects: unknown[]; background?: string };
+		styles: Record<string, unknown>;
+		colorPalette: string[];
+		metadata: { screenName: string; description: string; components: string[]; timestamp: number };
+	},
+	options: ConversionOptions,
+): Promise<{ files: { path: string; content: string; language: string }[]; dependencies: Record<string, string> }> => {
 	// Import code generation functions
 	const { exportToReact } = await import('../export/react');
 
@@ -223,9 +231,7 @@ const generateCodeFromDesign = async (design: any, options: any): Promise<any> =
 	return {
 		files: [
 			{
-				path: options.typescript
-					? 'ScreenshotComponent.tsx'
-					: 'ScreenshotComponent.jsx',
+				path: options.typescript ? 'ScreenshotComponent.tsx' : 'ScreenshotComponent.jsx',
 				content: code,
 				language: options.typescript ? 'typescript' : 'javascript',
 			},
@@ -246,13 +252,21 @@ const generateCodeFromDesign = async (design: any, options: any): Promise<any> =
 /**
  * Validate analysis result structure
  */
-const validateAnalysisResult = (result: any): AnalysisResult => {
+const validateAnalysisResult = (result: unknown): AnalysisResult => {
+	const res = result as {
+		elements?: unknown[];
+		colorPalette?: unknown[];
+		typography?: { fontFamilies: string[]; fontSizes: number[] };
+		layout?: { type: string };
+		accessibility?: { score: number; issues: string[] };
+	};
+
 	return {
-		elements: Array.isArray(result.elements) ? result.elements : [],
-		colorPalette: Array.isArray(result.colorPalette) ? result.colorPalette : [],
-		typography: result.typography || { fontFamilies: [], fontSizes: [] },
-		layout: result.layout || { type: 'flex' },
-		accessibility: result.accessibility || { score: 0, issues: [] },
+		elements: Array.isArray(res.elements) ? (res.elements as DetectedElement[]) : [],
+		colorPalette: Array.isArray(res.colorPalette) ? (res.colorPalette as string[]) : [],
+		typography: res.typography || { fontFamilies: [], fontSizes: [] },
+		layout: res.layout || { type: 'flex' },
+		accessibility: res.accessibility || { score: 0, issues: [] },
 	};
 };
 

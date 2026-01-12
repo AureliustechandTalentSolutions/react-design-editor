@@ -3,8 +3,6 @@
  * Defines mapping between UI elements and USWDS components
  */
 
-import { uswdsTokens } from './tokens';
-
 /**
  * USWDS component definition
  */
@@ -12,8 +10,8 @@ export interface USWDSComponent {
 	name: string;
 	className: string;
 	description: string;
-	props?: Record<string, any>;
-	variants?: Record<string, any>;
+	props?: Record<string, unknown>;
+	variants?: Record<string, unknown>;
 	a11y?: {
 		role?: string;
 		ariaLabel?: string;

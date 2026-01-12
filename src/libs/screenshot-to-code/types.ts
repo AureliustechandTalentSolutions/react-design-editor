@@ -56,7 +56,7 @@ export interface DetectedElement {
 		width: number;
 		height: number;
 	};
-	properties: Record<string, any>;
+	properties: Record<string, unknown>;
 	text?: string;
 	confidence: number;
 }

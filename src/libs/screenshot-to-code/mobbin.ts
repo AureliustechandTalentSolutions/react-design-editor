@@ -3,17 +3,16 @@
  * Handles file upload, clipboard paste, and batch import
  */
 
+import { convertScreenshotToCode } from './engine';
 import {
 	ScreenshotMetadata,
 	ImageFormat,
-	ScreenshotSource,
 	BatchImportResult,
 	ConversionResult,
 	ScreenshotImportRequest,
 	ConversionOptions,
 	MobbinConfig,
 } from './types';
-import { convertScreenshotToCode } from './engine';
 
 /**
  * Maximum file size in bytes (10MB)
@@ -71,10 +70,7 @@ export const readFileAsBase64 = (file: File): Promise<string> => {
 /**
  * Get image dimensions
  */
-export const getImageDimensions = (
-	base64: string,
-	mimeType: string
-): Promise<{ width: number; height: number }> => {
+export const getImageDimensions = (base64: string, mimeType: string): Promise<{ width: number; height: number }> => {
 	return new Promise((resolve, reject) => {
 		const img = new Image();
 		img.onload = () => {
@@ -97,10 +93,7 @@ const extractFormat = (mimeType: string): ImageFormat => {
 /**
  * Import screenshot from file upload
  */
-export const importFromFile = async (
-	file: File,
-	options: ConversionOptions
-): Promise<ConversionResult> => {
+export const importFromFile = async (file: File, options: ConversionOptions): Promise<ConversionResult> => {
 	// Validate file
 	const validation = validateImageFile(file);
 	if (!validation.valid) {
@@ -139,13 +132,13 @@ export const importFromFile = async (
  */
 export const importFromClipboard = async (
 	clipboardData: DataTransfer,
-	options: ConversionOptions
+	options: ConversionOptions,
 ): Promise<ConversionResult> => {
 	// Get image from clipboard
-	const items = clipboardData.items;
+	const { items } = clipboardData;
 	let imageItem: DataTransferItem | null = null;
 
-	for (let i = 0; i < items.length; i++) {
+	for (let i = 0; i < items.length; i += 1) {
 		if (items[i].type.indexOf('image') !== -1) {
 			imageItem = items[i];
 			break;
@@ -194,21 +187,18 @@ export const importFromClipboard = async (
 export const batchImport = async (
 	files: File[],
 	options: ConversionOptions,
-	config: MobbinConfig = {}
+	config: MobbinConfig = {},
 ): Promise<BatchImportResult> => {
 	const { batchSize = 5 } = config;
 	const results: BatchImportResult['results'] = [];
-	let successful = 0;
-	let failed = 0;
 
 	// Process files in batches
 	for (let i = 0; i < files.length; i += batchSize) {
 		const batch = files.slice(i, i + batchSize);
 
 		// Process batch in parallel
-		const batchResults = await Promise.allSettled(
-			batch.map((file) => importFromFile(file, options))
-		);
+		// eslint-disable-next-line no-await-in-loop
+		const batchResults = await Promise.allSettled(batch.map(file => importFromFile(file, options)));
 
 		// Collect results
 		batchResults.forEach((result, index) => {
@@ -223,13 +213,11 @@ export const batchImport = async (
 			};
 
 			if (result.status === 'fulfilled') {
-				successful++;
 				results.push({
 					screenshot: metadata,
 					result: result.value,
 				});
 			} else {
-				failed++;
 				results.push({
 					screenshot: metadata,
 					error: result.reason?.message || 'Unknown error',
@@ -238,10 +226,13 @@ export const batchImport = async (
 		});
 	}
 
+	const successfulCount = results.filter(r => r.result).length;
+	const failedCount = results.filter(r => r.error).length;
+
 	return {
 		total: files.length,
-		successful,
-		failed,
+		successful: successfulCount,
+		failed: failedCount,
 		results,
 	};
 };
@@ -250,7 +241,7 @@ export const batchImport = async (
  * Categorize screenshots by type
  */
 export const categorizeScreenshots = (
-	results: BatchImportResult['results']
+	results: BatchImportResult['results'],
 ): Record<string, BatchImportResult['results']> => {
 	const categories: Record<string, BatchImportResult['results']> = {
 		forms: [],
@@ -261,13 +252,13 @@ export const categorizeScreenshots = (
 		other: [],
 	};
 
-	results.forEach((result) => {
+	results.forEach(result => {
 		if (!result.result) {
 			categories.other.push(result);
 			return;
 		}
 
-		const components = result.result.metadata.components;
+		const { components } = result.result.metadata;
 
 		// Categorize based on detected components
 		if (components.includes('form') || components.includes('input')) {
@@ -293,7 +284,7 @@ export const categorizeScreenshots = (
  */
 export const handlePasteEvent = async (
 	event: ClipboardEvent,
-	options: ConversionOptions
+	options: ConversionOptions,
 ): Promise<ConversionResult> => {
 	if (!event.clipboardData) {
 		throw new Error('No clipboard data available');

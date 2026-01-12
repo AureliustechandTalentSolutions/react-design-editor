@@ -3,8 +3,11 @@
  * Maps detected UI elements to USWDS components
  */
 
+/* eslint-disable no-use-before-define */
+
 import { DetectedElement } from '../../screenshot-to-code/types';
-import { uswdsComponents, USWDSComponent, getUSWDSComponent } from './components';
+
+import { USWDSComponent, getUSWDSComponent } from './components';
 import { uswdsTokens } from './tokens';
 
 /**
@@ -13,9 +16,9 @@ import { uswdsTokens } from './tokens';
 export interface MappingResult {
 	component: USWDSComponent;
 	variant?: string;
-	props: Record<string, any>;
-	styles: Record<string, any>;
-	a11y: Record<string, any>;
+	props: Record<string, unknown>;
+	styles: Record<string, unknown>;
+	a11y: Record<string, unknown>;
 }
 
 /**
@@ -59,10 +62,7 @@ const mapElementTypeToUSWDS = (elementType: string): string | null => {
 /**
  * Determine variant based on element properties
  */
-const determineVariant = (
-	componentName: string,
-	element: DetectedElement
-): string | undefined => {
+const determineVariant = (componentName: string, element: DetectedElement): string | undefined => {
 	const { properties, text } = element;
 
 	switch (componentName) {
@@ -122,19 +122,19 @@ const determineVariant = (
 /**
  * Apply USWDS design tokens to element properties
  */
-const applyUSWDSTokens = (properties: Record<string, any>): Record<string, any> => {
-	const styles: Record<string, any> = {};
+const applyUSWDSTokens = (properties: Record<string, unknown>): Record<string, unknown> => {
+	const styles: Record<string, unknown> = {};
 
 	// Map colors
 	if (properties.backgroundColor) {
-		const color = findClosestUSWDSColor(properties.backgroundColor);
+		const color = findClosestUSWDSColor(properties.backgroundColor as string);
 		if (color) {
 			styles.backgroundColor = color;
 		}
 	}
 
 	if (properties.color || properties.textColor) {
-		const color = findClosestUSWDSColor(properties.color || properties.textColor);
+		const color = findClosestUSWDSColor((properties.color || properties.textColor) as string);
 		if (color) {
 			styles.color = color;
 		}
@@ -142,14 +142,14 @@ const applyUSWDSTokens = (properties: Record<string, any>): Record<string, any> 
 
 	// Map spacing
 	if (properties.padding) {
-		const spacing = findClosestUSWDSSpacing(properties.padding);
+		const spacing = findClosestUSWDSSpacing(properties.padding as number);
 		if (spacing) {
 			styles.padding = spacing;
 		}
 	}
 
 	if (properties.margin) {
-		const spacing = findClosestUSWDSSpacing(properties.margin);
+		const spacing = findClosestUSWDSSpacing(properties.margin as number);
 		if (spacing) {
 			styles.margin = spacing;
 		}
@@ -157,7 +157,7 @@ const applyUSWDSTokens = (properties: Record<string, any>): Record<string, any> 
 
 	// Map border radius
 	if (properties.borderRadius) {
-		const radius = findClosestUSWDSBorderRadius(properties.borderRadius);
+		const radius = findClosestUSWDSBorderRadius(properties.borderRadius as number);
 		if (radius !== undefined) {
 			styles.borderRadius = radius;
 		}
@@ -165,7 +165,7 @@ const applyUSWDSTokens = (properties: Record<string, any>): Record<string, any> 
 
 	// Map font size
 	if (properties.fontSize) {
-		const fontSize = findClosestUSWDSFontSize(properties.fontSize);
+		const fontSize = findClosestUSWDSFontSize(properties.fontSize as number);
 		if (fontSize) {
 			styles.fontSize = fontSize;
 		}
@@ -197,9 +197,7 @@ const findClosestUSWDSColor = (color: string): string | null => {
  */
 const findClosestUSWDSSpacing = (value: number): number | null => {
 	const spacingValues = Object.values(uswdsTokens.spacing);
-	return spacingValues.reduce((prev, curr) =>
-		Math.abs(curr - value) < Math.abs(prev - value) ? curr : prev
-	);
+	return spacingValues.reduce((prev, curr) => (Math.abs(curr - value) < Math.abs(prev - value) ? curr : prev));
 };
 
 /**
@@ -207,12 +205,8 @@ const findClosestUSWDSSpacing = (value: number): number | null => {
  */
 const findClosestUSWDSBorderRadius = (value: number): number | string | null => {
 	if (value >= 9999) return uswdsTokens.borderRadius.pill;
-	const radiusValues = Object.values(uswdsTokens.borderRadius).filter(
-		(v) => typeof v === 'number'
-	) as number[];
-	return radiusValues.reduce((prev, curr) =>
-		Math.abs(curr - value) < Math.abs(prev - value) ? curr : prev
-	);
+	const radiusValues = Object.values(uswdsTokens.borderRadius).filter(v => typeof v === 'number') as number[];
+	return radiusValues.reduce((prev, curr) => (Math.abs(curr - value) < Math.abs(prev - value) ? curr : prev));
 };
 
 /**
@@ -220,9 +214,7 @@ const findClosestUSWDSBorderRadius = (value: number): number | string | null => 
  */
 const findClosestUSWDSFontSize = (value: number): number | null => {
 	const fontSizes = Object.values(uswdsTokens.typography.fontSize);
-	return fontSizes.reduce((prev, curr) =>
-		Math.abs(curr - value) < Math.abs(prev - value) ? curr : prev
-	);
+	return fontSizes.reduce((prev, curr) => (Math.abs(curr - value) < Math.abs(prev - value) ? curr : prev));
 };
 
 /**
@@ -231,9 +223,7 @@ const findClosestUSWDSFontSize = (value: number): number | null => {
 const mapFontWeight = (weight: string | number): number | null => {
 	if (typeof weight === 'number') {
 		const weights = Object.values(uswdsTokens.typography.fontWeight);
-		return weights.reduce((prev, curr) =>
-			Math.abs(curr - weight) < Math.abs(prev - weight) ? curr : prev
-		);
+		return weights.reduce((prev, curr) => (Math.abs(curr - weight) < Math.abs(prev - weight) ? curr : prev));
 	}
 
 	const mapping: Record<string, number> = {
@@ -250,11 +240,8 @@ const mapFontWeight = (weight: string | number): number | null => {
 /**
  * Generate accessibility attributes
  */
-const generateA11yAttributes = (
-	component: USWDSComponent,
-	element: DetectedElement
-): Record<string, any> => {
-	const a11y: Record<string, any> = {};
+const generateA11yAttributes = (component: USWDSComponent, element: DetectedElement): Record<string, unknown> => {
+	const a11y: Record<string, unknown> = {};
 
 	// Apply component's default a11y attributes
 	if (component.a11y) {
@@ -300,7 +287,7 @@ export const mapElementToUSWDS = (element: DetectedElement): MappingResult | nul
 	const styles = applyUSWDSTokens(element.properties);
 
 	// Generate props
-	const props: Record<string, any> = {
+	const props: Record<string, unknown> = {
 		...element.properties,
 	};
 
@@ -323,10 +310,8 @@ export const mapElementToUSWDS = (element: DetectedElement): MappingResult | nul
 /**
  * Map multiple elements to USWDS components
  */
-export const mapElementsToUSWDS = (
-	elements: DetectedElement[]
-): Array<MappingResult | null> => {
-	return elements.map((element) => mapElementToUSWDS(element));
+export const mapElementsToUSWDS = (elements: DetectedElement[]): Array<MappingResult | null> => {
+	return elements.map(element => mapElementToUSWDS(element));
 };
 
 /**
