@@ -6,5 +6,7 @@ public/fonts
 dist/
 lib/
 .vscode/
-docs/
+# Generated API documentation (keep source docs)
+docs/docs/
+docs/api-docs/
 .DS_Store
