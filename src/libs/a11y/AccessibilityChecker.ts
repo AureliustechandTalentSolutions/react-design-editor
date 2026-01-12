@@ -171,15 +171,27 @@ export class AccessibilityChecker {
 	 * Calculate relative luminance of a color
 	 */
 	private getLuminance(color: string): number {
+		// WCAG 2.1 relative luminance constants
+		const SRGB_THRESHOLD = 0.03928;
+		const SRGB_LOW_DIVISOR = 12.92;
+		const SRGB_OFFSET = 0.055;
+		const SRGB_DIVISOR = 1.055;
+		const SRGB_GAMMA = 2.4;
+		const RED_COEFFICIENT = 0.2126;
+		const GREEN_COEFFICIENT = 0.7152;
+		const BLUE_COEFFICIENT = 0.0722;
+
 		const rgb = this.hexToRgb(color);
 		if (!rgb) return 0;
 
 		const [r, g, b] = [rgb.r, rgb.g, rgb.b].map(val => {
 			const v = val / 255;
-			return v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4;
+			return v <= SRGB_THRESHOLD
+				? v / SRGB_LOW_DIVISOR
+				: ((v + SRGB_OFFSET) / SRGB_DIVISOR) ** SRGB_GAMMA;
 		});
 
-		return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+		return RED_COEFFICIENT * r + GREEN_COEFFICIENT * g + BLUE_COEFFICIENT * b;
 	}
 
 	/**

@@ -5,7 +5,7 @@
 
 import React, { useState } from 'react';
 
-import { getComponentCount } from '../../../libs/design-systems/uswds/components';
+import { getComponentCount } from '@/libs/design-systems/uswds/components';
 
 export interface DesignSystemOption {
 	id: string;
