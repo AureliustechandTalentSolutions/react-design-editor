@@ -72,6 +72,19 @@ const defaultTokens: DesignTokens = {
 	},
 };
 
+export interface FigmaTokens {
+	colors?: Record<string, { value: string }>;
+	spacing?: Record<string, { value: string | number }>;
+	typography?: {
+		fontFamilies?: Array<string | { value: string }>;
+		fontSizes?: Record<string, { value: string | number }>;
+		fontWeights?: Record<string, { value: string | number }>;
+		lineHeights?: Record<string, { value: string | number }>;
+	};
+	borderRadius?: Record<string, { value: string | number }>;
+	shadows?: Record<string, { value: string }>;
+}
+
 export class TokenManager {
 	private tokens: DesignTokens;
 
@@ -152,7 +165,7 @@ export class TokenManager {
 	/**
 	 * Import design tokens from Figma format
 	 */
-	public importFromFigma(figmaTokens: any): void {
+	public importFromFigma(figmaTokens: FigmaTokens): void {
 		const converted: Partial<DesignTokens> = {};
 
 		// Convert Figma color tokens

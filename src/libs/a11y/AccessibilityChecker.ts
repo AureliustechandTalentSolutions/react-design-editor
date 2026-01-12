@@ -8,6 +8,18 @@ export interface A11yIssue {
 	suggestion: string;
 }
 
+export interface FixSuggestion {
+	issue: string;
+	wcag: string;
+	suggestion: string;
+	action: string;
+	params: Record<string, any>;
+}
+
+export interface FixSuggestionsResult {
+	[elementId: string]: FixSuggestion[];
+}
+
 export class AccessibilityChecker {
 	/**
 	 * Check design for accessibility issues
@@ -165,55 +177,59 @@ export class AccessibilityChecker {
 	/**
 	 * Suggest fixes for accessibility issues using AI
 	 */
-	public async suggestFixes(issues: A11yIssue[]): Promise<object> {
-		const suggestions: Record<string, any> = {};
+	public suggestFixes(issues: A11yIssue[]): Promise<FixSuggestionsResult> {
+		return new Promise(resolve => {
+			const suggestions: FixSuggestionsResult = {};
 
-		issues.forEach(issue => {
-			if (!suggestions[issue.element]) {
-				suggestions[issue.element] = [];
-			}
+			issues.forEach(issue => {
+				if (!suggestions[issue.element]) {
+					suggestions[issue.element] = [];
+				}
 
-			// Generate automated fix suggestions
-			const fix: any = {
-				issue: issue.message,
-				wcag: issue.wcagCriteria,
-				suggestion: issue.suggestion,
-			};
+				// Generate automated fix suggestions
+				const fix: FixSuggestion = {
+					issue: issue.message,
+					wcag: issue.wcagCriteria,
+					suggestion: issue.suggestion,
+					action: '',
+					params: {},
+				};
 
-			// Add specific fix recommendations based on issue type
-			if (issue.message.includes('color contrast')) {
-				fix.action = 'adjustColors';
-				fix.params = {
-					targetRatio: 4.5,
-					adjustMethod: 'darken-text',
-				};
-			} else if (issue.message.includes('font size')) {
-				fix.action = 'adjustFontSize';
-				fix.params = {
-					minSize: 12,
-				};
-			} else if (issue.message.includes('alternative text')) {
-				fix.action = 'addAltText';
-				fix.params = {
-					generateAlt: true,
-				};
-			} else if (issue.message.includes('too small')) {
-				fix.action = 'resizeElement';
-				fix.params = {
-					minWidth: 44,
-					minHeight: 44,
-				};
-			} else if (issue.message.includes('hidden from screen readers')) {
-				fix.action = 'addAriaHidden';
-				fix.params = {
-					value: true,
-				};
-			}
+				// Add specific fix recommendations based on issue type
+				if (issue.message.indexOf('color contrast') !== -1) {
+					fix.action = 'adjustColors';
+					fix.params = {
+						targetRatio: 4.5,
+						adjustMethod: 'darken-text',
+					};
+				} else if (issue.message.indexOf('font size') !== -1) {
+					fix.action = 'adjustFontSize';
+					fix.params = {
+						minSize: 12,
+					};
+				} else if (issue.message.indexOf('alternative text') !== -1) {
+					fix.action = 'addAltText';
+					fix.params = {
+						generateAlt: true,
+					};
+				} else if (issue.message.indexOf('too small') !== -1) {
+					fix.action = 'resizeElement';
+					fix.params = {
+						minWidth: 44,
+						minHeight: 44,
+					};
+				} else if (issue.message.indexOf('hidden from screen readers') !== -1) {
+					fix.action = 'addAriaHidden';
+					fix.params = {
+						value: true,
+					};
+				}
 
-			suggestions[issue.element].push(fix);
+				suggestions[issue.element].push(fix);
+			});
+
+			resolve(suggestions);
 		});
-
-		return suggestions;
 	}
 
 	/**

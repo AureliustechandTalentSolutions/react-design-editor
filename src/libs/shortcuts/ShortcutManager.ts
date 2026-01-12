@@ -147,7 +147,9 @@ export class ShortcutManager {
 	 */
 	public static formatShortcut(shortcut: Shortcut): string {
 		const parts: string[] = [];
-		const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
+		// Use userAgent as a more reliable platform detection method
+		const isMac = typeof navigator !== 'undefined' && 
+			/(Mac|iPhone|iPod|iPad)/i.test(navigator.userAgent);
 
 		if (shortcut.ctrlKey || shortcut.metaKey) {
 			parts.push(isMac ? '⌘' : 'Ctrl');

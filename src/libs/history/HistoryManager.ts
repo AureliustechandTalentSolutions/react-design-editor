@@ -8,6 +8,20 @@ export interface DesignSnapshot {
 	author?: string;
 }
 
+export interface SerializableDesignSnapshot {
+	id: string;
+	timestamp: string;
+	objects: object;
+	description: string;
+	author?: string;
+}
+
+export interface HistoryExport {
+	snapshots: SerializableDesignSnapshot[];
+	currentIndex: number;
+	maxSnapshots: number;
+}
+
 export class HistoryManager {
 	private snapshots: DesignSnapshot[] = [];
 	private currentIndex: number = -1;
@@ -91,8 +105,11 @@ export class HistoryManager {
 	 * Export history to JSON string
 	 */
 	public export(): string {
-		const exportData = {
-			snapshots: this.snapshots,
+		const exportData: HistoryExport = {
+			snapshots: this.snapshots.map(snapshot => ({
+				...snapshot,
+				timestamp: snapshot.timestamp.toISOString(),
+			})),
 			currentIndex: this.currentIndex,
 			maxSnapshots: this.maxSnapshots,
 		};
@@ -104,14 +121,14 @@ export class HistoryManager {
 	 */
 	public import(data: string): void {
 		try {
-			const importData = JSON.parse(data);
+			const importData: HistoryExport = JSON.parse(data);
 
 			if (!importData.snapshots || !Array.isArray(importData.snapshots)) {
 				throw new Error('Invalid history data format');
 			}
 
 			// Convert timestamp strings back to Date objects
-			this.snapshots = importData.snapshots.map((snapshot: any) => ({
+			this.snapshots = importData.snapshots.map((snapshot: SerializableDesignSnapshot) => ({
 				...snapshot,
 				timestamp: new Date(snapshot.timestamp),
 			}));
