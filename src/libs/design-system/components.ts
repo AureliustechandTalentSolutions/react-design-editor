@@ -4,17 +4,13 @@
  */
 
 import { UIComponent } from '../../types/aiui';
+
 import { tokens } from './tokens';
 
 /**
  * Create a basic rectangle template
  */
-const createRectTemplate = (
-	width: number,
-	height: number,
-	fill: string,
-	options: any = {}
-): any => ({
+const createRectTemplate = (width: number, height: number, fill: string, options: any = {}): any => ({
 	type: 'rect',
 	width,
 	height,
@@ -27,11 +23,7 @@ const createRectTemplate = (
 /**
  * Create a text template
  */
-const createTextTemplate = (
-	text: string,
-	fontSize: number,
-	options: any = {}
-): any => ({
+const createTextTemplate = (text: string, fontSize: number, options: any = {}): any => ({
 	type: 'text',
 	text,
 	fontSize,
@@ -79,9 +71,7 @@ export const componentLibrary: UIComponent[] = [
 		description: 'Page footer section',
 		template: {
 			type: 'group',
-			objects: [
-				createRectTemplate(1200, 100, tokens.colors.monochrome.background),
-			],
+			objects: [createRectTemplate(1200, 100, tokens.colors.monochrome.background)],
 		},
 	},
 	{
@@ -284,9 +274,7 @@ export const componentLibrary: UIComponent[] = [
 		description: 'Tab navigation',
 		template: {
 			type: 'group',
-			objects: [
-				createRectTemplate(600, 40, 'transparent'),
-			],
+			objects: [createRectTemplate(600, 40, 'transparent')],
 		},
 	},
 	{
@@ -297,9 +285,7 @@ export const componentLibrary: UIComponent[] = [
 		description: 'Breadcrumb navigation',
 		template: {
 			type: 'group',
-			objects: [
-				createTextTemplate('Home / Products / Details', tokens.fontSize.sm),
-			],
+			objects: [createTextTemplate('Home / Products / Details', tokens.fontSize.sm)],
 		},
 	},
 	{

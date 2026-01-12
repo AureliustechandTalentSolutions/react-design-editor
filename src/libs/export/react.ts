@@ -4,22 +4,19 @@
  */
 
 import { ExportedCode, ExportOptions } from '../../types/aiui';
+
 import { cssObjectToString, fabricToCSS, fabricToTailwind, formatCode, generateId, kebabToPascal } from './utils';
 
 /**
  * Generate React component from Fabric.js objects
  */
-const generateReactComponent = (
-	objects: any[],
-	options: ExportOptions,
-	componentName: string
-): string => {
+const generateReactComponent = (objects: any[], options: ExportOptions, componentName: string): string => {
 	const { styling, typescript, includeResponsive } = options;
 	const useTailwind = styling === 'tailwind';
 	const useStyledComponents = styling === 'styled-components';
 	const useCSSModules = styling === 'css-modules';
 
-	let imports = [`import React from 'react';`];
+	const imports = [`import React from 'react';`];
 	if (useStyledComponents) {
 		imports.push(`import styled from 'styled-components';`);
 	}
@@ -29,30 +26,28 @@ const generateReactComponent = (
 
 	const renderObject = (obj: any, index: number): string => {
 		const id = generateId('el');
-		
+
 		if (obj.type === 'text') {
 			const className = useTailwind
 				? fabricToTailwind(obj).join(' ')
 				: useCSSModules
-				? `styles.text_${index}`
-				: useStyledComponents
-				? ''
-				: `text_${index}`;
+					? `styles.text_${index}`
+					: useStyledComponents
+						? ''
+						: `text_${index}`;
 
 			const element = `<div ${className ? `className="${className}"` : ''}>${obj.text || 'Text'}</div>`;
-			return useStyledComponents
-				? `<StyledText_${index}>${obj.text || 'Text'}</StyledText_${index}>`
-				: element;
+			return useStyledComponents ? `<StyledText_${index}>${obj.text || 'Text'}</StyledText_${index}>` : element;
 		}
 
 		if (obj.type === 'rect' || obj.type === 'group') {
 			const className = useTailwind
 				? fabricToTailwind(obj).join(' ')
 				: useCSSModules
-				? `styles.box_${index}`
-				: useStyledComponents
-				? ''
-				: `box_${index}`;
+					? `styles.box_${index}`
+					: useStyledComponents
+						? ''
+						: `box_${index}`;
 
 			const children = obj.objects
 				? obj.objects.map((child: any, i: number) => renderObject(child, i)).join('\n      ')
@@ -65,8 +60,8 @@ const generateReactComponent = (
 			return useStyledComponents && !children
 				? `<StyledBox_${index} />`
 				: useStyledComponents
-				? `<StyledBox_${index}>\n      ${children}\n    </StyledBox_${index}>`
-				: element;
+					? `<StyledBox_${index}>\n      ${children}\n    </StyledBox_${index}>`
+					: element;
 		}
 
 		return '';
@@ -145,7 +140,7 @@ export const exportReact = (design: any, options: ExportOptions): ExportedCode =
 		const styledDefs = generateStyledComponents(objects);
 		componentCode = componentCode.replace(
 			`import styled from 'styled-components';`,
-			`import styled from 'styled-components';\n\n${styledDefs}`
+			`import styled from 'styled-components';\n\n${styledDefs}`,
 		);
 	}
 
@@ -188,8 +183,7 @@ export const exportReact = (design: any, options: ExportOptions): ExportedCode =
 	return {
 		files,
 		dependencies,
-		instructions: options.styling === 'tailwind'
-			? 'Make sure to configure Tailwind CSS in your project.'
-			: undefined,
+		instructions:
+			options.styling === 'tailwind' ? 'Make sure to configure Tailwind CSS in your project.' : undefined,
 	};
 };

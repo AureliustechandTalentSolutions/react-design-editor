@@ -27,10 +27,12 @@ const LayersPanel: React.FC<IProps> = ({ objects, onSelectObject }) => {
 	const treeData = objects.map((obj, index) => ({
 		title: `${obj.type || 'Object'} ${index + 1}`,
 		key: obj.id || `obj-${index}`,
-		children: obj.objects ? obj.objects.map((child: any, childIndex: number) => ({
-			title: `${child.type || 'Object'} ${childIndex + 1}`,
-			key: child.id || `obj-${index}-${childIndex}`,
-		})) : undefined,
+		children: obj.objects
+			? obj.objects.map((child: any, childIndex: number) => ({
+					title: `${child.type || 'Object'} ${childIndex + 1}`,
+					key: child.id || `obj-${index}-${childIndex}`,
+				}))
+			: undefined,
 	}));
 
 	return (
@@ -39,7 +41,7 @@ const LayersPanel: React.FC<IProps> = ({ objects, onSelectObject }) => {
 				<Tree
 					treeData={treeData}
 					defaultExpandAll
-					onSelect={(keys) => {
+					onSelect={keys => {
 						if (keys.length > 0 && onSelectObject) {
 							onSelectObject(keys[0] as string);
 						}
