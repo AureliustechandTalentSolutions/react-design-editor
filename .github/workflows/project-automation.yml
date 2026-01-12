@@ -20,5 +20,6 @@ jobs:
       - name: Move to Done when closed
         if: github.event.action == 'closed'
         run: |
-          echo "Issue/PR closed - would move to Done column"
-          # Add GraphQL mutation to move card
+          echo "Issue/PR #${{ github.event.number }} closed"
+          echo "In a production setup, add GraphQL mutation here to move card to Done column"
+          echo "See: https://docs.github.com/en/graphql/reference/mutations#updateprojectv2itemfieldvalue"
