@@ -4,11 +4,11 @@ const envSchema = z.object({
 	ANTHROPIC_API_KEY: z.string().optional(),
 	VITE_DEBUG_MODE: z
 		.string()
-		.transform((v) => v === 'true')
+		.transform(v => v === 'true')
 		.default('false'),
 	VITE_MOCK_AI_RESPONSES: z
 		.string()
-		.transform((v) => v === 'true')
+		.transform(v => v === 'true')
 		.default('true'),
 });
 
