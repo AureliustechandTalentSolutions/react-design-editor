@@ -1,0 +1,7 @@
+{
+	"maxCyclomaticComplexity": 10,
+	"maxCognitiveComplexity": 15,
+	"maxFunctionLength": 50,
+	"maxFileLength": 300,
+	"maxParameters": 4
+}

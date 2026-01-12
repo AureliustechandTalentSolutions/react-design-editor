@@ -37,8 +37,23 @@
 		"react/jsx-indent": [4, "tab"],
 		"react/no-unused-class-component-methods": "warn",
 		"@typescript-eslint/indent": "off",
-		"@typescript-eslint/no-explicit-any": "off",
+		"@typescript-eslint/no-explicit-any": "warn",
 		"@typescript-eslint/no-shadow": "off",
 		"@typescript-eslint/ban-ts-comment": "off",
+		"no-console": ["warn", { "allow": ["warn", "error"] }],
+		"no-debugger": "error",
+		"no-unused-vars": "off",
+		"@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
+		"react/react-in-jsx-scope": "off",
+		"react/prop-types": "off",
+		"import/order": [
+			"error",
+			{
+				"groups": ["builtin", "external", "internal", "parent", "sibling", "index"],
+				"newlines-between": "always",
+				"alphabetize": { "order": "asc" }
+			}
+		],
+		"import/no-duplicates": "error"
 	},
 }

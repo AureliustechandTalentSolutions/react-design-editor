@@ -1,10 +1,55 @@
-# Dependency directories
+# Dependencies
 node_modules/
+.pnp/
+.pnp.js
+
+# Build outputs
+dist/
+build/
+lib/
+docs/
 public/js
 public/index.html
 public/fonts
-dist/
-lib/
-.vscode/
-docs/
+*.tsbuildinfo
+
+# Test coverage
+coverage/
+.nyc_output/
+
+# IDE
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+*.swp
+*.swo
+
+# OS
 .DS_Store
+Thumbs.db
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Cache
+.eslintcache
+.cache/
+*.cache
+
+# Temporary
+*.tmp
+*.temp
+.tmp/
+
+# Generated
+*.generated.*
