@@ -1,3 +1,4 @@
+export { default as AIUIEditor } from './aiuigenerator';
 export { default as FiberEditor } from './fiber';
 export { default as HexGridEditor } from './hexgrid';
 export { default as ImageMapEditor } from './imagemap';
