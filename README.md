@@ -120,6 +120,74 @@ src/
 - ⬛ Monochrome - Elegant grays
 - 🌈 Neon - Vibrant colors
 
+## 🖼️ Screenshot-to-Code Pipeline ⭐ NEW
+
+Convert Mobbin UI screenshots into production-ready code with federal design system support.
+
+### Features
+
+- **📸 Multiple Import Methods**: Drag-drop, clipboard paste (Cmd+V), or file upload
+- **🏛️ Federal Design Systems**: USWDS, VA.gov, CMS with Section 508 compliance
+- **🎨 Design System Support**: USWDS, Tailwind CSS, shadcn/ui, or plain HTML/CSS
+- **📦 Batch Processing**: Import and convert multiple screenshots at once
+- **🎯 Smart Detection**: Automatically detects UI elements, colors, typography, and layout
+- **♿ Accessibility**: WCAG 2.1 AA compliance with proper ARIA attributes
+- **📝 Code Generation**: React, Vue, Next.js, or HTML with TypeScript support
+
+### Quick Example
+
+```typescript
+import { MobbinImporter } from 'react-design-editor';
+
+function App() {
+	return (
+		<MobbinImporter
+			onImportComplete={(result) => {
+				console.log('Design:', result.design);
+				console.log('Generated code:', result.code);
+			}}
+			options={{
+				framework: 'react',
+				styling: 'tailwind',
+				typescript: true,
+				designSystem: 'uswds', // Maps to USWDS components
+				includeResponsive: true,
+				federalCompliance: true, // Section 508 mode
+			}}
+		/>
+	);
+}
+```
+
+### Supported Design Systems
+
+| Design System    | Type      | Features                                      |
+| ---------------- | --------- | --------------------------------------------- |
+| **USWDS**        | Federal   | U.S. Web Design System, Section 508 compliant |
+| **VA.gov**       | Federal   | Veterans Affairs design patterns              |
+| **CMS**          | Federal   | Medicare & Medicaid design system             |
+| **Tailwind CSS** | Utility   | Modern utility-first CSS framework            |
+| **shadcn/ui**    | Component | Beautiful React components                    |
+
+### USWDS Component Mapping
+
+Detected elements are automatically mapped to USWDS components:
+
+```typescript
+Button → usa-button (primary, secondary, outline variants)
+Input → usa-input (text, email, password fields)
+Card → usa-card (flag, header-first layouts)
+Alert → usa-alert (success, warning, error, info)
+Navigation → usa-nav (with proper ARIA roles)
+Form → usa-form (large, default sizes)
+```
+
+### Test Coverage
+
+- 43 passing tests across engine, utilities, and mappers
+- 78%+ coverage on USWDS mapping module
+- Mock mode available for development without API key
+
 ## 🧪 Testing
 
 ```bash
@@ -150,8 +218,16 @@ npm test -- --grep "AI"
 - [User Guide](./docs/guides/ai-ui-generator-user-guide.md)
 - [Developer Guide](./docs/guides/ai-ui-generator-developer-guide.md)
 - [Prompt Library](./docs/examples/prompt-library.md)
-- **[Screenshot-to-Code Pipeline](./docs/screenshot-to-code.md)** ⭐ NEW
 - [Roadmap](./ROADMAP.md)
+
+### Screenshot-to-Code API
+
+See the inline code examples above and TypeScript definitions in:
+
+- `src/libs/screenshot-to-code/types.ts` - Type definitions
+- `src/libs/screenshot-to-code/engine.ts` - Core engine API
+- `src/libs/screenshot-to-code/mobbin.ts` - File handling utilities
+- `src/libs/design-systems/uswds/` - USWDS integration
 
 ## 🛠️ Development
 
