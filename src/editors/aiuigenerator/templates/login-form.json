@@ -1,0 +1,154 @@
+{
+  "name": "Login Form Template",
+  "description": "Clean login form with social authentication options",
+  "category": "authentication",
+  "version": "1.0.0",
+  "objects": [
+    {
+      "type": "rect",
+      "id": "container",
+      "left": 400,
+      "top": 150,
+      "width": 400,
+      "height": 500,
+      "fill": "#ffffff",
+      "stroke": "#e5e7eb",
+      "strokeWidth": 1,
+      "rx": 12,
+      "ry": 12
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "left": 520,
+      "top": 200,
+      "text": "Welcome Back",
+      "fontSize": 28,
+      "fontWeight": "bold",
+      "fill": "#111827"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "left": 465,
+      "top": 240,
+      "text": "Sign in to your account",
+      "fontSize": 14,
+      "fill": "#6b7280"
+    },
+    {
+      "type": "rect",
+      "id": "email-input",
+      "left": 440,
+      "top": 290,
+      "width": 320,
+      "height": 45,
+      "fill": "#ffffff",
+      "stroke": "#d1d5db",
+      "strokeWidth": 1,
+      "rx": 6,
+      "ry": 6
+    },
+    {
+      "type": "text",
+      "id": "email-placeholder",
+      "left": 455,
+      "top": 305,
+      "text": "Email address",
+      "fontSize": 14,
+      "fill": "#9ca3af"
+    },
+    {
+      "type": "rect",
+      "id": "password-input",
+      "left": 440,
+      "top": 350,
+      "width": 320,
+      "height": 45,
+      "fill": "#ffffff",
+      "stroke": "#d1d5db",
+      "strokeWidth": 1,
+      "rx": 6,
+      "ry": 6
+    },
+    {
+      "type": "text",
+      "id": "password-placeholder",
+      "left": 455,
+      "top": 365,
+      "text": "Password",
+      "fontSize": 14,
+      "fill": "#9ca3af"
+    },
+    {
+      "type": "text",
+      "id": "forgot-password",
+      "left": 640,
+      "top": 410,
+      "text": "Forgot password?",
+      "fontSize": 12,
+      "fill": "#3b82f6"
+    },
+    {
+      "type": "rect",
+      "id": "signin-button",
+      "left": 440,
+      "top": 440,
+      "width": 320,
+      "height": 45,
+      "fill": "#3b82f6",
+      "rx": 6,
+      "ry": 6
+    },
+    {
+      "type": "text",
+      "id": "signin-text",
+      "left": 575,
+      "top": 455,
+      "text": "Sign In",
+      "fontSize": 16,
+      "fontWeight": "bold",
+      "fill": "#ffffff"
+    },
+    {
+      "type": "text",
+      "id": "divider-text",
+      "left": 570,
+      "top": 510,
+      "text": "OR",
+      "fontSize": 12,
+      "fill": "#9ca3af"
+    },
+    {
+      "type": "rect",
+      "id": "google-button",
+      "left": 440,
+      "top": 540,
+      "width": 320,
+      "height": 45,
+      "fill": "#ffffff",
+      "stroke": "#d1d5db",
+      "strokeWidth": 1,
+      "rx": 6,
+      "ry": 6
+    },
+    {
+      "type": "text",
+      "id": "google-text",
+      "left": 525,
+      "top": 555,
+      "text": "Continue with Google",
+      "fontSize": 14,
+      "fill": "#374151"
+    },
+    {
+      "type": "text",
+      "id": "signup-link",
+      "left": 490,
+      "top": 610,
+      "text": "Don't have an account? Sign up",
+      "fontSize": 12,
+      "fill": "#6b7280"
+    }
+  ]
+}

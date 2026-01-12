@@ -1,17 +1,22 @@
 ---
-name: Feature request
-about: Suggest an idea for this project
-title: "[Feature] Examples"
-labels: feature
-assignees: salgum1114
-
+name: Feature Request
+about: Suggest a new feature for the AI UI Generator
+title: '[Feature] '
+labels: enhancement, ai-ui-generator
+assignees: ''
 ---
 
-**Is your feature request related to a problem? Please describe.**
-A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
+## Feature Description
+A clear description of the feature.
 
-**Describe the solution you'd like**
-A clear and concise description of what you want to happen.
+## Use Case
+Why is this feature needed? What problem does it solve?
 
-**Describe alternatives you've considered**
-A clear and concise description of any alternative solutions or features you've considered.
+## Proposed Solution
+How should this feature work?
+
+## Alternatives Considered
+Any alternative solutions you've considered.
+
+## Additional Context
+Screenshots, mockups, or examples.

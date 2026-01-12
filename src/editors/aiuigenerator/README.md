@@ -1,167 +1,149 @@
-# AI UI Generator
+# AI UI Generator Templates
 
-An AI-powered UI design generation module that enables users to create complete UI designs from natural language descriptions, integrated with the react-design-editor canvas.
+This directory contains pre-built templates for the AI UI Generator feature.
 
-## Features
+## Template Gallery Component
 
-- **Text-to-UI Generation**: Describe your UI in natural language and let AI generate the design
-- **Prompt Templates**: Quick-start templates for common UI patterns (Landing Pages, Dashboards, Forms, etc.)
-- **Component Library**: Drag-and-drop UI components organized by category
-- **Style Explorer**: Pre-built color palettes and typography presets
-- **AI Assistant**: Quick actions for design refinement and improvements
-- **Code Export**: Export designs to React, Vue, Next.js, or HTML/CSS
-- **Multiple Styling Options**: Support for Tailwind CSS, CSS Modules, Styled Components, or plain CSS
+The `TemplateGallery.tsx` component provides a user-friendly interface for browsing and selecting templates.
 
-## Usage
+### Usage
 
-### Basic Workflow
+```typescript
+import { TemplateGallery } from './editors/aiuigenerator/TemplateGallery';
+import { DesignTemplate } from './libs/templates/TemplateLibrary';
 
-1. **Navigate to AI UI Generator**: Click the "AI UI Generator" tab in the main navigation
-2. **Enter a Prompt**: Describe the UI you want to create in the prompt input
-3. **Configure Options**: Select style, platform, and complexity
-4. **Generate**: Click "Generate UI Design" to create your UI
-5. **Refine**: Use the AI Assistant for quick refinements
-6. **Export**: Export your design to code in your preferred framework
+function MyComponent() {
+  const handleSelectTemplate = (template: DesignTemplate) => {
+    // Load the template design into the canvas
+    console.log('Selected template:', template);
+  };
 
-### Prompt Examples
-
-```
-A modern landing page with a hero section featuring a headline, 
-subheadline, CTA button, and an image. Include a features section 
-with 3 feature cards and a footer.
+  return <TemplateGallery onSelectTemplate={handleSelectTemplate} />;
+}
 ```
 
-```
-An admin dashboard with a sidebar navigation, header with user profile, 
-and main content area showing KPI cards, charts, and a data table.
-```
+### Features
 
-```
-A clean login form with email and password fields, a "Remember me" 
-checkbox, "Forgot password?" link, and a login button. Include 
-social login options.
-```
+- **Category Filtering**: Browse templates by category (dashboard, marketing, authentication, etc.)
+- **Search**: Search templates by name, description, or tags
+- **Preview Modal**: View template details before selecting
+- **Responsive Grid**: Templates displayed in a responsive grid layout
 
-### Generation Options
+## Available Templates
 
-- **Style**: modern, minimal, corporate, playful, dark, glassmorphism
-- **Platform**: web, mobile, tablet, responsive
-- **Complexity**: simple, medium, complex
-- **Color Scheme**: auto, light, dark, custom
+### Dashboard Templates
 
-### Component Library
+1. **Dashboard** (`dashboard.json`)
+   - Modern dashboard with sidebar navigation
+   - Analytics cards and chart area
+   - Tags: dashboard, analytics, admin, cards
 
-Browse and add components by category:
+2. **Settings Page** (`settings-page.json`)
+   - User settings with profile, preferences, and security sections
+   - Toggle switches and input fields
+   - Tags: settings, profile, preferences, dashboard
 
-- **Layout**: Page, Header, Footer, Sidebar, Grid
-- **Forms**: Login Form, Register Form, Contact Form, Search, File Upload
-- **Data Display**: Data Table, Card Grid, List, Chart, KPI Card
-- **Navigation**: Navbar, Tabs, Breadcrumb, Pagination
-- **Actions**: Button, Dropdown, Modal, Toast
-- **E-commerce**: Product Card, Cart, Checkout, Price Display
+### Marketing Templates
 
-### AI Assistant Quick Actions
+3. **Landing Page** (`landing-page.json`)
+   - Hero section with CTA button
+   - Feature cards layout
+   - Tags: landing, marketing, hero, features
 
-- **Improve Contrast**: Enhance color contrast for better accessibility
-- **Add Shadows**: Add subtle shadows to create depth
-- **Improve Spacing**: Better visual hierarchy through spacing
-- **Modernize**: Update design with modern UI patterns
-- **Simplify**: Remove unnecessary elements
-- **Make Responsive**: Optimize for responsiveness
-- **Accessibility**: Improve with ARIA labels and semantic structure
+4. **Pricing Table** (`pricing-table.json`)
+   - Three-tier pricing layout
+   - Popular badge highlight
+   - Tags: pricing, plans, subscription, marketing
 
-### Code Export
+### Authentication Templates
 
-Export your design to:
+5. **Login Form** (`login-form.json`)
+   - Clean login form with social authentication
+   - Forgot password link
+   - Tags: login, authentication, form, signin
 
-- **React** with TypeScript/JavaScript
-- **Next.js** with various styling options
-- **Vue 3** with Composition API
-- **HTML/CSS** with semantic markup
+### E-commerce Templates
 
-Styling options:
-- Tailwind CSS
-- CSS Modules
-- Styled Components
-- Plain CSS
+6. **Product Card** (`product-card.json`)
+   - Product card with image, title, and price
+   - Add to cart button and wishlist icon
+   - Tags: ecommerce, product, card, shop
 
-## API Configuration
+### Mobile Templates
 
-### With Claude API Key
+7. **Mobile App Home** (`mobile-app-home.json`)
+   - Mobile app home screen (375x812)
+   - Quick actions and recent activity
+   - Bottom navigation
+   - Tags: mobile, app, home, navigation
 
-Set the `ANTHROPIC_API_KEY` or `REACT_APP_ANTHROPIC_API_KEY` environment variable:
+### Messaging Templates
 
-```bash
-ANTHROPIC_API_KEY=your-api-key-here
-```
+8. **Chat Interface** (`chat-interface.json`)
+   - Modern chat UI with message bubbles
+   - Chat header with avatar
+   - Input field with send button
+   - Tags: chat, messaging, conversation, communication
 
-**Security Note**: The current implementation uses `dangerouslyAllowBrowser: true` for demo/development purposes. In production, you should implement a backend proxy to keep API keys secure and prevent exposure in client-side code.
+## Template Format
 
-### Demo Mode
+Each template is a JSON file with the following structure:
 
-Without an API key, the module runs in demo mode with:
-- Mock design generation
-- Sample layouts
-- Full UI functionality
-- Limited AI refinement
-
-## Architecture
-
-```
-src/editors/aiuigenerator/
-├── AIUIEditor.tsx         # Main editor component
-├── PromptInput.tsx        # Natural language input
-├── ComponentLibrary.tsx   # Draggable components
-├── AIAssistant.tsx        # Quick actions panel
-├── StyleExplorer.tsx      # Color & typography
-├── PropertiesPanel.tsx    # Object properties
-├── LayersPanel.tsx        # Layer hierarchy
-├── CodePreview.tsx        # Code display
-├── ExportPanel.tsx        # Export options
-└── index.tsx              # Module exports
+```json
+{
+  "name": "Template Name",
+  "description": "Template description",
+  "category": "category-name",
+  "version": "1.0.0",
+  "objects": [
+    {
+      "type": "rect",
+      "id": "unique-id",
+      "left": 0,
+      "top": 0,
+      "width": 100,
+      "height": 100,
+      "fill": "#ffffff"
+    }
+  ]
+}
 ```
 
-## Dependencies
+## Adding New Templates
 
-- `@anthropic-ai/sdk`: Claude AI integration
-- `prismjs` / `react-syntax-highlighter`: Code highlighting
-- `framer-motion`: Animations (optional)
-- `zustand`: State management (optional)
+1. Create a new JSON file in the `templates/` directory
+2. Follow the template format above
+3. Add the template to the `initializeTemplates()` function in `TemplateGallery.tsx`
+4. Include appropriate metadata (id, name, description, category, tags)
 
-## Development Tips
+Example:
 
-1. **Specific Prompts**: Be detailed in your descriptions for better results
-2. **Iterate**: Use quick actions to refine generated designs
-3. **Templates**: Start with templates and customize
-4. **Components**: Mix generated designs with manual components
-5. **Export Early**: Export to code frequently to see the results
+```typescript
+{
+  id: 'my-template',
+  name: myTemplate.name,
+  description: myTemplate.description,
+  category: myTemplate.category,
+  thumbnail: '/assets/templates/my-template-thumb.png',
+  design: myTemplate.objects,
+  tags: ['tag1', 'tag2', 'tag3'],
+}
+```
 
-## Limitations
+## Template Categories
 
-- AI generation quality depends on the Claude API
-- Complex layouts may need manual refinement
-- Demo mode provides simplified mock designs
-- Generated code may need adjustment for production use
+Current categories:
+- `dashboard` - Dashboard and admin interfaces
+- `marketing` - Landing pages and marketing materials
+- `authentication` - Login, signup, and auth forms
+- `ecommerce` - Product cards, shopping interfaces
+- `mobile` - Mobile app screens
+- `messaging` - Chat and communication interfaces
 
 ## Future Enhancements
 
-- Real-time collaboration
-- Design version history
-- More component templates
-- Advanced AI refinement options
-- Integration with design systems
-- A/B testing variations
-- Accessibility scoring
-- Performance optimization suggestions
-
-## Support
-
-For issues or questions:
-- Check the documentation
-- Review prompt examples
-- Try demo mode first
-- Ensure API key is configured correctly
-
-## License
-
-MIT License - See repository LICENSE file
+- Template preview rendering
+- Template thumbnail generation
+- Template versioning
+- Community template submissions
+- Template customization wizard

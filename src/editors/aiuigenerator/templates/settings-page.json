@@ -1,0 +1,275 @@
+{
+  "name": "Settings Page Template",
+  "description": "User settings page with profile, preferences, and security sections",
+  "category": "dashboard",
+  "version": "1.0.0",
+  "objects": [
+    {
+      "type": "text",
+      "id": "page-title",
+      "left": 100,
+      "top": 50,
+      "text": "Settings",
+      "fontSize": 32,
+      "fontWeight": "bold",
+      "fill": "#111827"
+    },
+    {
+      "type": "rect",
+      "id": "profile-section",
+      "left": 100,
+      "top": 120,
+      "width": 700,
+      "height": 250,
+      "fill": "#ffffff",
+      "stroke": "#e5e7eb",
+      "strokeWidth": 1,
+      "rx": 8,
+      "ry": 8
+    },
+    {
+      "type": "text",
+      "id": "profile-title",
+      "left": 130,
+      "top": 150,
+      "text": "Profile Information",
+      "fontSize": 20,
+      "fontWeight": "bold",
+      "fill": "#111827"
+    },
+    {
+      "type": "rect",
+      "id": "avatar-circle",
+      "left": 130,
+      "top": 190,
+      "width": 80,
+      "height": 80,
+      "fill": "#e5e7eb",
+      "rx": 40,
+      "ry": 40
+    },
+    {
+      "type": "text",
+      "id": "avatar-initials",
+      "left": 157,
+      "top": 220,
+      "text": "JD",
+      "fontSize": 24,
+      "fontWeight": "bold",
+      "fill": "#6b7280"
+    },
+    {
+      "type": "text",
+      "id": "name-label",
+      "left": 240,
+      "top": 200,
+      "text": "Full Name",
+      "fontSize": 12,
+      "fill": "#6b7280"
+    },
+    {
+      "type": "rect",
+      "id": "name-input",
+      "left": 240,
+      "top": 220,
+      "width": 300,
+      "height": 40,
+      "fill": "#ffffff",
+      "stroke": "#d1d5db",
+      "strokeWidth": 1,
+      "rx": 6,
+      "ry": 6
+    },
+    {
+      "type": "text",
+      "id": "name-value",
+      "left": 255,
+      "top": 235,
+      "text": "John Doe",
+      "fontSize": 14,
+      "fill": "#111827"
+    },
+    {
+      "type": "text",
+      "id": "email-label",
+      "left": 240,
+      "top": 280,
+      "text": "Email Address",
+      "fontSize": 12,
+      "fill": "#6b7280"
+    },
+    {
+      "type": "rect",
+      "id": "email-input",
+      "left": 240,
+      "top": 300,
+      "width": 300,
+      "height": 40,
+      "fill": "#ffffff",
+      "stroke": "#d1d5db",
+      "strokeWidth": 1,
+      "rx": 6,
+      "ry": 6
+    },
+    {
+      "type": "text",
+      "id": "email-value",
+      "left": 255,
+      "top": 315,
+      "text": "john.doe@example.com",
+      "fontSize": 14,
+      "fill": "#111827"
+    },
+    {
+      "type": "rect",
+      "id": "preferences-section",
+      "left": 100,
+      "top": 400,
+      "width": 700,
+      "height": 200,
+      "fill": "#ffffff",
+      "stroke": "#e5e7eb",
+      "strokeWidth": 1,
+      "rx": 8,
+      "ry": 8
+    },
+    {
+      "type": "text",
+      "id": "preferences-title",
+      "left": 130,
+      "top": 430,
+      "text": "Preferences",
+      "fontSize": 20,
+      "fontWeight": "bold",
+      "fill": "#111827"
+    },
+    {
+      "type": "rect",
+      "id": "notification-toggle",
+      "left": 130,
+      "top": 480,
+      "width": 50,
+      "height": 26,
+      "fill": "#3b82f6",
+      "rx": 13,
+      "ry": 13
+    },
+    {
+      "type": "rect",
+      "id": "toggle-knob",
+      "left": 156,
+      "top": 483,
+      "width": 20,
+      "height": 20,
+      "fill": "#ffffff",
+      "rx": 10,
+      "ry": 10
+    },
+    {
+      "type": "text",
+      "id": "notification-label",
+      "left": 200,
+      "top": 485,
+      "text": "Email Notifications",
+      "fontSize": 14,
+      "fill": "#111827"
+    },
+    {
+      "type": "rect",
+      "id": "theme-toggle",
+      "left": 130,
+      "top": 530,
+      "width": 50,
+      "height": 26,
+      "fill": "#d1d5db",
+      "rx": 13,
+      "ry": 13
+    },
+    {
+      "type": "rect",
+      "id": "theme-knob",
+      "left": 134,
+      "top": 533,
+      "width": 20,
+      "height": 20,
+      "fill": "#ffffff",
+      "rx": 10,
+      "ry": 10
+    },
+    {
+      "type": "text",
+      "id": "theme-label",
+      "left": 200,
+      "top": 535,
+      "text": "Dark Mode",
+      "fontSize": 14,
+      "fill": "#111827"
+    },
+    {
+      "type": "rect",
+      "id": "security-section",
+      "left": 100,
+      "top": 630,
+      "width": 700,
+      "height": 150,
+      "fill": "#ffffff",
+      "stroke": "#e5e7eb",
+      "strokeWidth": 1,
+      "rx": 8,
+      "ry": 8
+    },
+    {
+      "type": "text",
+      "id": "security-title",
+      "left": 130,
+      "top": 660,
+      "text": "Security",
+      "fontSize": 20,
+      "fontWeight": "bold",
+      "fill": "#111827"
+    },
+    {
+      "type": "rect",
+      "id": "change-password-button",
+      "left": 130,
+      "top": 710,
+      "width": 200,
+      "height": 40,
+      "fill": "#ffffff",
+      "stroke": "#d1d5db",
+      "strokeWidth": 1,
+      "rx": 6,
+      "ry": 6
+    },
+    {
+      "type": "text",
+      "id": "change-password-text",
+      "left": 165,
+      "top": 724,
+      "text": "Change Password",
+      "fontSize": 14,
+      "fill": "#374151"
+    },
+    {
+      "type": "rect",
+      "id": "save-button",
+      "left": 680,
+      "top": 810,
+      "width": 120,
+      "height": 45,
+      "fill": "#3b82f6",
+      "rx": 8,
+      "ry": 8
+    },
+    {
+      "type": "text",
+      "id": "save-button-text",
+      "left": 710,
+      "top": 825,
+      "text": "Save Changes",
+      "fontSize": 14,
+      "fontWeight": "bold",
+      "fill": "#ffffff"
+    }
+  ]
+}
