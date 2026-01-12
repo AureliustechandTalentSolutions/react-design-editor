@@ -13,7 +13,7 @@ import { SortableItem } from '@/libs/dnd';
 import { layerReducer, initialLayerState, Layer, LayerType } from '@/libs/layers';
 
 interface IProps {
-	objects?: any[];
+	objects?: any[]; // eslint-disable-line @typescript-eslint/no-explicit-any
 	onSelectObject?: (objectId: string) => void;
 	onLayersChange?: (layers: Layer[]) => void;
 }
@@ -43,7 +43,7 @@ const getLayerType = (objType?: string): LayerType => {
 	return 'shape';
 };
 
-export const LayerPanel: React.FC<IProps> = ({ objects, onSelectObject, onLayersChange }) => {
+function LayerPanel({ objects, onSelectObject, onLayersChange }: IProps) {
 	const [state, dispatch] = useReducer(layerReducer, initialLayerState);
 
 	// Initialize layers from objects
@@ -149,7 +149,7 @@ export const LayerPanel: React.FC<IProps> = ({ objects, onSelectObject, onLayers
 										role="button"
 										tabIndex={0}
 										onClick={() => handleSelectLayer(layer.id)}
-										onKeyDown={(e) => {
+										onKeyDown={e => {
 											if (e.key === 'Enter' || e.key === ' ') {
 												e.preventDefault();
 												handleSelectLayer(layer.id);
@@ -175,7 +175,9 @@ export const LayerPanel: React.FC<IProps> = ({ objects, onSelectObject, onLayers
 											<Tooltip title={layer.visible ? 'Hide' : 'Show'}>
 												<Button
 													size="small"
-													onClick={(e: React.MouseEvent) => handleToggleVisibility(layer.id, e)}
+													onClick={(e: React.MouseEvent) =>
+														handleToggleVisibility(layer.id, e)
+													}
 												>
 													<Icon type={layer.visible ? 'eye' : 'eye-invisible'} />
 												</Button>
@@ -216,6 +218,6 @@ export const LayerPanel: React.FC<IProps> = ({ objects, onSelectObject, onLayers
 			</Card>
 		</div>
 	);
-};
+}
 
 export default LayerPanel;
