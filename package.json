@@ -112,6 +112,7 @@
 		"@typescript-eslint/eslint-plugin": "^5.31.0",
 		"@typescript-eslint/parser": "^5.31.0",
 		"@vitejs/plugin-react": "^4.5.0",
+		"@vitest/coverage-v8": "^4.0.17",
 		"@vitest/ui": "^4.0.17",
 		"ajv": "^8.17.1",
 		"babel-eslint": "^10.1.0",
