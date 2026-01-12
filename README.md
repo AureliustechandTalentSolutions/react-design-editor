@@ -150,6 +150,7 @@ npm test -- --grep "AI"
 - [User Guide](./docs/guides/ai-ui-generator-user-guide.md)
 - [Developer Guide](./docs/guides/ai-ui-generator-developer-guide.md)
 - [Prompt Library](./docs/examples/prompt-library.md)
+- **[Screenshot-to-Code Pipeline](./docs/screenshot-to-code.md)** ⭐ NEW
 - [Roadmap](./ROADMAP.md)
 
 ## 🛠️ Development

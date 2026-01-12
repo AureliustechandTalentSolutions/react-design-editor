@@ -2,13 +2,9 @@
  * Mobbin File Handling Tests
  */
 
-import { describe, it, expect, vi } from 'vitest';
-import {
-	validateImageFile,
-	readFileAsBase64,
-	getImageDimensions,
-	categorizeScreenshots,
-} from '../mobbin';
+import { describe, it, expect } from 'vitest';
+
+import { validateImageFile, categorizeScreenshots } from '../mobbin';
 
 describe('Mobbin File Handling', () => {
 	describe('validateImageFile', () => {

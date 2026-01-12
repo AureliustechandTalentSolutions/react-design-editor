@@ -2,9 +2,10 @@
  * Screenshot-to-Code Engine Tests
  */
 
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { describe, it, expect, beforeEach } from 'vitest';
+
 import { analyzeScreenshot, convertScreenshotToCode, isScreenshotToCodeAvailable } from '../engine';
-import { AnalysisOptions, ConversionOptions, ScreenshotImportRequest } from '../types';
+import { AnalysisOptions, ScreenshotImportRequest } from '../types';
 
 describe('Screenshot-to-Code Engine', () => {
 	beforeEach(() => {
