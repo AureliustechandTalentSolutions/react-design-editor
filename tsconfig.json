@@ -21,8 +21,16 @@
 		"moduleResolution": "node",
 		"target": "esnext",
 		"outDir": "lib",
-		"lib": ["dom", "esnext", "ESNext.String"]
+		"lib": ["dom", "esnext", "ESNext.String"],
+		"paths": {
+			"@/*": ["./src/*"],
+			"@/libs/*": ["./src/libs/*"],
+			"@/editors/*": ["./src/editors/*"],
+			"@/types/*": ["./src/types/*"],
+			"@/components/*": ["./src/components/*"],
+			"@/config/*": ["./src/config/*"]
+		}
 	},
-	"include": ["src/canvas/index.tsx", "src/canvas/global.d.ts"],
+	"include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.d.ts"],
 	"exclude": ["node_modules", "dist", "lib"]
 }
