@@ -1,338 +1,338 @@
 {
-  "name": "Pricing Table Template",
-  "description": "Modern pricing table with three tiers",
-  "category": "marketing",
-  "version": "1.0.0",
-  "objects": [
-    {
-      "type": "text",
-      "id": "main-title",
-      "left": 450,
-      "top": 50,
-      "text": "Choose Your Plan",
-      "fontSize": 36,
-      "fontWeight": "bold",
-      "fill": "#111827"
-    },
-    {
-      "type": "text",
-      "id": "subtitle",
-      "left": 380,
-      "top": 100,
-      "text": "Select the perfect plan for your needs",
-      "fontSize": 16,
-      "fill": "#6b7280"
-    },
-    {
-      "type": "rect",
-      "id": "basic-card",
-      "left": 100,
-      "top": 180,
-      "width": 280,
-      "height": 450,
-      "fill": "#ffffff",
-      "stroke": "#e5e7eb",
-      "strokeWidth": 1,
-      "rx": 12,
-      "ry": 12
-    },
-    {
-      "type": "text",
-      "id": "basic-title",
-      "left": 200,
-      "top": 220,
-      "text": "Basic",
-      "fontSize": 24,
-      "fontWeight": "bold",
-      "fill": "#111827"
-    },
-    {
-      "type": "text",
-      "id": "basic-price",
-      "left": 185,
-      "top": 260,
-      "text": "$9",
-      "fontSize": 48,
-      "fontWeight": "bold",
-      "fill": "#111827"
-    },
-    {
-      "type": "text",
-      "id": "basic-period",
-      "left": 210,
-      "top": 315,
-      "text": "/month",
-      "fontSize": 14,
-      "fill": "#6b7280"
-    },
-    {
-      "type": "text",
-      "id": "basic-feature1",
-      "left": 130,
-      "top": 360,
-      "text": "✓ 10 Projects",
-      "fontSize": 14,
-      "fill": "#374151"
-    },
-    {
-      "type": "text",
-      "id": "basic-feature2",
-      "left": 130,
-      "top": 390,
-      "text": "✓ 5GB Storage",
-      "fontSize": 14,
-      "fill": "#374151"
-    },
-    {
-      "type": "text",
-      "id": "basic-feature3",
-      "left": 130,
-      "top": 420,
-      "text": "✓ Basic Support",
-      "fontSize": 14,
-      "fill": "#374151"
-    },
-    {
-      "type": "rect",
-      "id": "basic-button",
-      "left": 130,
-      "top": 560,
-      "width": 220,
-      "height": 45,
-      "fill": "#ffffff",
-      "stroke": "#3b82f6",
-      "strokeWidth": 2,
-      "rx": 8,
-      "ry": 8
-    },
-    {
-      "type": "text",
-      "id": "basic-button-text",
-      "left": 205,
-      "top": 575,
-      "text": "Get Started",
-      "fontSize": 16,
-      "fontWeight": "bold",
-      "fill": "#3b82f6"
-    },
-    {
-      "type": "rect",
-      "id": "pro-card",
-      "left": 410,
-      "top": 150,
-      "width": 280,
-      "height": 500,
-      "fill": "#3b82f6",
-      "rx": 12,
-      "ry": 12
-    },
-    {
-      "type": "rect",
-      "id": "popular-badge",
-      "left": 490,
-      "top": 130,
-      "width": 120,
-      "height": 30,
-      "fill": "#1e40af",
-      "rx": 15,
-      "ry": 15
-    },
-    {
-      "type": "text",
-      "id": "popular-text",
-      "left": 512,
-      "top": 142,
-      "text": "POPULAR",
-      "fontSize": 12,
-      "fontWeight": "bold",
-      "fill": "#ffffff"
-    },
-    {
-      "type": "text",
-      "id": "pro-title",
-      "left": 525,
-      "top": 200,
-      "text": "Pro",
-      "fontSize": 24,
-      "fontWeight": "bold",
-      "fill": "#ffffff"
-    },
-    {
-      "type": "text",
-      "id": "pro-price",
-      "left": 505,
-      "top": 240,
-      "text": "$29",
-      "fontSize": 48,
-      "fontWeight": "bold",
-      "fill": "#ffffff"
-    },
-    {
-      "type": "text",
-      "id": "pro-period",
-      "left": 530,
-      "top": 295,
-      "text": "/month",
-      "fontSize": 14,
-      "fill": "#e0e7ff"
-    },
-    {
-      "type": "text",
-      "id": "pro-feature1",
-      "left": 440,
-      "top": 350,
-      "text": "✓ Unlimited Projects",
-      "fontSize": 14,
-      "fill": "#ffffff"
-    },
-    {
-      "type": "text",
-      "id": "pro-feature2",
-      "left": 440,
-      "top": 380,
-      "text": "✓ 50GB Storage",
-      "fontSize": 14,
-      "fill": "#ffffff"
-    },
-    {
-      "type": "text",
-      "id": "pro-feature3",
-      "left": 440,
-      "top": 410,
-      "text": "✓ Priority Support",
-      "fontSize": 14,
-      "fill": "#ffffff"
-    },
-    {
-      "type": "text",
-      "id": "pro-feature4",
-      "left": 440,
-      "top": 440,
-      "text": "✓ Advanced Features",
-      "fontSize": 14,
-      "fill": "#ffffff"
-    },
-    {
-      "type": "rect",
-      "id": "pro-button",
-      "left": 440,
-      "top": 580,
-      "width": 220,
-      "height": 45,
-      "fill": "#ffffff",
-      "rx": 8,
-      "ry": 8
-    },
-    {
-      "type": "text",
-      "id": "pro-button-text",
-      "left": 515,
-      "top": 595,
-      "text": "Get Started",
-      "fontSize": 16,
-      "fontWeight": "bold",
-      "fill": "#3b82f6"
-    },
-    {
-      "type": "rect",
-      "id": "enterprise-card",
-      "left": 720,
-      "top": 180,
-      "width": 280,
-      "height": 450,
-      "fill": "#ffffff",
-      "stroke": "#e5e7eb",
-      "strokeWidth": 1,
-      "rx": 12,
-      "ry": 12
-    },
-    {
-      "type": "text",
-      "id": "enterprise-title",
-      "left": 800,
-      "top": 220,
-      "text": "Enterprise",
-      "fontSize": 24,
-      "fontWeight": "bold",
-      "fill": "#111827"
-    },
-    {
-      "type": "text",
-      "id": "enterprise-price",
-      "left": 790,
-      "top": 260,
-      "text": "$99",
-      "fontSize": 48,
-      "fontWeight": "bold",
-      "fill": "#111827"
-    },
-    {
-      "type": "text",
-      "id": "enterprise-period",
-      "left": 830,
-      "top": 315,
-      "text": "/month",
-      "fontSize": 14,
-      "fill": "#6b7280"
-    },
-    {
-      "type": "text",
-      "id": "enterprise-feature1",
-      "left": 750,
-      "top": 360,
-      "text": "✓ Unlimited Projects",
-      "fontSize": 14,
-      "fill": "#374151"
-    },
-    {
-      "type": "text",
-      "id": "enterprise-feature2",
-      "left": 750,
-      "top": 390,
-      "text": "✓ Unlimited Storage",
-      "fontSize": 14,
-      "fill": "#374151"
-    },
-    {
-      "type": "text",
-      "id": "enterprise-feature3",
-      "left": 750,
-      "top": 420,
-      "text": "✓ 24/7 Support",
-      "fontSize": 14,
-      "fill": "#374151"
-    },
-    {
-      "type": "text",
-      "id": "enterprise-feature4",
-      "left": 750,
-      "top": 450,
-      "text": "✓ Custom Integration",
-      "fontSize": 14,
-      "fill": "#374151"
-    },
-    {
-      "type": "rect",
-      "id": "enterprise-button",
-      "left": 750,
-      "top": 560,
-      "width": 220,
-      "height": 45,
-      "fill": "#ffffff",
-      "stroke": "#3b82f6",
-      "strokeWidth": 2,
-      "rx": 8,
-      "ry": 8
-    },
-    {
-      "type": "text",
-      "id": "enterprise-button-text",
-      "left": 810,
-      "top": 575,
-      "text": "Contact Sales",
-      "fontSize": 16,
-      "fontWeight": "bold",
-      "fill": "#3b82f6"
-    }
-  ]
+	"name": "Pricing Table Template",
+	"description": "Modern pricing table with three tiers",
+	"category": "marketing",
+	"version": "1.0.0",
+	"objects": [
+		{
+			"type": "text",
+			"id": "main-title",
+			"left": 450,
+			"top": 50,
+			"text": "Choose Your Plan",
+			"fontSize": 36,
+			"fontWeight": "bold",
+			"fill": "#111827"
+		},
+		{
+			"type": "text",
+			"id": "subtitle",
+			"left": 380,
+			"top": 100,
+			"text": "Select the perfect plan for your needs",
+			"fontSize": 16,
+			"fill": "#6b7280"
+		},
+		{
+			"type": "rect",
+			"id": "basic-card",
+			"left": 100,
+			"top": 180,
+			"width": 280,
+			"height": 450,
+			"fill": "#ffffff",
+			"stroke": "#e5e7eb",
+			"strokeWidth": 1,
+			"rx": 12,
+			"ry": 12
+		},
+		{
+			"type": "text",
+			"id": "basic-title",
+			"left": 200,
+			"top": 220,
+			"text": "Basic",
+			"fontSize": 24,
+			"fontWeight": "bold",
+			"fill": "#111827"
+		},
+		{
+			"type": "text",
+			"id": "basic-price",
+			"left": 185,
+			"top": 260,
+			"text": "$9",
+			"fontSize": 48,
+			"fontWeight": "bold",
+			"fill": "#111827"
+		},
+		{
+			"type": "text",
+			"id": "basic-period",
+			"left": 210,
+			"top": 315,
+			"text": "/month",
+			"fontSize": 14,
+			"fill": "#6b7280"
+		},
+		{
+			"type": "text",
+			"id": "basic-feature1",
+			"left": 130,
+			"top": 360,
+			"text": "✓ 10 Projects",
+			"fontSize": 14,
+			"fill": "#374151"
+		},
+		{
+			"type": "text",
+			"id": "basic-feature2",
+			"left": 130,
+			"top": 390,
+			"text": "✓ 5GB Storage",
+			"fontSize": 14,
+			"fill": "#374151"
+		},
+		{
+			"type": "text",
+			"id": "basic-feature3",
+			"left": 130,
+			"top": 420,
+			"text": "✓ Basic Support",
+			"fontSize": 14,
+			"fill": "#374151"
+		},
+		{
+			"type": "rect",
+			"id": "basic-button",
+			"left": 130,
+			"top": 560,
+			"width": 220,
+			"height": 45,
+			"fill": "#ffffff",
+			"stroke": "#3b82f6",
+			"strokeWidth": 2,
+			"rx": 8,
+			"ry": 8
+		},
+		{
+			"type": "text",
+			"id": "basic-button-text",
+			"left": 205,
+			"top": 575,
+			"text": "Get Started",
+			"fontSize": 16,
+			"fontWeight": "bold",
+			"fill": "#3b82f6"
+		},
+		{
+			"type": "rect",
+			"id": "pro-card",
+			"left": 410,
+			"top": 150,
+			"width": 280,
+			"height": 500,
+			"fill": "#3b82f6",
+			"rx": 12,
+			"ry": 12
+		},
+		{
+			"type": "rect",
+			"id": "popular-badge",
+			"left": 490,
+			"top": 130,
+			"width": 120,
+			"height": 30,
+			"fill": "#1e40af",
+			"rx": 15,
+			"ry": 15
+		},
+		{
+			"type": "text",
+			"id": "popular-text",
+			"left": 512,
+			"top": 142,
+			"text": "POPULAR",
+			"fontSize": 12,
+			"fontWeight": "bold",
+			"fill": "#ffffff"
+		},
+		{
+			"type": "text",
+			"id": "pro-title",
+			"left": 525,
+			"top": 200,
+			"text": "Pro",
+			"fontSize": 24,
+			"fontWeight": "bold",
+			"fill": "#ffffff"
+		},
+		{
+			"type": "text",
+			"id": "pro-price",
+			"left": 505,
+			"top": 240,
+			"text": "$29",
+			"fontSize": 48,
+			"fontWeight": "bold",
+			"fill": "#ffffff"
+		},
+		{
+			"type": "text",
+			"id": "pro-period",
+			"left": 530,
+			"top": 295,
+			"text": "/month",
+			"fontSize": 14,
+			"fill": "#e0e7ff"
+		},
+		{
+			"type": "text",
+			"id": "pro-feature1",
+			"left": 440,
+			"top": 350,
+			"text": "✓ Unlimited Projects",
+			"fontSize": 14,
+			"fill": "#ffffff"
+		},
+		{
+			"type": "text",
+			"id": "pro-feature2",
+			"left": 440,
+			"top": 380,
+			"text": "✓ 50GB Storage",
+			"fontSize": 14,
+			"fill": "#ffffff"
+		},
+		{
+			"type": "text",
+			"id": "pro-feature3",
+			"left": 440,
+			"top": 410,
+			"text": "✓ Priority Support",
+			"fontSize": 14,
+			"fill": "#ffffff"
+		},
+		{
+			"type": "text",
+			"id": "pro-feature4",
+			"left": 440,
+			"top": 440,
+			"text": "✓ Advanced Features",
+			"fontSize": 14,
+			"fill": "#ffffff"
+		},
+		{
+			"type": "rect",
+			"id": "pro-button",
+			"left": 440,
+			"top": 580,
+			"width": 220,
+			"height": 45,
+			"fill": "#ffffff",
+			"rx": 8,
+			"ry": 8
+		},
+		{
+			"type": "text",
+			"id": "pro-button-text",
+			"left": 515,
+			"top": 595,
+			"text": "Get Started",
+			"fontSize": 16,
+			"fontWeight": "bold",
+			"fill": "#3b82f6"
+		},
+		{
+			"type": "rect",
+			"id": "enterprise-card",
+			"left": 720,
+			"top": 180,
+			"width": 280,
+			"height": 450,
+			"fill": "#ffffff",
+			"stroke": "#e5e7eb",
+			"strokeWidth": 1,
+			"rx": 12,
+			"ry": 12
+		},
+		{
+			"type": "text",
+			"id": "enterprise-title",
+			"left": 800,
+			"top": 220,
+			"text": "Enterprise",
+			"fontSize": 24,
+			"fontWeight": "bold",
+			"fill": "#111827"
+		},
+		{
+			"type": "text",
+			"id": "enterprise-price",
+			"left": 790,
+			"top": 260,
+			"text": "$99",
+			"fontSize": 48,
+			"fontWeight": "bold",
+			"fill": "#111827"
+		},
+		{
+			"type": "text",
+			"id": "enterprise-period",
+			"left": 830,
+			"top": 315,
+			"text": "/month",
+			"fontSize": 14,
+			"fill": "#6b7280"
+		},
+		{
+			"type": "text",
+			"id": "enterprise-feature1",
+			"left": 750,
+			"top": 360,
+			"text": "✓ Unlimited Projects",
+			"fontSize": 14,
+			"fill": "#374151"
+		},
+		{
+			"type": "text",
+			"id": "enterprise-feature2",
+			"left": 750,
+			"top": 390,
+			"text": "✓ Unlimited Storage",
+			"fontSize": 14,
+			"fill": "#374151"
+		},
+		{
+			"type": "text",
+			"id": "enterprise-feature3",
+			"left": 750,
+			"top": 420,
+			"text": "✓ 24/7 Support",
+			"fontSize": 14,
+			"fill": "#374151"
+		},
+		{
+			"type": "text",
+			"id": "enterprise-feature4",
+			"left": 750,
+			"top": 450,
+			"text": "✓ Custom Integration",
+			"fontSize": 14,
+			"fill": "#374151"
+		},
+		{
+			"type": "rect",
+			"id": "enterprise-button",
+			"left": 750,
+			"top": 560,
+			"width": 220,
+			"height": 45,
+			"fill": "#ffffff",
+			"stroke": "#3b82f6",
+			"strokeWidth": 2,
+			"rx": 8,
+			"ry": 8
+		},
+		{
+			"type": "text",
+			"id": "enterprise-button-text",
+			"left": 810,
+			"top": 575,
+			"text": "Contact Sales",
+			"fontSize": 16,
+			"fontWeight": "bold",
+			"fill": "#3b82f6"
+		}
+	]
 }

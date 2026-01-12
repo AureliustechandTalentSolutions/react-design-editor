@@ -1,123 +1,123 @@
 {
-  "name": "Product Card Template",
-  "description": "E-commerce product card with image, title, price, and action button",
-  "category": "ecommerce",
-  "version": "1.0.0",
-  "objects": [
-    {
-      "type": "rect",
-      "id": "card-container",
-      "left": 100,
-      "top": 100,
-      "width": 300,
-      "height": 450,
-      "fill": "#ffffff",
-      "stroke": "#e5e7eb",
-      "strokeWidth": 1,
-      "rx": 12,
-      "ry": 12
-    },
-    {
-      "type": "rect",
-      "id": "image-placeholder",
-      "left": 100,
-      "top": 100,
-      "width": 300,
-      "height": 250,
-      "fill": "#f3f4f6",
-      "rx": 12,
-      "ry": 12
-    },
-    {
-      "type": "text",
-      "id": "image-text",
-      "left": 210,
-      "top": 215,
-      "text": "Product Image",
-      "fontSize": 14,
-      "fill": "#9ca3af"
-    },
-    {
-      "type": "text",
-      "id": "product-category",
-      "left": 120,
-      "top": 370,
-      "text": "ELECTRONICS",
-      "fontSize": 10,
-      "fontWeight": "bold",
-      "fill": "#6b7280"
-    },
-    {
-      "type": "text",
-      "id": "product-name",
-      "left": 120,
-      "top": 390,
-      "text": "Premium Wireless\nHeadphones",
-      "fontSize": 18,
-      "fontWeight": "bold",
-      "fill": "#111827"
-    },
-    {
-      "type": "text",
-      "id": "product-description",
-      "left": 120,
-      "top": 440,
-      "text": "High-quality sound with\nnoise cancellation",
-      "fontSize": 13,
-      "fill": "#6b7280"
-    },
-    {
-      "type": "text",
-      "id": "product-price",
-      "left": 120,
-      "top": 490,
-      "text": "$299.99",
-      "fontSize": 24,
-      "fontWeight": "bold",
-      "fill": "#111827"
-    },
-    {
-      "type": "rect",
-      "id": "add-to-cart-button",
-      "left": 120,
-      "top": 520,
-      "width": 260,
-      "height": 45,
-      "fill": "#3b82f6",
-      "rx": 8,
-      "ry": 8
-    },
-    {
-      "type": "text",
-      "id": "button-text",
-      "left": 195,
-      "top": 535,
-      "text": "Add to Cart",
-      "fontSize": 16,
-      "fontWeight": "bold",
-      "fill": "#ffffff"
-    },
-    {
-      "type": "rect",
-      "id": "wishlist-icon",
-      "left": 350,
-      "top": 120,
-      "width": 35,
-      "height": 35,
-      "fill": "#ffffff",
-      "stroke": "#e5e7eb",
-      "strokeWidth": 1,
-      "rx": 17.5,
-      "ry": 17.5
-    },
-    {
-      "type": "text",
-      "id": "heart-icon",
-      "left": 361,
-      "top": 130,
-      "text": "♡",
-      "fontSize": 18,
-      "fill": "#6b7280"
-    }
-  ]
+	"name": "Product Card Template",
+	"description": "E-commerce product card with image, title, price, and action button",
+	"category": "ecommerce",
+	"version": "1.0.0",
+	"objects": [
+		{
+			"type": "rect",
+			"id": "card-container",
+			"left": 100,
+			"top": 100,
+			"width": 300,
+			"height": 450,
+			"fill": "#ffffff",
+			"stroke": "#e5e7eb",
+			"strokeWidth": 1,
+			"rx": 12,
+			"ry": 12
+		},
+		{
+			"type": "rect",
+			"id": "image-placeholder",
+			"left": 100,
+			"top": 100,
+			"width": 300,
+			"height": 250,
+			"fill": "#f3f4f6",
+			"rx": 12,
+			"ry": 12
+		},
+		{
+			"type": "text",
+			"id": "image-text",
+			"left": 210,
+			"top": 215,
+			"text": "Product Image",
+			"fontSize": 14,
+			"fill": "#9ca3af"
+		},
+		{
+			"type": "text",
+			"id": "product-category",
+			"left": 120,
+			"top": 370,
+			"text": "ELECTRONICS",
+			"fontSize": 10,
+			"fontWeight": "bold",
+			"fill": "#6b7280"
+		},
+		{
+			"type": "text",
+			"id": "product-name",
+			"left": 120,
+			"top": 390,
+			"text": "Premium Wireless\nHeadphones",
+			"fontSize": 18,
+			"fontWeight": "bold",
+			"fill": "#111827"
+		},
+		{
+			"type": "text",
+			"id": "product-description",
+			"left": 120,
+			"top": 440,
+			"text": "High-quality sound with\nnoise cancellation",
+			"fontSize": 13,
+			"fill": "#6b7280"
+		},
+		{
+			"type": "text",
+			"id": "product-price",
+			"left": 120,
+			"top": 490,
+			"text": "$299.99",
+			"fontSize": 24,
+			"fontWeight": "bold",
+			"fill": "#111827"
+		},
+		{
+			"type": "rect",
+			"id": "add-to-cart-button",
+			"left": 120,
+			"top": 520,
+			"width": 260,
+			"height": 45,
+			"fill": "#3b82f6",
+			"rx": 8,
+			"ry": 8
+		},
+		{
+			"type": "text",
+			"id": "button-text",
+			"left": 195,
+			"top": 535,
+			"text": "Add to Cart",
+			"fontSize": 16,
+			"fontWeight": "bold",
+			"fill": "#ffffff"
+		},
+		{
+			"type": "rect",
+			"id": "wishlist-icon",
+			"left": 350,
+			"top": 120,
+			"width": 35,
+			"height": 35,
+			"fill": "#ffffff",
+			"stroke": "#e5e7eb",
+			"strokeWidth": 1,
+			"rx": 17.5,
+			"ry": 17.5
+		},
+		{
+			"type": "text",
+			"id": "heart-icon",
+			"left": 361,
+			"top": 130,
+			"text": "♡",
+			"fontSize": 18,
+			"fill": "#6b7280"
+		}
+	]
 }

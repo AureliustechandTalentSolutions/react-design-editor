@@ -1,7 +1,7 @@
-import { describe, it, expect, beforeAll, afterAll } from 'vitest';
+import { chromium, Browser, Page } from 'playwright';
 import { preview } from 'vite';
 import type { PreviewServer } from 'vite';
-import { chromium, Browser, Page } from 'playwright';
+import { describe, it, expect, beforeAll, afterAll } from 'vitest';
 
 describe('AI UI Generator E2E', () => {
 	let server: PreviewServer;
@@ -11,9 +11,9 @@ describe('AI UI Generator E2E', () => {
 	beforeAll(async () => {
 		// Start vite preview server
 		server = await preview({ preview: { port: 4173 } });
-		
+
 		// Launch browser
-		browser = await chromium.launch({ 
+		browser = await chromium.launch({
 			headless: true,
 		});
 		page = await browser.newPage();

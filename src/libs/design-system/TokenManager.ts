@@ -144,9 +144,7 @@ export class TokenManager {
 			}
 			// Apply color tokens
 			if (obj.fill && typeof obj.fill === 'string') {
-				const colorName = Object.keys(this.tokens.colors).find(
-					key => this.tokens.colors[key] === obj.fill
-				);
+				const colorName = Object.keys(this.tokens.colors).find(key => this.tokens.colors[key] === obj.fill);
 				if (colorName) {
 					obj.set('fill', this.getColor(colorName));
 				}
@@ -200,9 +198,7 @@ export class TokenManager {
 			};
 
 			if (figmaTokens.typography.fontFamilies) {
-				converted.typography.fontFamilies = figmaTokens.typography.fontFamilies.map(
-					(f: any) => f.value || f
-				);
+				converted.typography.fontFamilies = figmaTokens.typography.fontFamilies.map((f: any) => f.value || f);
 			}
 
 			if (figmaTokens.typography.fontSizes) {

@@ -42,7 +42,7 @@ export const camelToKebab = (str: string): string => {
  * Convert kebab-case to camelCase
  */
 export const kebabToCamel = (str: string): string => {
-	return str.replace(/-([a-z])/g, (g) => g[1].toUpperCase());
+	return str.replace(/-([a-z])/g, g => g[1].toUpperCase());
 };
 
 /**

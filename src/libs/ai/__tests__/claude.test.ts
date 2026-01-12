@@ -1,4 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
+
 import { generateUIFromPrompt, refineDesign, generateStyleVariations } from '../claude';
 
 describe('Claude AI Integration', () => {
@@ -27,7 +28,7 @@ describe('Claude AI Integration', () => {
 					complexity: 'simple',
 					colorScheme: 'auto',
 					clearCanvas: true,
-				})
+				}),
 			).rejects.toThrow('Prompt cannot be empty');
 		});
 
@@ -39,7 +40,7 @@ describe('Claude AI Integration', () => {
 					complexity: 'simple',
 					colorScheme: 'auto',
 					clearCanvas: true,
-				})
+				}),
 			).rejects.toThrow('Prompt cannot be empty');
 		});
 
@@ -127,7 +128,7 @@ describe('Claude AI Integration', () => {
 					instruction: '',
 					targetObject: { type: 'rect' },
 					context: {},
-				})
+				}),
 			).rejects.toThrow('Instruction cannot be empty');
 		});
 
@@ -187,12 +188,8 @@ describe('Claude AI Integration', () => {
 		});
 
 		it('should throw error for invalid count', async () => {
-			await expect(generateStyleVariations({}, 0)).rejects.toThrow(
-				'Count must be between 1 and 10'
-			);
-			await expect(generateStyleVariations({}, 11)).rejects.toThrow(
-				'Count must be between 1 and 10'
-			);
+			await expect(generateStyleVariations({}, 0)).rejects.toThrow('Count must be between 1 and 10');
+			await expect(generateStyleVariations({}, 11)).rejects.toThrow('Count must be between 1 and 10');
 		});
 
 		it('should include color palettes in variations', async () => {
@@ -209,7 +206,7 @@ describe('Claude AI Integration', () => {
 
 			const palettes = variations.map(v => JSON.stringify(v.colorPalette));
 			const uniquePalettes = new Set(palettes);
-			
+
 			// Should have at least 2 unique palettes
 			expect(uniquePalettes.size).toBeGreaterThanOrEqual(2);
 		});
