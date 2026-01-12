@@ -7,7 +7,7 @@ import { ExportedCode, ExportOptions } from '../../types/aiui';
 import { cssObjectToString, fabricToCSS, fabricToTailwind, formatCode, generateId, kebabToPascal } from './utils';
 
 /**
- * Generate Vue component from Fabric.js objects
+ * Generate Vue 3 Composition API component with script setup
  */
 const generateVueComponent = (
 	objects: any[],
@@ -41,22 +41,32 @@ const generateVueComponent = (
 	const elements = objects.map((obj, index) => renderObject(obj, index)).join('\n    ');
 
 	const scriptLang = typescript ? ' lang="ts"' : '';
+	
+	// Use script setup syntax for Vue 3 Composition API
+	const scriptSetup = `<script setup${scriptLang}>
+import { ref, computed, onMounted } from 'vue';
+
+// Component state
+const isLoaded = ref(false);
+
+// Computed properties
+const containerClass = computed(() => {
+  return isLoaded.value ? 'container loaded' : 'container';
+});
+
+// Lifecycle hooks
+onMounted(() => {
+  isLoaded.value = true;
+});
+</script>`;
+
 	const component = `<template>
-  <div class="container">
+  <div :class="containerClass">
     ${elements}
   </div>
 </template>
 
-<script${scriptLang}>
-import { defineComponent } from 'vue';
-
-export default defineComponent({
-  name: '${componentName}',
-  setup() {
-    return {};
-  },
-});
-</script>
+${scriptSetup}
 
 <style${styling === 'css-modules' ? ' module' : ''} scoped>
 .container {
@@ -66,6 +76,13 @@ export default defineComponent({
 }
 
 ${styling !== 'tailwind' ? generateVueCSS(objects) : ''}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .container {
+    padding: 15px;
+  }
+}
 </style>
 `;
 
