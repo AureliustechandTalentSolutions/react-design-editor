@@ -218,30 +218,20 @@ const generateCodeFromDesign = async (
 	options: ConversionOptions,
 ): Promise<{ files: { path: string; content: string; language: string }[]; dependencies: Record<string, string> }> => {
 	// Import code generation functions
-	const { exportToReact } = await import('../export/react');
+	const { exportReact } = await import('../export/react');
 
 	// Generate code based on framework
-	const code = await exportToReact(design, {
+	const exported = exportReact(design, {
+		framework: options.framework,
 		styling: options.styling || 'tailwind',
 		typescript: options.typescript ?? true,
-		includeComments: true,
-		componentName: 'ScreenshotComponent',
+		includeResponsive: options.includeResponsive ?? true,
 	});
 
 	return {
-		files: [
-			{
-				path: options.typescript ? 'ScreenshotComponent.tsx' : 'ScreenshotComponent.jsx',
-				content: code,
-				language: options.typescript ? 'typescript' : 'javascript',
-			},
-		],
+		files: exported.files,
 		dependencies: {
-			react: '^16.14.0',
-			...(options.styling === 'tailwind' && { tailwindcss: '^3.0.0' }),
-			...(options.styling === 'styled-components' && {
-				'styled-components': '^5.3.0',
-			}),
+			...exported.dependencies,
 			...(options.designSystem === 'uswds' && {
 				'@trussworks/react-uswds': '^9.0.0',
 			}),
