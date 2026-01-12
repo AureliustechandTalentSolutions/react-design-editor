@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { DndContext, DragEndEvent, closestCenter } from '@dnd-kit/core';
 import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import { SortableItem } from '../../libs/dnd/SortableItem';
@@ -25,7 +25,9 @@ function LayerPanel({
 	onSendToBack,
 	selectedLayerId,
 }: LayerPanelProps) {
-	const sortedLayers = [...layers].sort((a, b) => b.zIndex - a.zIndex);
+	const sortedLayers = useMemo(() => [...layers].sort((a, b) => b.zIndex - a.zIndex), [layers]);
+
+	const layerIds = useMemo(() => sortedLayers.map(l => l.id), [sortedLayers]);
 
 	const handleDragEnd = useCallback(
 		(event: DragEndEvent) => {
@@ -34,7 +36,7 @@ function LayerPanel({
 				onLayerReorder(active.id as string, over.id as string);
 			}
 		},
-		[onLayerReorder]
+		[onLayerReorder],
 	);
 
 	const getLayerIcon = (type: Layer['type']) => {
@@ -79,18 +81,15 @@ function LayerPanel({
 			</div>
 
 			<DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
-				<SortableContext
-					items={sortedLayers.map((l) => l.id)}
-					strategy={verticalListSortingStrategy}
-				>
+				<SortableContext items={layerIds} strategy={verticalListSortingStrategy}>
 					<div style={{ flex: 1, overflow: 'auto', padding: '8px' }}>
-						{sortedLayers.map((layer) => (
+						{sortedLayers.map(layer => (
 							<SortableItem key={layer.id} id={layer.id}>
 								<div
 									role="button"
 									tabIndex={0}
 									onClick={() => onLayerSelect(layer.id)}
-									onKeyDown={(e) => {
+									onKeyDown={e => {
 										if (e.key === 'Enter' || e.key === ' ') {
 											onLayerSelect(layer.id);
 										}
@@ -103,14 +102,14 @@ function LayerPanel({
 										borderRadius: '4px',
 										background: selectedLayerId === layer.id ? '#e3f2fd' : '#fff',
 										border:
-											selectedLayerId === layer.id
-												? '1px solid #2196f3'
-												: '1px solid #e0e0e0',
+											selectedLayerId === layer.id ? '1px solid #2196f3' : '1px solid #e0e0e0',
 										cursor: 'pointer',
 										opacity: layer.visible ? 1 : 0.5,
 									}}
 								>
-									<span style={{ marginRight: '8px' }}>{getLayerIcon(layer.type)}</span>
+									<span style={{ marginRight: '8px' }} aria-label={`${layer.type} layer`}>
+										{getLayerIcon(layer.type)}
+									</span>
 									<span
 										style={{
 											flex: 1,
@@ -124,7 +123,7 @@ function LayerPanel({
 
 									<button
 										type="button"
-										onClick={(e) => {
+										onClick={e => {
 											e.stopPropagation();
 											onLayerVisibilityToggle(layer.id);
 										}}
@@ -136,13 +135,14 @@ function LayerPanel({
 											opacity: layer.visible ? 1 : 0.3,
 										}}
 										title={layer.visible ? 'Hide layer' : 'Show layer'}
+										aria-label={layer.visible ? 'Hide layer' : 'Show layer'}
 									>
-										👁️
+										<span aria-hidden="true">👁️</span>
 									</button>
 
 									<button
 										type="button"
-										onClick={(e) => {
+										onClick={e => {
 											e.stopPropagation();
 											onLayerLockToggle(layer.id);
 										}}
@@ -153,8 +153,9 @@ function LayerPanel({
 											padding: '4px',
 										}}
 										title={layer.locked ? 'Unlock layer' : 'Lock layer'}
+										aria-label={layer.locked ? 'Unlock layer' : 'Lock layer'}
 									>
-										{layer.locked ? '🔒' : '🔓'}
+										<span aria-hidden="true">{layer.locked ? '🔒' : '🔓'}</span>
 									</button>
 								</div>
 							</SortableItem>
@@ -177,15 +178,17 @@ function LayerPanel({
 						type="button"
 						onClick={() => onBringToFront(selectedLayerId)}
 						style={{ padding: '6px 12px', fontSize: '12px', cursor: 'pointer' }}
+						aria-label="Bring layer to front"
 					>
-						⬆️ Front
+						<span aria-hidden="true">⬆️</span> Front
 					</button>
 					<button
 						type="button"
 						onClick={() => onSendToBack(selectedLayerId)}
 						style={{ padding: '6px 12px', fontSize: '12px', cursor: 'pointer' }}
+						aria-label="Send layer to back"
 					>
-						⬇️ Back
+						<span aria-hidden="true">⬇️</span> Back
 					</button>
 				</div>
 			)}

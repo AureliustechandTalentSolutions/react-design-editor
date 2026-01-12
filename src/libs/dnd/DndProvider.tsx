@@ -24,7 +24,7 @@ function DndProvider({ children, onDragEnd, onDragStart }: DndProviderProps) {
 		}),
 		useSensor(KeyboardSensor, {
 			coordinateGetter: sortableKeyboardCoordinates,
-		})
+		}),
 	);
 
 	return (
@@ -41,4 +41,3 @@ function DndProvider({ children, onDragEnd, onDragStart }: DndProviderProps) {
 
 export default DndProvider;
 export { DndProvider };
-
