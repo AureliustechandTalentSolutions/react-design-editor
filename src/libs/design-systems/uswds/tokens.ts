@@ -82,7 +82,7 @@ export const USWDSTokens = {
 				'"Public Sans Web", -apple-system, BlinkMacSystemFont, ' +
 				'"Segoe UI", Roboto, Helvetica, Arial, sans-serif',
 			serif: '"Merriweather Web", Georgia, Cambria, "Times New Roman", Times, serif',
-			mono: '"Roboto Mono Web", "Bitstream Vera Sans Mono", Consolas, Courier, ' + 'monospace',
+			mono: '"Roboto Mono Web", "Bitstream Vera Sans Mono", Consolas, Courier, monospace',
 		},
 		fontSize: {
 			'3xs': '0.87rem',
