@@ -3,8 +3,6 @@
  * Device viewport switcher with realistic device frames
  */
 
-import React, { useState, useMemo } from 'react';
-import { Button, Select, InputNumber, Radio, Tooltip } from 'antd';
 import {
 	MobileOutlined,
 	TabletOutlined,
@@ -13,12 +11,10 @@ import {
 	ZoomInOutlined,
 	ZoomOutOutlined,
 } from '@ant-design/icons';
-import {
-	STANDARD_VIEWPORTS,
-	DEVICE_PRESETS,
-	Viewport,
-	getViewportById,
-} from '../../libs/responsive/viewports';
+import { Button, Select, InputNumber, Radio, Tooltip } from 'antd';
+import React, { useState, useMemo } from 'react';
+
+import { STANDARD_VIEWPORTS, DEVICE_PRESETS, Viewport, getViewportById } from '../../libs/responsive/viewports';
 
 const { Option } = Select;
 
@@ -108,7 +104,7 @@ export const ResponsivePreview: React.FC<ResponsivePreviewProps> = ({
 				borderRadius: '30px',
 				boxShadow: '0 20px 60px rgba(0, 0, 0, 0.5)',
 				position: 'relative',
-		  }
+			}
 		: {};
 
 	return (

@@ -7,9 +7,10 @@ import { Button, Card, message, Tabs } from 'antd';
 import React, { useState } from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
+
 import Icon from '../../components/icon/Icon';
-import { ExportOptions } from '../../types/aiui';
 import { exportHTML, exportReact, exportVue } from '../../libs/export';
+import { ExportOptions } from '../../types/aiui';
 
 const { TabPane } = Tabs;
 
@@ -133,7 +134,9 @@ const CodePreview: React.FC<IProps> = ({ design }) => {
 				</Tabs>
 
 				{codeResult.instructions && (
-					<div style={{ marginTop: 12, padding: 8, backgroundColor: '#fef3c7', borderRadius: 4, fontSize: 12 }}>
+					<div
+						style={{ marginTop: 12, padding: 8, backgroundColor: '#fef3c7', borderRadius: 4, fontSize: 12 }}
+					>
 						<Icon name="info-circle" prefix="fas" style={{ marginRight: 8 }} />
 						{codeResult.instructions}
 					</div>

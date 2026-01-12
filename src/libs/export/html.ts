@@ -4,6 +4,7 @@
  */
 
 import { ExportedCode, ExportOptions } from '../../types/aiui';
+
 import { cssObjectToString, fabricToCSS, formatCode, generateId, kebabToCamel } from './utils';
 
 /**
@@ -11,7 +12,7 @@ import { cssObjectToString, fabricToCSS, formatCode, generateId, kebabToCamel } 
  */
 const generateHTML = (objects: any[], componentName: string, includeAria: boolean = true): string => {
 	let sectionIndex = 0;
-	let articleIndex = 0;
+	
 
 	const getSemanticTag = (obj: any, index: number): { tag: string; role?: string } => {
 		if (obj.semanticType === 'header') return { tag: 'header', role: 'banner' };
@@ -19,17 +20,17 @@ const generateHTML = (objects: any[], componentName: string, includeAria: boolea
 		if (obj.semanticType === 'main') return { tag: 'main', role: 'main' };
 		if (obj.semanticType === 'footer') return { tag: 'footer', role: 'contentinfo' };
 		if (obj.semanticType === 'aside') return { tag: 'aside', role: 'complementary' };
-		
+
 		// Auto-detect semantic meaning
 		if (index === 0) return { tag: 'header', role: 'banner' };
 		if (obj.type === 'text' && obj.fontSize > 24) return { tag: 'h2' };
 		if (obj.type === 'text' && obj.fontSize > 18) return { tag: 'h3' };
 		if (obj.objects && obj.objects.length > 2) {
-			sectionIndex++;
+			sectionIndex += 1;
 			return { tag: 'section', role: undefined };
 		}
 		if (obj.type === 'text') return { tag: 'p' };
-		
+
 		return { tag: 'div' };
 	};
 
@@ -275,6 +276,7 @@ export const exportHTML = (design: any, options: ExportOptions): ExportedCode =>
 	return {
 		files,
 		dependencies: {},
-		instructions: 'Open index.html in a web browser to view your design. The HTML uses semantic elements and includes ARIA attributes for accessibility.',
+		instructions:
+			'Open index.html in a web browser to view your design. The HTML uses semantic elements and includes ARIA attributes for accessibility.',
 	};
 };

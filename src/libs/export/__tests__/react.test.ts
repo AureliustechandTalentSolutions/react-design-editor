@@ -1,13 +1,12 @@
 import { describe, it, expect } from 'vitest';
+
 import { exportToReact, generateComponentCode, generateImports } from '../react';
 
 describe('React Export', () => {
 	describe('exportToReact', () => {
 		it('should generate valid React component code', async () => {
 			const design = {
-				objects: [
-					{ type: 'rect', left: 0, top: 0, width: 100, height: 50, fill: '#3B82F6' },
-				],
+				objects: [{ type: 'rect', left: 0, top: 0, width: 100, height: 50, fill: '#3B82F6' }],
 			};
 
 			const code = await exportToReact(design, { styling: 'tailwind', typescript: true });
@@ -41,9 +40,7 @@ describe('React Export', () => {
 
 		it('should use inline styles when specified', async () => {
 			const design = {
-				objects: [
-					{ type: 'rect', left: 10, top: 20, width: 100, height: 50, fill: '#3B82F6' },
-				],
+				objects: [{ type: 'rect', left: 10, top: 20, width: 100, height: 50, fill: '#3B82F6' }],
 			};
 			const code = await exportToReact(design, { styling: 'inline', typescript: true });
 

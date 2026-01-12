@@ -202,7 +202,7 @@ export const getViewportsByCategory = (category: Viewport['category']): Viewport
 export const getBreakpointForWidth = (width: number): Breakpoint | undefined => {
 	return BREAKPOINTS.find(
 		breakpoint =>
-			width >= breakpoint.minWidth && (breakpoint.maxWidth === undefined || width <= breakpoint.maxWidth)
+			width >= breakpoint.minWidth && (breakpoint.maxWidth === undefined || width <= breakpoint.maxWidth),
 	);
 };
 
@@ -213,10 +213,7 @@ export const matchesBreakpoint = (width: number, breakpointName: string): boolea
 	const breakpoint = BREAKPOINTS.find(bp => bp.name === breakpointName);
 	if (!breakpoint) return false;
 
-	return (
-		width >= breakpoint.minWidth &&
-		(breakpoint.maxWidth === undefined || width <= breakpoint.maxWidth)
-	);
+	return width >= breakpoint.minWidth && (breakpoint.maxWidth === undefined || width <= breakpoint.maxWidth);
 };
 
 /**
@@ -226,14 +223,21 @@ export const createCustomViewport = (
 	name: string,
 	width: number,
 	height: number,
-	category: Viewport['category'] = 'desktop'
+	category: Viewport['category'] = 'desktop',
 ): Viewport => {
+	let icon = '💻';
+	if (category === 'mobile' || category === 'tablet') {
+		icon = '📱';
+	} else if (category === 'wide') {
+		icon = '🖥️';
+	}
+
 	return {
 		id: `custom-${name.toLowerCase().replace(/\s+/g, '-')}`,
 		name,
 		width,
 		height,
-		icon: category === 'mobile' ? '📱' : category === 'tablet' ? '📱' : category === 'desktop' ? '💻' : '🖥️',
+		icon,
 		category,
 	};
 };

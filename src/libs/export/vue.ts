@@ -4,16 +4,13 @@
  */
 
 import { ExportedCode, ExportOptions } from '../../types/aiui';
+
 import { cssObjectToString, fabricToCSS, fabricToTailwind, formatCode, generateId, kebabToPascal } from './utils';
 
 /**
  * Generate Vue 3 Composition API component with script setup
  */
-const generateVueComponent = (
-	objects: any[],
-	options: ExportOptions,
-	componentName: string
-): string => {
+const generateVueComponent = (objects: any[], options: ExportOptions, componentName: string): string => {
 	const { styling, typescript } = options;
 	const useTailwind = styling === 'tailwind';
 
@@ -41,7 +38,7 @@ const generateVueComponent = (
 	const elements = objects.map((obj, index) => renderObject(obj, index)).join('\n    ');
 
 	const scriptLang = typescript ? ' lang="ts"' : '';
-	
+
 	// Use script setup syntax for Vue 3 Composition API
 	const scriptSetup = `<script setup${scriptLang}>
 import { ref, computed, onMounted } from 'vue';

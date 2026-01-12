@@ -4,6 +4,7 @@
  */
 
 import { ExportedCode, ExportOptions } from '../../types/aiui';
+
 import { cssObjectToString, fabricToCSS, fabricToTailwind, formatCode, generateId, kebabToPascal } from './utils';
 
 /**
@@ -19,18 +20,14 @@ const shouldBeClientComponent = (objects: any[]): boolean => {
 /**
  * Generate Next.js App Router page component
  */
-const generateNextJSPage = (
-	objects: any[],
-	options: ExportOptions,
-	componentName: string
-): string => {
+const generateNextJSPage = (objects: any[], options: ExportOptions, componentName: string): string => {
 	const { styling, typescript } = options;
 	const useTailwind = styling === 'tailwind';
 	const useStyledComponents = styling === 'styled-components';
 	const useCSSModules = styling === 'css-modules';
 	const isClient = shouldBeClientComponent(objects);
 
-	let imports = [];
+	const imports = [];
 	if (isClient) {
 		imports.push(`'use client';`);
 		imports.push('');
@@ -45,30 +42,28 @@ const generateNextJSPage = (
 
 	const renderObject = (obj: any, index: number): string => {
 		const id = generateId('el');
-		
+
 		if (obj.type === 'text') {
 			const className = useTailwind
 				? fabricToTailwind(obj).join(' ')
 				: useCSSModules
-				? `styles.text_${index}`
-				: useStyledComponents
-				? ''
-				: `text_${index}`;
+					? `styles.text_${index}`
+					: useStyledComponents
+						? ''
+						: `text_${index}`;
 
 			const element = `<div ${className ? `className="${className}"` : ''}>${obj.text || 'Text'}</div>`;
-			return useStyledComponents
-				? `<StyledText_${index}>${obj.text || 'Text'}</StyledText_${index}>`
-				: element;
+			return useStyledComponents ? `<StyledText_${index}>${obj.text || 'Text'}</StyledText_${index}>` : element;
 		}
 
 		if (obj.type === 'rect' || obj.type === 'group') {
 			const className = useTailwind
 				? fabricToTailwind(obj).join(' ')
 				: useCSSModules
-				? `styles.box_${index}`
-				: useStyledComponents
-				? ''
-				: `box_${index}`;
+					? `styles.box_${index}`
+					: useStyledComponents
+						? ''
+						: `box_${index}`;
 
 			const children = obj.objects
 				? obj.objects.map((child: any, i: number) => renderObject(child, i)).join('\n      ')
@@ -81,8 +76,8 @@ const generateNextJSPage = (
 			return useStyledComponents && !children
 				? `<StyledBox_${index} />`
 				: useStyledComponents
-				? `<StyledBox_${index}>\n      ${children}\n    </StyledBox_${index}>`
-				: element;
+					? `<StyledBox_${index}>\n      ${children}\n    </StyledBox_${index}>`
+					: element;
 		}
 
 		return '';
@@ -126,16 +121,14 @@ export const metadata${metadataType} = {
  */
 const generateLayout = (componentName: string, styling: string, typescript: boolean): string => {
 	const useTailwind = styling === 'tailwind';
-	
-	let imports = [`import type { Metadata } from 'next';`];
-	
+
+	const imports = [`import type { Metadata } from 'next';`];
+
 	if (useTailwind) {
 		imports.push(`import './globals.css';`);
 	}
 
-	const propsType = typescript
-		? `{ children: React.ReactNode }`
-		: '';
+	const propsType = typescript ? `{ children: React.ReactNode }` : '';
 
 	return `
 ${imports.join('\n')}
@@ -263,7 +256,7 @@ export const exportNextJS = (design: any, options: ExportOptions): ExportedCode 
 		const styledDefs = generateStyledComponents(objects);
 		componentCode = componentCode.replace(
 			`import styled from 'styled-components';`,
-			`import styled from 'styled-components';\n\n${styledDefs}`
+			`import styled from 'styled-components';\n\n${styledDefs}`,
 		);
 	}
 
@@ -329,10 +322,8 @@ export const exportNextJS = (design: any, options: ExportOptions): ExportedCode 
 	return {
 		files,
 		dependencies,
-		instructions:
-			'This is a Next.js 14 App Router project. Place files in the correct directory structure. ' +
-			(options.styling === 'tailwind'
-				? 'Configure Tailwind CSS according to Next.js documentation.'
-				: ''),
+		instructions: `This is a Next.js 14 App Router project. Place files in the correct directory structure. ${
+			options.styling === 'tailwind' ? 'Configure Tailwind CSS according to Next.js documentation.' : ''
+		}`,
 	};
 };
