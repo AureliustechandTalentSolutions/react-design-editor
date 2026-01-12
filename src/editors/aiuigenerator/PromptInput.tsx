@@ -5,9 +5,10 @@
 
 import { Button, Card, Input, Select, Tabs } from 'antd';
 import React, { useState } from 'react';
+
 import Icon from '../../components/icon/Icon';
-import { GenerateOptions } from '../../types/aiui';
 import { promptTemplates } from '../../libs/ai/prompts';
+import { GenerateOptions } from '../../types/aiui';
 
 const { TextArea } = Input;
 const { Option } = Select;
@@ -41,13 +42,16 @@ const PromptInput: React.FC<IProps> = ({ onGenerate, loading }) => {
 		}
 	};
 
-	const templatesByCategory = promptTemplates.reduce((acc, template) => {
-		if (!acc[template.category]) {
-			acc[template.category] = [];
-		}
-		acc[template.category].push(template);
-		return acc;
-	}, {} as Record<string, typeof promptTemplates>);
+	const templatesByCategory = promptTemplates.reduce(
+		(acc, template) => {
+			if (!acc[template.category]) {
+				acc[template.category] = [];
+			}
+			acc[template.category].push(template);
+			return acc;
+		},
+		{} as Record<string, typeof promptTemplates>,
+	);
 
 	return (
 		<div style={{ padding: 16 }}>

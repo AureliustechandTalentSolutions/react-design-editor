@@ -1,6 +1,7 @@
-import { describe, it, expect, vi } from 'vitest';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { describe, it, expect, vi } from 'vitest';
+
 import { PromptInput } from '../PromptInput';
 
 describe('PromptInput', () => {
@@ -56,7 +57,7 @@ describe('PromptInput', () => {
 			() => {
 				expect(screen.queryByText(/quick start/i)).not.toBeInTheDocument();
 			},
-			{ timeout: 300 }
+			{ timeout: 300 },
 		);
 	});
 
@@ -103,10 +104,7 @@ describe('PromptInput', () => {
 		const button = screen.getByRole('button', { name: /generate/i });
 		await userEvent.click(button);
 
-		expect(onSubmit).toHaveBeenCalledWith(
-			'Test',
-			expect.objectContaining({ platform: 'mobile' })
-		);
+		expect(onSubmit).toHaveBeenCalledWith('Test', expect.objectContaining({ platform: 'mobile' }));
 	});
 
 	it('should allow changing complexity option', async () => {
@@ -122,10 +120,7 @@ describe('PromptInput', () => {
 		const button = screen.getByRole('button', { name: /generate/i });
 		await userEvent.click(button);
 
-		expect(onSubmit).toHaveBeenCalledWith(
-			'Test',
-			expect.objectContaining({ complexity: 'complex' })
-		);
+		expect(onSubmit).toHaveBeenCalledWith('Test', expect.objectContaining({ complexity: 'complex' }));
 	});
 
 	it('should not submit on empty prompt', async () => {

@@ -66,6 +66,9 @@
 	"dependencies": {
 		"@anthropic-ai/sdk": "^0.24.0",
 		"@dagrejs/dagre": "^1.1.4",
+		"@dnd-kit/core": "^6.3.1",
+		"@dnd-kit/sortable": "^8.0.0",
+		"@dnd-kit/utilities": "^3.2.2",
 		"@flomon-ui/icons": "^0.0.68",
 		"@types/prismjs": "^1.26.0",
 		"animejs": "^3.0.0",
