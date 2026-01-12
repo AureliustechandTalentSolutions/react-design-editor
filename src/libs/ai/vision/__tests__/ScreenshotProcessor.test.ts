@@ -3,6 +3,7 @@
  */
 
 import { describe, it, expect, beforeEach } from 'vitest';
+
 import { ScreenshotProcessor, processScreenshot } from '../ScreenshotProcessor';
 import { VisionError, VisionErrorType } from '../types';
 
@@ -49,49 +50,41 @@ describe('ScreenshotProcessor', () => {
 	});
 
 	describe('processScreenshot - Base64', () => {
-		it('should handle base64 strings', async () => {
-			const base64 = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==';
-			
-			// Note: This will fail in Node.js environment without proper DOM mocking
+		it.skip('should handle base64 strings', async () => {
+			const base64 =
+				'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==';
+
+			// Note: Skipped because it requires browser DOM APIs
 			// In a browser environment, it would process correctly
-			try {
-				const result = await processor.processScreenshot(base64);
-				expect(result).toHaveProperty('base64');
-				expect(result).toHaveProperty('format');
-				expect(result).toHaveProperty('width');
-				expect(result).toHaveProperty('height');
-				expect(result).toHaveProperty('size');
-			} catch (error) {
-				// Expected in test environment
-				expect(error).toBeDefined();
-			}
+			const result = await processor.processScreenshot(base64);
+			expect(result).toHaveProperty('base64');
+			expect(result).toHaveProperty('format');
+			expect(result).toHaveProperty('width');
+			expect(result).toHaveProperty('height');
+			expect(result).toHaveProperty('size');
 		});
 	});
 
 	describe('processScreenshot - Data URL', () => {
-		it('should handle data URLs', async () => {
-			const dataUrl = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==';
-			
-			try {
-				const result = await processor.processScreenshot(dataUrl);
-				expect(result).toBeDefined();
-			} catch (error) {
-				expect(error).toBeDefined();
-			}
+		it.skip('should handle data URLs', async () => {
+			const dataUrl =
+				'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==';
+
+			// Skipped: requires browser DOM
+			const result = await processor.processScreenshot(dataUrl);
+			expect(result).toBeDefined();
 		});
 
 		it('should reject invalid data URLs', async () => {
 			const invalidDataUrl = 'data:invalid';
-			
+
 			await expect(processor.processScreenshot(invalidDataUrl)).rejects.toThrow();
 		});
 
 		it('should reject unsupported formats', async () => {
 			const dataUrl = 'data:image/bmp;base64,invalid';
-			
-			await expect(processor.processScreenshot(dataUrl)).rejects.toThrow(
-				VisionError
-			);
+
+			await expect(processor.processScreenshot(dataUrl)).rejects.toThrow(VisionError);
 		});
 	});
 
@@ -102,9 +95,7 @@ describe('ScreenshotProcessor', () => {
 				type: 'image/jpeg',
 			});
 
-			await expect(processor.processScreenshot(largeFile)).rejects.toThrow(
-				VisionError
-			);
+			await expect(processor.processScreenshot(largeFile)).rejects.toThrow(VisionError);
 		});
 
 		it('should reject unsupported file types', async () => {
@@ -112,25 +103,19 @@ describe('ScreenshotProcessor', () => {
 				type: 'text/plain',
 			});
 
-			await expect(processor.processScreenshot(unsupportedFile)).rejects.toThrow(
-				VisionError
-			);
+			await expect(processor.processScreenshot(unsupportedFile)).rejects.toThrow(VisionError);
 		});
 	});
 
 	describe('batchProcess', () => {
-		it('should process multiple sources', async () => {
+		it.skip('should process multiple sources', async () => {
 			const sources = [
 				'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==',
 			];
 
-			try {
-				const results = await processor.batchProcess(sources);
-				expect(Array.isArray(results)).toBe(true);
-			} catch (error) {
-				// Expected in test environment
-				expect(error).toBeDefined();
-			}
+			// Skipped: requires browser DOM
+			const results = await processor.batchProcess(sources);
+			expect(Array.isArray(results)).toBe(true);
 		});
 
 		it('should handle empty array', async () => {
@@ -139,13 +124,9 @@ describe('ScreenshotProcessor', () => {
 		});
 
 		it('should throw error when all images fail', async () => {
-			const sources = [
-				new File(['test'], 'test.txt', { type: 'text/plain' }),
-			];
+			const sources = [new File(['test'], 'test.txt', { type: 'text/plain' })];
 
-			await expect(processor.batchProcess(sources)).rejects.toThrow(
-				VisionError
-			);
+			await expect(processor.batchProcess(sources)).rejects.toThrow(VisionError);
 		});
 	});
 
@@ -162,7 +143,7 @@ describe('ScreenshotProcessor', () => {
 		it('should compress images based on quality setting', () => {
 			const highQuality = new ScreenshotProcessor({ quality: 1.0 });
 			const lowQuality = new ScreenshotProcessor({ quality: 0.5 });
-			
+
 			expect(highQuality).toBeDefined();
 			expect(lowQuality).toBeDefined();
 		});
@@ -203,34 +184,30 @@ describe('ScreenshotProcessor', () => {
 });
 
 describe('processScreenshot helper', () => {
-	it('should create processor and process', async () => {
-		const base64 = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==';
-		
-		try {
-			const result = await processScreenshot(base64);
-			expect(result).toBeDefined();
-		} catch (error) {
-			expect(error).toBeDefined();
-		}
+	it.skip('should create processor and process', async () => {
+		const base64 =
+			'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==';
+
+		// Skipped: requires browser DOM
+		const result = await processScreenshot(base64);
+		expect(result).toBeDefined();
 	});
 
-	it('should accept custom options', async () => {
-		const base64 = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==';
-		
-		try {
-			const result = await processScreenshot(base64, {
-				maxWidth: 800,
-				quality: 0.8,
-			});
-			expect(result).toBeDefined();
-		} catch (error) {
-			expect(error).toBeDefined();
-		}
+	it.skip('should accept custom options', async () => {
+		const base64 =
+			'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==';
+
+		// Skipped: requires browser DOM
+		const result = await processScreenshot(base64, {
+			maxWidth: 800,
+			quality: 0.8,
+		});
+		expect(result).toBeDefined();
 	});
 });
 
 describe('autoCrop', () => {
-	it('should handle auto-crop gracefully', async () => {
+	it.skip('should handle auto-crop gracefully', async () => {
 		const processor = new ScreenshotProcessor();
 		const mockImageData = {
 			base64: 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==',
@@ -240,16 +217,12 @@ describe('autoCrop', () => {
 			size: 1024,
 		};
 
-		try {
-			const result = await processor.autoCrop(mockImageData);
-			expect(result).toBeDefined();
-		} catch (error) {
-			// Expected in test environment
-			expect(error).toBeDefined();
-		}
+		// Skipped: requires browser DOM
+		const result = await processor.autoCrop(mockImageData);
+		expect(result).toBeDefined();
 	});
 
-	it('should return original on crop failure', async () => {
+	it.skip('should return original on crop failure', async () => {
 		const processor = new ScreenshotProcessor();
 		const mockImageData = {
 			base64: 'invalid',
@@ -259,6 +232,7 @@ describe('autoCrop', () => {
 			size: 1024,
 		};
 
+		// Skipped: requires browser DOM
 		const result = await processor.autoCrop(mockImageData);
 		expect(result).toEqual(mockImageData);
 	});

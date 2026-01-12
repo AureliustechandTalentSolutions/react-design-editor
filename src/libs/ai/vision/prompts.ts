@@ -22,12 +22,9 @@ Return ONLY valid JSON, no explanations or markdown.`;
 /**
  * Element extraction prompt
  */
-export const getElementExtractionPrompt = (options?: {
-	detectText?: boolean;
-	extractColors?: boolean;
-}): string => {
+export const getElementExtractionPrompt = (options?: { detectText?: boolean; extractColors?: boolean }): string => {
 	const { detectText = true, extractColors = true } = options || {};
-	
+
 	return `Analyze this UI screenshot and extract all UI elements.
 
 For each element, provide:

@@ -3,6 +3,7 @@
  */
 
 import { describe, it, expect, beforeEach } from 'vitest';
+
 import { UIElementDetector, detectElements } from '../UIElementDetector';
 import { VisionClient } from '../VisionClient';
 import type { ImageData, DetectedElement, UIElementType } from '../types';
@@ -37,14 +38,14 @@ describe('UIElementDetector', () => {
 	describe('detectElements', () => {
 		it('should return mock elements in demo mode', async () => {
 			const elements = await detector.detectElements(mockImageData);
-			
+
 			expect(Array.isArray(elements)).toBe(true);
 			expect(elements.length).toBeGreaterThan(0);
 		});
 
 		it('should return elements with required properties', async () => {
 			const elements = await detector.detectElements(mockImageData);
-			
+
 			elements.forEach(element => {
 				expect(element).toHaveProperty('id');
 				expect(element).toHaveProperty('type');
@@ -59,13 +60,27 @@ describe('UIElementDetector', () => {
 
 		it('should return valid element types', async () => {
 			const elements = await detector.detectElements(mockImageData);
-			
+
 			const validTypes: UIElementType[] = [
-				'button', 'input', 'textarea', 'select', 'checkbox', 'radio',
-				'card', 'modal', 'nav', 'header', 'footer', 'sidebar',
-				'text', 'image', 'icon', 'divider', 'container'
+				'button',
+				'input',
+				'textarea',
+				'select',
+				'checkbox',
+				'radio',
+				'card',
+				'modal',
+				'nav',
+				'header',
+				'footer',
+				'sidebar',
+				'text',
+				'image',
+				'icon',
+				'divider',
+				'container',
 			];
-			
+
 			elements.forEach(element => {
 				expect(validTypes).toContain(element.type);
 			});
@@ -149,7 +164,7 @@ describe('UIElementDetector', () => {
 			];
 
 			const hierarchy = detector.buildHierarchy(elements);
-			
+
 			expect(hierarchy.length).toBeGreaterThan(0);
 			expect(hierarchy[0].children).toBeDefined();
 			expect(hierarchy[0].children!.length).toBe(2);
@@ -172,7 +187,7 @@ describe('UIElementDetector', () => {
 			];
 
 			const hierarchy = detector.buildHierarchy(elements);
-			
+
 			expect(hierarchy.length).toBe(2);
 			hierarchy.forEach(element => {
 				expect(element.children).toBeUndefined();
@@ -184,7 +199,7 @@ describe('UIElementDetector', () => {
 		it('should filter elements by type', async () => {
 			const elements = await detector.detectElements(mockImageData);
 			const buttons = detector.filterByType(elements, 'button');
-			
+
 			expect(Array.isArray(buttons)).toBe(true);
 			buttons.forEach(element => {
 				expect(element.type).toBe('button');
@@ -194,7 +209,7 @@ describe('UIElementDetector', () => {
 		it('should return empty array when no matches', async () => {
 			const elements = await detector.detectElements(mockImageData);
 			const modals = detector.filterByType(elements, 'modal');
-			
+
 			expect(Array.isArray(modals)).toBe(true);
 		});
 
@@ -226,7 +241,7 @@ describe('UIElementDetector', () => {
 		it('should count elements by type', async () => {
 			const elements = await detector.detectElements(mockImageData);
 			const stats = detector.getStatistics(elements);
-			
+
 			expect(typeof stats).toBe('object');
 			Object.values(stats).forEach(count => {
 				expect(typeof count).toBe('number');
@@ -295,7 +310,7 @@ describe('UIElementDetector', () => {
 		it('should extract colors from region', async () => {
 			const boundingBox = { x: 0, y: 0, width: 100, height: 100 };
 			const colors = await detector.extractColors(mockImageData, boundingBox);
-			
+
 			expect(Array.isArray(colors)).toBe(true);
 			colors.forEach(color => {
 				expect(color).toMatch(/^#[0-9a-f]{6}$/i);

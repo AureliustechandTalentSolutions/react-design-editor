@@ -3,13 +3,7 @@
  * Handles image preprocessing, validation, and optimization
  */
 
-import {
-	ImageData,
-	ImageFormat,
-	PreprocessingOptions,
-	VisionError,
-	VisionErrorType,
-} from './types';
+import { ImageData, ImageFormat, PreprocessingOptions, VisionError, VisionErrorType } from './types';
 
 /**
  * Default preprocessing options
@@ -24,12 +18,7 @@ const DEFAULT_OPTIONS: Required<PreprocessingOptions> = {
 /**
  * Supported image formats
  */
-const SUPPORTED_FORMATS: ImageFormat[] = [
-	'image/jpeg',
-	'image/png',
-	'image/gif',
-	'image/webp',
-];
+const SUPPORTED_FORMATS: ImageFormat[] = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
 
 /**
  * Max file size (5MB in bytes)
@@ -49,10 +38,7 @@ export class ScreenshotProcessor {
 	/**
 	 * Process screenshot from various sources
 	 */
-	async processScreenshot(
-		source: File | Blob | string,
-		options?: PreprocessingOptions
-	): Promise<ImageData> {
+	async processScreenshot(source: File | Blob | string, options?: PreprocessingOptions): Promise<ImageData> {
 		const opts = { ...this.options, ...options };
 
 		// Handle different source types
@@ -74,15 +60,12 @@ export class ScreenshotProcessor {
 	/**
 	 * Process from File or Blob
 	 */
-	private async processFromFile(
-		file: File | Blob,
-		options: Required<PreprocessingOptions>
-	): Promise<ImageData> {
+	private async processFromFile(file: File | Blob, options: Required<PreprocessingOptions>): Promise<ImageData> {
 		// Validate file size
 		if (file.size > MAX_FILE_SIZE) {
 			throw new VisionError(
 				VisionErrorType.IMAGE_TOO_LARGE,
-				`Image size ${(file.size / 1024 / 1024).toFixed(2)}MB exceeds maximum of ${MAX_FILE_SIZE / 1024 / 1024}MB`
+				`Image size ${(file.size / 1024 / 1024).toFixed(2)}MB exceeds maximum of ${MAX_FILE_SIZE / 1024 / 1024}MB`,
 			);
 		}
 
@@ -91,7 +74,7 @@ export class ScreenshotProcessor {
 		if (!SUPPORTED_FORMATS.includes(format)) {
 			throw new VisionError(
 				VisionErrorType.UNSUPPORTED_FORMAT,
-				`Format ${file.type} is not supported. Use: ${SUPPORTED_FORMATS.join(', ')}`
+				`Format ${file.type} is not supported. Use: ${SUPPORTED_FORMATS.join(', ')}`,
 			);
 		}
 
@@ -104,21 +87,14 @@ export class ScreenshotProcessor {
 			// Process and resize
 			return this.processImage(img, options);
 		} catch (error) {
-			throw new VisionError(
-				VisionErrorType.PREPROCESSING_ERROR,
-				'Failed to process image file',
-				error
-			);
+			throw new VisionError(VisionErrorType.PREPROCESSING_ERROR, 'Failed to process image file', error);
 		}
 	}
 
 	/**
 	 * Process from URL
 	 */
-	private async processFromURL(
-		url: string,
-		options: Required<PreprocessingOptions>
-	): Promise<ImageData> {
+	private async processFromURL(url: string, options: Required<PreprocessingOptions>): Promise<ImageData> {
 		try {
 			const response = await fetch(url);
 			if (!response.ok) {
@@ -128,66 +104,46 @@ export class ScreenshotProcessor {
 			const blob = await response.blob();
 			return this.processFromFile(blob, options);
 		} catch (error) {
-			throw new VisionError(
-				VisionErrorType.PREPROCESSING_ERROR,
-				'Failed to load image from URL',
-				error
-			);
+			throw new VisionError(VisionErrorType.PREPROCESSING_ERROR, 'Failed to load image from URL', error);
 		}
 	}
 
 	/**
 	 * Process from data URL
 	 */
-	private async processFromDataURL(
-		dataUrl: string,
-		options: Required<PreprocessingOptions>
-	): Promise<ImageData> {
+	private async processFromDataURL(dataUrl: string, options: Required<PreprocessingOptions>): Promise<ImageData> {
 		try {
 			const [metadata, base64] = dataUrl.split(',');
 			const formatMatch = metadata.match(/data:(image\/\w+);base64/);
-			
+
 			if (!formatMatch) {
 				throw new Error('Invalid data URL format');
 			}
 
 			const format = formatMatch[1] as ImageFormat;
 			if (!SUPPORTED_FORMATS.includes(format)) {
-				throw new VisionError(
-					VisionErrorType.UNSUPPORTED_FORMAT,
-					`Format ${format} is not supported`
-				);
+				throw new VisionError(VisionErrorType.UNSUPPORTED_FORMAT, `Format ${format} is not supported`);
 			}
 
 			// Decode base64 to check size
 			const binary = atob(base64);
 			if (binary.length > MAX_FILE_SIZE) {
-				throw new VisionError(
-					VisionErrorType.IMAGE_TOO_LARGE,
-					'Image size exceeds maximum'
-				);
+				throw new VisionError(VisionErrorType.IMAGE_TOO_LARGE, 'Image size exceeds maximum');
 			}
 
 			const img = await this.loadImage(dataUrl);
 			return this.processImage(img, options);
 		} catch (error) {
 			if (error instanceof VisionError) throw error;
-			
-			throw new VisionError(
-				VisionErrorType.PREPROCESSING_ERROR,
-				'Failed to process data URL',
-				error
-			);
+
+			throw new VisionError(VisionErrorType.PREPROCESSING_ERROR, 'Failed to process data URL', error);
 		}
 	}
 
 	/**
 	 * Process from base64 string
 	 */
-	private async processFromBase64(
-		base64: string,
-		options: Required<PreprocessingOptions>
-	): Promise<ImageData> {
+	private async processFromBase64(base64: string, options: Required<PreprocessingOptions>): Promise<ImageData> {
 		// Assume JPEG if no format specified
 		const dataUrl = `data:image/jpeg;base64,${base64}`;
 		return this.processFromDataURL(dataUrl, options);
@@ -200,10 +156,10 @@ export class ScreenshotProcessor {
 		return new Promise((resolve, reject) => {
 			const img = new Image();
 			img.crossOrigin = 'anonymous';
-			
+
 			img.onload = () => resolve(img);
 			img.onerror = () => reject(new Error('Failed to load image'));
-			
+
 			img.src = src;
 		});
 	}
@@ -211,18 +167,15 @@ export class ScreenshotProcessor {
 	/**
 	 * Process and optimize image
 	 */
-	private processImage(
-		img: HTMLImageElement,
-		options: Required<PreprocessingOptions>
-	): ImageData {
+	private processImage(img: HTMLImageElement, options: Required<PreprocessingOptions>): ImageData {
 		const { maxWidth, maxHeight, quality, format } = options;
 
 		// Calculate new dimensions
 		let { width, height } = img;
-		
+
 		if (width > maxWidth || height > maxHeight) {
 			const aspectRatio = width / height;
-			
+
 			if (width > height) {
 				width = maxWidth;
 				height = Math.round(width / aspectRatio);
@@ -236,13 +189,10 @@ export class ScreenshotProcessor {
 		const canvas = document.createElement('canvas');
 		canvas.width = width;
 		canvas.height = height;
-		
+
 		const ctx = canvas.getContext('2d');
 		if (!ctx) {
-			throw new VisionError(
-				VisionErrorType.PREPROCESSING_ERROR,
-				'Failed to get canvas context'
-			);
+			throw new VisionError(VisionErrorType.PREPROCESSING_ERROR, 'Failed to get canvas context');
 		}
 
 		// Use high-quality scaling
@@ -280,29 +230,33 @@ export class ScreenshotProcessor {
 	async autoCrop(imageData: ImageData, padding: number = 20): Promise<ImageData> {
 		try {
 			const img = await this.loadImage(`data:${imageData.format};base64,${imageData.base64}`);
-			
+
 			const canvas = document.createElement('canvas');
 			canvas.width = imageData.width;
 			canvas.height = imageData.height;
-			
+
 			const ctx = canvas.getContext('2d');
 			if (!ctx) throw new Error('Cannot get context');
-			
+
 			ctx.drawImage(img, 0, 0);
-			
+
 			// Get image data
 			const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-			const data = imgData.data;
+			const { data } = imgData;
 
 			// Find bounds
-			let top = 0, bottom = canvas.height, left = 0, right = canvas.width;
+			let top = 0;
+			let bottom = canvas.height;
+			let left = 0;
+			let right = canvas.width;
 			let found = false;
 
 			// Find top
 			for (let y = 0; y < canvas.height; y++) {
 				for (let x = 0; x < canvas.width; x++) {
 					const i = (y * canvas.width + x) * 4;
-					if (data[i + 3] > 0) { // Alpha channel
+					if (data[i + 3] > 0) {
+						// Alpha channel
 						top = y;
 						found = true;
 						break;
@@ -366,15 +320,11 @@ export class ScreenshotProcessor {
 			const croppedCanvas = document.createElement('canvas');
 			croppedCanvas.width = cropWidth;
 			croppedCanvas.height = cropHeight;
-			
+
 			const croppedCtx = croppedCanvas.getContext('2d');
 			if (!croppedCtx) throw new Error('Cannot get context');
-			
-			croppedCtx.drawImage(
-				canvas,
-				left, top, cropWidth, cropHeight,
-				0, 0, cropWidth, cropHeight
-			);
+
+			croppedCtx.drawImage(canvas, left, top, cropWidth, cropHeight, 0, 0, cropWidth, cropHeight);
 
 			const dataUrl = croppedCanvas.toDataURL(imageData.format, this.options.quality);
 			const base64 = dataUrl.split(',')[1];
@@ -395,10 +345,7 @@ export class ScreenshotProcessor {
 	/**
 	 * Batch process multiple screenshots
 	 */
-	async batchProcess(
-		sources: (File | Blob | string)[],
-		options?: PreprocessingOptions
-	): Promise<ImageData[]> {
+	async batchProcess(sources: (File | Blob | string)[], options?: PreprocessingOptions): Promise<ImageData[]> {
 		const results: ImageData[] = [];
 		const errors: Error[] = [];
 
@@ -412,11 +359,7 @@ export class ScreenshotProcessor {
 		}
 
 		if (results.length === 0 && errors.length > 0) {
-			throw new VisionError(
-				VisionErrorType.PREPROCESSING_ERROR,
-				'All images failed to process',
-				errors
-			);
+			throw new VisionError(VisionErrorType.PREPROCESSING_ERROR, 'All images failed to process', errors);
 		}
 
 		return results;
@@ -435,7 +378,7 @@ export const createScreenshotProcessor = (options?: PreprocessingOptions): Scree
  */
 export const processScreenshot = async (
 	source: File | Blob | string,
-	options?: PreprocessingOptions
+	options?: PreprocessingOptions,
 ): Promise<ImageData> => {
 	const processor = new ScreenshotProcessor(options);
 	return processor.processScreenshot(source, options);

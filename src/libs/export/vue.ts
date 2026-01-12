@@ -4,16 +4,13 @@
  */
 
 import { ExportedCode, ExportOptions } from '../../types/aiui';
+
 import { cssObjectToString, fabricToCSS, fabricToTailwind, formatCode, generateId, kebabToPascal } from './utils';
 
 /**
  * Generate Vue component from Fabric.js objects
  */
-const generateVueComponent = (
-	objects: any[],
-	options: ExportOptions,
-	componentName: string
-): string => {
+const generateVueComponent = (objects: any[], options: ExportOptions, componentName: string): string => {
 	const { styling, typescript } = options;
 	const useTailwind = styling === 'tailwind';
 

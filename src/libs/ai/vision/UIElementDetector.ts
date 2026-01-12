@@ -4,6 +4,8 @@
  */
 
 import { nanoid } from 'nanoid';
+
+import { VisionClient, getVisionClient } from './VisionClient';
 import {
 	DetectedElement,
 	UIElementType,
@@ -13,7 +15,6 @@ import {
 	VisionError,
 	VisionErrorType,
 } from './types';
-import { VisionClient, getVisionClient } from './VisionClient';
 
 /**
  * Element detection confidence threshold
@@ -52,11 +53,7 @@ export class UIElementDetector {
 				throw error;
 			}
 
-			throw new VisionError(
-				VisionErrorType.DETECTION_ERROR,
-				'Failed to detect UI elements',
-				error
-			);
+			throw new VisionError(VisionErrorType.DETECTION_ERROR, 'Failed to detect UI elements', error);
 		}
 	}
 
@@ -93,7 +90,7 @@ export class UIElementDetector {
 	 */
 	private normalizeElementType(type: string): UIElementType {
 		const normalized = type.toLowerCase().trim();
-		
+
 		const typeMap: Record<string, UIElementType> = {
 			btn: 'button',
 			'text-input': 'input',
@@ -133,14 +130,9 @@ export class UIElementDetector {
 	 */
 	private validateElement(element: DetectedElement): boolean {
 		const { boundingBox } = element;
-		
+
 		// Check if bounding box is valid
-		if (
-			boundingBox.width <= 0 ||
-			boundingBox.height <= 0 ||
-			boundingBox.x < 0 ||
-			boundingBox.y < 0
-		) {
+		if (boundingBox.width <= 0 || boundingBox.height <= 0 || boundingBox.x < 0 || boundingBox.y < 0) {
 			return false;
 		}
 
@@ -166,23 +158,12 @@ export class UIElementDetector {
 		const aspectRatio = boundingBox.width / boundingBox.height;
 
 		// Button detection
-		if (
-			text &&
-			text.length < 30 &&
-			aspectRatio > 1.5 &&
-			aspectRatio < 5 &&
-			boundingBox.height < 60
-		) {
+		if (text && text.length < 30 && aspectRatio > 1.5 && aspectRatio < 5 && boundingBox.height < 60) {
 			return 'button';
 		}
 
 		// Input field detection
-		if (
-			aspectRatio > 3 &&
-			boundingBox.height < 50 &&
-			boundingBox.height > 25 &&
-			styles?.border
-		) {
+		if (aspectRatio > 3 && boundingBox.height < 50 && boundingBox.height > 25 && styles?.border) {
 			return 'input';
 		}
 
@@ -217,10 +198,7 @@ export class UIElementDetector {
 	/**
 	 * Extract colors from element region
 	 */
-	async extractColors(
-		imageData: ImageData,
-		boundingBox: BoundingBox
-	): Promise<string[]> {
+	async extractColors(imageData: ImageData, boundingBox: BoundingBox): Promise<string[]> {
 		// In a real implementation, this would analyze the image region
 		// For now, return default colors
 		return ['#3b82f6', '#ffffff'];
@@ -271,12 +249,7 @@ export class UIElementDetector {
 	 * Check if box A is contained within box B
 	 */
 	private isContained(a: BoundingBox, b: BoundingBox): boolean {
-		return (
-			a.x >= b.x &&
-			a.y >= b.y &&
-			a.x + a.width <= b.x + b.width &&
-			a.y + a.height <= b.y + b.height
-		);
+		return a.x >= b.x && a.y >= b.y && a.x + a.width <= b.x + b.width && a.y + a.height <= b.y + b.height;
 	}
 
 	/**

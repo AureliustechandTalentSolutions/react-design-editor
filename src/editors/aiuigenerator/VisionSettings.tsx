@@ -4,8 +4,9 @@
  */
 
 import React, { useState } from 'react';
-import { Settings, ChevronDown } from '@flomon-ui/icons';
-import type { VisionModel, ConversionOptions } from '../../libs/ai/vision/types';
+import Icon from '../../components/icon/Icon';
+
+import type { VisionModel } from '../../libs/ai/vision/types';
 
 interface VisionSettingsProps {
 	onSettingsChange: (settings: VisionSettings) => void;
@@ -35,10 +36,7 @@ const DEFAULT_SETTINGS: VisionSettings = {
 /**
  * Vision Settings Panel Component
  */
-export const VisionSettings: React.FC<VisionSettingsProps> = ({
-	onSettingsChange,
-	initialSettings = {},
-}) => {
+export const VisionSettings: React.FC<VisionSettingsProps> = ({ onSettingsChange, initialSettings = {} }) => {
 	const [settings, setSettings] = useState<VisionSettings>({
 		...DEFAULT_SETTINGS,
 		...initialSettings,
@@ -48,10 +46,7 @@ export const VisionSettings: React.FC<VisionSettingsProps> = ({
 	/**
 	 * Update setting
 	 */
-	const updateSetting = <K extends keyof VisionSettings>(
-		key: K,
-		value: VisionSettings[K]
-	) => {
+	const updateSetting = <K extends keyof VisionSettings>(key: K, value: VisionSettings[K]) => {
 		const newSettings = { ...settings, [key]: value };
 		setSettings(newSettings);
 		onSettingsChange(newSettings);
@@ -59,15 +54,22 @@ export const VisionSettings: React.FC<VisionSettingsProps> = ({
 
 	return (
 		<div className="vision-settings">
-			<div className="settings-header" onClick={() => setIsExpanded(!isExpanded)}>
+			<div
+				className="settings-header"
+				onClick={() => setIsExpanded(!isExpanded)}
+				role="button"
+				tabIndex={0}
+				onKeyDown={e => {
+					if (e.key === 'Enter' || e.key === ' ') {
+						setIsExpanded(!isExpanded);
+					}
+				}}
+			>
 				<div className="header-left">
-					<Settings size={20} />
+					<Icon name="cog" />
 					<h3>Vision Settings</h3>
 				</div>
-				<ChevronDown
-					size={20}
-					className={`chevron ${isExpanded ? 'expanded' : ''}`}
-				/>
+				<Icon name={isExpanded ? 'chevron-up' : 'chevron-down'} />
 			</div>
 
 			{isExpanded && (
@@ -77,14 +79,10 @@ export const VisionSettings: React.FC<VisionSettingsProps> = ({
 						<label>AI Model</label>
 						<select
 							value={settings.model}
-							onChange={(e) => updateSetting('model', e.target.value as VisionModel)}
+							onChange={e => updateSetting('model', e.target.value as VisionModel)}
 						>
-							<option value="claude-3-5-sonnet-20241022">
-								Claude 3.5 Sonnet (Recommended)
-							</option>
-							<option value="claude-3-opus-20240229">
-								Claude 3 Opus (More Accurate)
-							</option>
+							<option value="claude-3-5-sonnet-20241022">Claude 3.5 Sonnet (Recommended)</option>
+							<option value="claude-3-opus-20240229">Claude 3 Opus (More Accurate)</option>
 						</select>
 						<p className="setting-hint">
 							Sonnet is faster and cost-effective. Opus provides higher accuracy.
@@ -101,7 +99,7 @@ export const VisionSettings: React.FC<VisionSettingsProps> = ({
 									name="framework"
 									value="react"
 									checked={settings.framework === 'react'}
-									onChange={(e) => updateSetting('framework', e.target.value as any)}
+									onChange={e => updateSetting('framework', e.target.value as any)}
 								/>
 								<span>React</span>
 							</label>
@@ -111,7 +109,7 @@ export const VisionSettings: React.FC<VisionSettingsProps> = ({
 									name="framework"
 									value="vue"
 									checked={settings.framework === 'vue'}
-									onChange={(e) => updateSetting('framework', e.target.value as any)}
+									onChange={e => updateSetting('framework', e.target.value as any)}
 								/>
 								<span>Vue</span>
 							</label>
@@ -121,7 +119,7 @@ export const VisionSettings: React.FC<VisionSettingsProps> = ({
 									name="framework"
 									value="html"
 									checked={settings.framework === 'html'}
-									onChange={(e) => updateSetting('framework', e.target.value as any)}
+									onChange={e => updateSetting('framework', e.target.value as any)}
 								/>
 								<span>HTML</span>
 							</label>
@@ -140,21 +138,11 @@ export const VisionSettings: React.FC<VisionSettingsProps> = ({
 								min="0"
 								max="2"
 								step="1"
-								value={
-									settings.fidelity === 'exact'
-										? 0
-										: settings.fidelity === 'approximate'
-										? 1
-										: 2
-								}
-								onChange={(e) => {
+								value={settings.fidelity === 'exact' ? 0 : settings.fidelity === 'approximate' ? 1 : 2}
+								onChange={e => {
 									const value = parseInt(e.target.value);
 									const fidelity =
-										value === 0
-											? 'exact'
-											: value === 1
-											? 'approximate'
-											: 'design-system';
+										value === 0 ? 'exact' : value === 1 ? 'approximate' : 'design-system';
 									updateSetting('fidelity', fidelity);
 								}}
 								className="slider"
@@ -166,12 +154,10 @@ export const VisionSettings: React.FC<VisionSettingsProps> = ({
 							</div>
 						</div>
 						<p className="setting-hint">
-							{settings.fidelity === 'exact' &&
-								'Recreate the exact design from the screenshot'}
+							{settings.fidelity === 'exact' && 'Recreate the exact design from the screenshot'}
 							{settings.fidelity === 'approximate' &&
 								'Balance between accuracy and design system adherence'}
-							{settings.fidelity === 'design-system' &&
-								'Adapt the design to match your design system'}
+							{settings.fidelity === 'design-system' && 'Adapt the design to match your design system'}
 						</p>
 					</div>
 
@@ -181,24 +167,22 @@ export const VisionSettings: React.FC<VisionSettingsProps> = ({
 							<input
 								type="checkbox"
 								checked={settings.useDesignSystem}
-								onChange={(e) => updateSetting('useDesignSystem', e.target.checked)}
+								onChange={e => updateSetting('useDesignSystem', e.target.checked)}
 							/>
 							<span>Use Design System Tokens</span>
 						</label>
-						<p className="setting-hint">
-							Apply design system colors, spacing, and typography
-						</p>
+						<p className="setting-hint">Apply design system colors, spacing, and typography</p>
 					</div>
 
 					{/* Advanced Options */}
 					<div className="setting-group">
 						<label>Advanced Options</label>
-						
+
 						<label className="checkbox-label">
 							<input
 								type="checkbox"
 								checked={settings.extractColors}
-								onChange={(e) => updateSetting('extractColors', e.target.checked)}
+								onChange={e => updateSetting('extractColors', e.target.checked)}
 							/>
 							<span>Extract Color Palette</span>
 						</label>
@@ -207,7 +191,7 @@ export const VisionSettings: React.FC<VisionSettingsProps> = ({
 							<input
 								type="checkbox"
 								checked={settings.extractText}
-								onChange={(e) => updateSetting('extractText', e.target.checked)}
+								onChange={e => updateSetting('extractText', e.target.checked)}
 							/>
 							<span>OCR Text Extraction</span>
 						</label>
@@ -216,7 +200,7 @@ export const VisionSettings: React.FC<VisionSettingsProps> = ({
 							<input
 								type="checkbox"
 								checked={settings.detectComponents}
-								onChange={(e) => updateSetting('detectComponents', e.target.checked)}
+								onChange={e => updateSetting('detectComponents', e.target.checked)}
 							/>
 							<span>Component Detection</span>
 						</label>

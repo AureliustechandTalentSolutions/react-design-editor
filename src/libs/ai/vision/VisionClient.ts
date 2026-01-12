@@ -3,6 +3,7 @@
  * Handles communication with Claude Vision API for screenshot analysis
  */
 
+import { UI_ANALYSIS_SYSTEM_PROMPT, getElementExtractionPrompt } from './prompts';
 import {
 	ImageData,
 	VisionModel,
@@ -13,7 +14,6 @@ import {
 	RateLimitConfig,
 	ScreenshotAnalysis,
 } from './types';
-import { UI_ANALYSIS_SYSTEM_PROMPT, getElementExtractionPrompt } from './prompts';
 
 /**
  * Default rate limiting configuration
@@ -50,10 +50,7 @@ class RateLimiter {
 		const recentRequests = this.requestTimestamps.filter(ts => ts > oneMinuteAgo).length;
 		const hourlyRequests = this.requestTimestamps.length;
 
-		return (
-			recentRequests < this.config.maxRequestsPerMinute &&
-			hourlyRequests < this.config.maxRequestsPerHour
-		);
+		return recentRequests < this.config.maxRequestsPerMinute && hourlyRequests < this.config.maxRequestsPerHour;
 	}
 
 	/**
@@ -111,14 +108,11 @@ export class VisionClient {
 	/**
 	 * Analyze screenshot with Vision API
 	 */
-	async analyzeScreenshot(
-		imageData: ImageData,
-		options: VisionRequestOptions = {}
-	): Promise<VisionResponse> {
+	async analyzeScreenshot(imageData: ImageData, options: VisionRequestOptions = {}): Promise<VisionResponse> {
 		if (!this.apiKey) {
 			throw new VisionError(
 				VisionErrorType.API_ERROR,
-				'API key not configured. Set ANTHROPIC_API_KEY environment variable.'
+				'API key not configured. Set ANTHROPIC_API_KEY environment variable.',
 			);
 		}
 
@@ -128,7 +122,7 @@ export class VisionClient {
 			throw new VisionError(
 				VisionErrorType.RATE_LIMIT,
 				`Rate limit exceeded. Please wait ${Math.ceil(waitTime / 1000)} seconds.`,
-				{ waitTime }
+				{ waitTime },
 			);
 		}
 
@@ -184,10 +178,7 @@ export class VisionClient {
 
 			const content = message.content[0];
 			if (content.type !== 'text') {
-				throw new VisionError(
-					VisionErrorType.API_ERROR,
-					'Unexpected response format from Claude API'
-				);
+				throw new VisionError(VisionErrorType.API_ERROR, 'Unexpected response format from Claude API');
 			}
 
 			const analysis = this.parseAnalysisResponse(content.text, imageData);
@@ -209,18 +200,10 @@ export class VisionClient {
 
 			// Handle API errors with retry logic
 			if (error.status === 429) {
-				throw new VisionError(
-					VisionErrorType.RATE_LIMIT,
-					'API rate limit exceeded',
-					error
-				);
+				throw new VisionError(VisionErrorType.RATE_LIMIT, 'API rate limit exceeded', error);
 			}
 
-			throw new VisionError(
-				VisionErrorType.API_ERROR,
-				`Failed to analyze screenshot: ${error.message}`,
-				error
-			);
+			throw new VisionError(VisionErrorType.API_ERROR, `Failed to analyze screenshot: ${error.message}`, error);
 		}
 	}
 
@@ -231,7 +214,7 @@ export class VisionClient {
 		try {
 			// Extract JSON from response
 			let jsonStr = response.trim();
-			
+
 			// Remove markdown code blocks if present
 			const jsonMatch = jsonStr.match(/```(?:json)?\s*([\s\S]*?)\s*```/);
 			if (jsonMatch) {
@@ -258,21 +241,14 @@ export class VisionClient {
 				},
 			};
 		} catch (error) {
-			throw new VisionError(
-				VisionErrorType.API_ERROR,
-				'Failed to parse API response',
-				error
-			);
+			throw new VisionError(VisionErrorType.API_ERROR, 'Failed to parse API response', error);
 		}
 	}
 
 	/**
 	 * Retry logic for failed requests
 	 */
-	async retryRequest<T>(
-		fn: () => Promise<T>,
-		attempts: number = DEFAULT_RATE_LIMIT.retryAttempts
-	): Promise<T> {
+	async retryRequest<T>(fn: () => Promise<T>, attempts: number = DEFAULT_RATE_LIMIT.retryAttempts): Promise<T> {
 		let lastError: Error;
 
 		for (let i = 0; i < attempts; i++) {
@@ -284,15 +260,14 @@ export class VisionClient {
 				// Don't retry on certain errors
 				if (
 					error instanceof VisionError &&
-					(error.type === VisionErrorType.INVALID_IMAGE ||
-						error.type === VisionErrorType.UNSUPPORTED_FORMAT)
+					(error.type === VisionErrorType.INVALID_IMAGE || error.type === VisionErrorType.UNSUPPORTED_FORMAT)
 				) {
 					throw error;
 				}
 
 				// Wait before retry
 				if (i < attempts - 1) {
-					await this.delay(DEFAULT_RATE_LIMIT.retryDelay * Math.pow(2, i));
+					await this.delay(DEFAULT_RATE_LIMIT.retryDelay * 2 ** i);
 				}
 			}
 		}

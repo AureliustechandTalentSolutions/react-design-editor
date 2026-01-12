@@ -4,7 +4,8 @@
  */
 
 import React, { useState, useRef, useCallback } from 'react';
-import { Upload, Link, Clipboard, Image, X, Check, AlertCircle } from '@flomon-ui/icons';
+import Icon from '../../components/icon/Icon';
+
 import { processScreenshot } from '../../libs/ai/vision';
 import type { ImageData } from '../../libs/ai/vision/types';
 
@@ -31,7 +32,7 @@ export const ScreenshotUpload: React.FC<ScreenshotUploadProps> = ({
 	const [preview, setPreview] = useState<string | null>(null);
 	const [error, setError] = useState<string | null>(null);
 	const [success, setSuccess] = useState(false);
-	
+
 	const fileInputRef = useRef<HTMLInputElement>(null);
 	const dropZoneRef = useRef<HTMLDivElement>(null);
 
@@ -55,7 +56,7 @@ export const ScreenshotUpload: React.FC<ScreenshotUploadProps> = ({
 
 			await processFile(imageFile);
 		},
-		[acceptedFormats]
+		[acceptedFormats],
 	);
 
 	/**
@@ -160,10 +161,10 @@ export const ScreenshotUpload: React.FC<ScreenshotUploadProps> = ({
 
 		try {
 			const items = await navigator.clipboard.read();
-			
+
 			for (const item of items) {
 				const imageType = item.types.find(type => type.startsWith('image/'));
-				
+
 				if (imageType) {
 					setIsProcessing(true);
 					const blob = await item.getType(imageType);
@@ -205,24 +206,27 @@ export const ScreenshotUpload: React.FC<ScreenshotUploadProps> = ({
 			{/* Upload Method Tabs */}
 			<div className="upload-tabs">
 				<button
+					type="button"
 					className={`tab ${uploadMethod === 'file' ? 'active' : ''}`}
 					onClick={() => setUploadMethod('file')}
 				>
-					<Upload size={16} />
+					<Icon name="upload" />
 					<span>Upload File</span>
 				</button>
 				<button
+					type="button"
 					className={`tab ${uploadMethod === 'url' ? 'active' : ''}`}
 					onClick={() => setUploadMethod('url')}
 				>
-					<Link size={16} />
+					<Icon name="link" />
 					<span>From URL</span>
 				</button>
 				<button
+					type="button"
 					className={`tab ${uploadMethod === 'clipboard' ? 'active' : ''}`}
 					onClick={() => setUploadMethod('clipboard')}
 				>
-					<Clipboard size={16} />
+					<Icon name="clipboard" />
 					<span>Paste</span>
 				</button>
 			</div>
@@ -237,6 +241,13 @@ export const ScreenshotUpload: React.FC<ScreenshotUploadProps> = ({
 						onDragOver={handleDragOver}
 						onDragLeave={handleDragLeave}
 						onClick={() => fileInputRef.current?.click()}
+						role="button"
+						tabIndex={0}
+						onKeyDown={(e) => {
+							if (e.key === 'Enter' || e.key === ' ') {
+								fileInputRef.current?.click();
+							}
+						}}
 					>
 						<input
 							ref={fileInputRef}
@@ -246,7 +257,7 @@ export const ScreenshotUpload: React.FC<ScreenshotUploadProps> = ({
 							style={{ display: 'none' }}
 						/>
 						<div className="drop-zone-content">
-							<Image size={48} />
+							<Icon name="image" size="3x" />
 							<p className="primary-text">
 								{isDragging ? 'Drop image here' : 'Drag & drop an image or click to browse'}
 							</p>
@@ -263,11 +274,12 @@ export const ScreenshotUpload: React.FC<ScreenshotUploadProps> = ({
 							type="url"
 							placeholder="Enter image URL..."
 							value={urlInput}
-							onChange={(e) => setUrlInput(e.target.value)}
-							onKeyDown={(e) => e.key === 'Enter' && handleUrlSubmit()}
+							onChange={e => setUrlInput(e.target.value)}
+							onKeyDown={e => e.key === 'Enter' && handleUrlSubmit()}
 							disabled={isProcessing}
 						/>
 						<button
+							type="button"
 							onClick={handleUrlSubmit}
 							disabled={!urlInput.trim() || isProcessing}
 							className="btn-primary"
@@ -279,17 +291,11 @@ export const ScreenshotUpload: React.FC<ScreenshotUploadProps> = ({
 
 				{uploadMethod === 'clipboard' && (
 					<div className="clipboard-container">
-						<button
-							onClick={handlePaste}
-							disabled={isProcessing}
-							className="btn-clipboard"
-						>
-							<Clipboard size={48} />
+						<button type="button" onClick={handlePaste} disabled={isProcessing} className="btn-clipboard">
+							<Icon name="clipboard" size="3x" />
 							<span>{isProcessing ? 'Processing...' : 'Paste from Clipboard'}</span>
 						</button>
-						<p className="hint">
-							Copy an image to your clipboard and click the button above
-						</p>
+						<p className="hint">Copy an image to your clipboard and click the button above</p>
 					</div>
 				)}
 			</div>
@@ -299,8 +305,8 @@ export const ScreenshotUpload: React.FC<ScreenshotUploadProps> = ({
 				<div className="preview-container">
 					<div className="preview-header">
 						<h4>Preview</h4>
-						<button onClick={clearPreview} className="btn-icon">
-							<X size={16} />
+						<button type="button" onClick={clearPreview} className="btn-icon">
+							<Icon name="times" />
 						</button>
 					</div>
 					<div className="preview-image">
@@ -312,14 +318,14 @@ export const ScreenshotUpload: React.FC<ScreenshotUploadProps> = ({
 			{/* Status Messages */}
 			{error && (
 				<div className="message error">
-					<AlertCircle size={16} />
+					<Icon name="exclamation-circle" />
 					<span>{error}</span>
 				</div>
 			)}
 
 			{success && (
 				<div className="message success">
-					<Check size={16} />
+					<Icon name="check-circle" />
 					<span>Image processed successfully</span>
 				</div>
 			)}

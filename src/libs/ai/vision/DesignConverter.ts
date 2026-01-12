@@ -4,6 +4,9 @@
  */
 
 import { nanoid } from 'nanoid';
+
+import { tokens } from '../../design-system/tokens';
+
 import {
 	DetectedElement,
 	UIElementType,
@@ -12,7 +15,6 @@ import {
 	VisionErrorType,
 	ScreenshotAnalysis,
 } from './types';
-import { tokens } from '../../design-system/tokens';
 
 /**
  * Default conversion options
@@ -38,10 +40,7 @@ export class DesignConverter {
 	/**
 	 * Convert detected elements to Fabric.js objects
 	 */
-	convertToFabricObjects(
-		elements: DetectedElement[],
-		analysis?: ScreenshotAnalysis
-	): any[] {
+	convertToFabricObjects(elements: DetectedElement[], analysis?: ScreenshotAnalysis): any[] {
 		try {
 			const fabricObjects: any[] = [];
 			let zIndex = 0;
@@ -58,7 +57,7 @@ export class DesignConverter {
 			throw new VisionError(
 				VisionErrorType.CONVERSION_ERROR,
 				'Failed to convert elements to Fabric.js objects',
-				error
+				error,
 			);
 		}
 	}
@@ -66,11 +65,7 @@ export class DesignConverter {
 	/**
 	 * Convert single element
 	 */
-	private convertElement(
-		element: DetectedElement,
-		zIndex: number,
-		analysis?: ScreenshotAnalysis
-	): any {
+	private convertElement(element: DetectedElement, zIndex: number, analysis?: ScreenshotAnalysis): any {
 		const { boundingBox, type } = element;
 		const baseProps = {
 			id: element.id,
@@ -106,11 +101,7 @@ export class DesignConverter {
 	/**
 	 * Convert button element
 	 */
-	private convertButton(
-		element: DetectedElement,
-		baseProps: any,
-		analysis?: ScreenshotAnalysis
-	): any {
+	private convertButton(element: DetectedElement, baseProps: any, analysis?: ScreenshotAnalysis): any {
 		const color = this.getColor(element, 'primary', analysis);
 		const borderRadius = this.getBorderRadius(element, 'md');
 
@@ -152,11 +143,7 @@ export class DesignConverter {
 	/**
 	 * Convert input element
 	 */
-	private convertInput(
-		element: DetectedElement,
-		baseProps: any,
-		analysis?: ScreenshotAnalysis
-	): any {
+	private convertInput(element: DetectedElement, baseProps: any, analysis?: ScreenshotAnalysis): any {
 		const borderRadius = this.getBorderRadius(element, 'sm');
 
 		const background = {
@@ -194,11 +181,7 @@ export class DesignConverter {
 	/**
 	 * Convert text element
 	 */
-	private convertText(
-		element: DetectedElement,
-		baseProps: any,
-		analysis?: ScreenshotAnalysis
-	): any {
+	private convertText(element: DetectedElement, baseProps: any, analysis?: ScreenshotAnalysis): any {
 		const fontSize = this.getFontSize(element, 'base');
 		const color = this.getColor(element, 'text', analysis);
 
@@ -218,11 +201,7 @@ export class DesignConverter {
 	/**
 	 * Convert container/card element
 	 */
-	private convertContainer(
-		element: DetectedElement,
-		baseProps: any,
-		analysis?: ScreenshotAnalysis
-	): any {
+	private convertContainer(element: DetectedElement, baseProps: any, analysis?: ScreenshotAnalysis): any {
 		const color = this.getColor(element, 'background', analysis);
 		const borderRadius = this.getBorderRadius(element, 'lg');
 
@@ -263,11 +242,7 @@ export class DesignConverter {
 	/**
 	 * Convert image element
 	 */
-	private convertImage(
-		element: DetectedElement,
-		baseProps: any,
-		analysis?: ScreenshotAnalysis
-	): any {
+	private convertImage(element: DetectedElement, baseProps: any, analysis?: ScreenshotAnalysis): any {
 		const borderRadius = this.getBorderRadius(element, 'md');
 
 		return {
@@ -284,11 +259,7 @@ export class DesignConverter {
 	/**
 	 * Convert divider element
 	 */
-	private convertDivider(
-		element: DetectedElement,
-		baseProps: any,
-		analysis?: ScreenshotAnalysis
-	): any {
+	private convertDivider(element: DetectedElement, baseProps: any, analysis?: ScreenshotAnalysis): any {
 		return {
 			type: 'line',
 			left: baseProps.left,
@@ -305,11 +276,7 @@ export class DesignConverter {
 	/**
 	 * Convert generic element
 	 */
-	private convertGeneric(
-		element: DetectedElement,
-		baseProps: any,
-		analysis?: ScreenshotAnalysis
-	): any {
+	private convertGeneric(element: DetectedElement, baseProps: any, analysis?: ScreenshotAnalysis): any {
 		const color = this.getColor(element, 'background', analysis);
 
 		return {
@@ -327,7 +294,7 @@ export class DesignConverter {
 	private getColor(
 		element: DetectedElement,
 		role: 'primary' | 'secondary' | 'text' | 'background',
-		analysis?: ScreenshotAnalysis
+		analysis?: ScreenshotAnalysis,
 	): string {
 		// Use element color if available
 		if (element.color) {
@@ -392,10 +359,7 @@ export class DesignConverter {
 	/**
 	 * Get border radius
 	 */
-	private getBorderRadius(
-		element: DetectedElement,
-		defaultRadius: keyof typeof tokens.borderRadius
-	): number {
+	private getBorderRadius(element: DetectedElement, defaultRadius: keyof typeof tokens.borderRadius): number {
 		if (element.styles?.borderRadius) {
 			const parsed = parseInt(element.styles.borderRadius, 10);
 			if (!isNaN(parsed)) return parsed;
@@ -481,7 +445,7 @@ export class DesignConverter {
 
 		const assign = (element: DetectedElement): DetectedElement => {
 			const updated = { ...element };
-			
+
 			if (updated.children) {
 				updated.children = updated.children.map(assign);
 				zIndex += updated.children.length;
@@ -501,10 +465,7 @@ export class DesignConverter {
 	/**
 	 * Generate complete design object
 	 */
-	generateDesign(
-		elements: DetectedElement[],
-		analysis?: ScreenshotAnalysis
-	): any {
+	generateDesign(elements: DetectedElement[], analysis?: ScreenshotAnalysis): any {
 		const fabricObjects = this.convertToFabricObjects(elements, analysis);
 		const layout = this.buildLayout(elements, analysis);
 
@@ -526,10 +487,7 @@ export class DesignConverter {
 	/**
 	 * Generate CSS stylesheet
 	 */
-	private generateStyleSheet(
-		elements: DetectedElement[],
-		analysis?: ScreenshotAnalysis
-	): Record<string, any> {
+	private generateStyleSheet(elements: DetectedElement[], analysis?: ScreenshotAnalysis): Record<string, any> {
 		const styles: Record<string, any> = {};
 
 		elements.forEach(element => {
@@ -553,7 +511,7 @@ export const createDesignConverter = (options?: ConversionOptions): DesignConver
 export const convertToFabricObjects = (
 	elements: DetectedElement[],
 	analysis?: ScreenshotAnalysis,
-	options?: ConversionOptions
+	options?: ConversionOptions,
 ): any[] => {
 	const converter = new DesignConverter(options);
 	return converter.convertToFabricObjects(elements, analysis);

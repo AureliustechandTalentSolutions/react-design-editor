@@ -3,6 +3,7 @@
  */
 
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
+
 import { VisionClient } from '../VisionClient';
 import { VisionError, VisionErrorType } from '../types';
 import type { ImageData } from '../types';
@@ -58,17 +59,13 @@ describe('VisionClient', () => {
 	describe('analyzeScreenshot', () => {
 		it('should throw error when no API key', async () => {
 			const client = new VisionClient();
-			await expect(client.analyzeScreenshot(mockImageData)).rejects.toThrow(
-				VisionError
-			);
-			await expect(client.analyzeScreenshot(mockImageData)).rejects.toThrow(
-				'API key not configured'
-			);
+			await expect(client.analyzeScreenshot(mockImageData)).rejects.toThrow(VisionError);
+			await expect(client.analyzeScreenshot(mockImageData)).rejects.toThrow('API key not configured');
 		});
 
 		it('should accept valid image data', async () => {
 			const client = new VisionClient('test-key');
-			
+
 			// This will fail in test without real API, but validates structure
 			try {
 				await client.analyzeScreenshot(mockImageData);
@@ -80,7 +77,7 @@ describe('VisionClient', () => {
 
 		it('should use default options when not provided', async () => {
 			const client = new VisionClient('test-key');
-			
+
 			try {
 				await client.analyzeScreenshot(mockImageData);
 			} catch (error) {
@@ -90,7 +87,7 @@ describe('VisionClient', () => {
 
 		it('should accept custom options', async () => {
 			const client = new VisionClient('test-key');
-			
+
 			try {
 				await client.analyzeScreenshot(mockImageData, {
 					model: 'claude-3-opus-20240229',
@@ -107,7 +104,7 @@ describe('VisionClient', () => {
 		it('should track rate limit status', () => {
 			const client = new VisionClient('test-key');
 			const status = client.getRateLimitStatus();
-			
+
 			expect(status).toHaveProperty('canMakeRequest');
 			expect(status).toHaveProperty('waitTime');
 			expect(status.canMakeRequest).toBe(true);
@@ -130,7 +127,7 @@ describe('VisionClient', () => {
 	describe('extractColors', () => {
 		it('should extract colors from image', async () => {
 			const client = new VisionClient('test-key');
-			
+
 			try {
 				const colors = await client.extractColors(mockImageData);
 				expect(Array.isArray(colors)).toBe(true);
@@ -144,15 +141,13 @@ describe('VisionClient', () => {
 	describe('Error Handling', () => {
 		it('should throw VisionError for API errors', async () => {
 			const client = new VisionClient();
-			
-			await expect(client.analyzeScreenshot(mockImageData)).rejects.toThrow(
-				VisionError
-			);
+
+			await expect(client.analyzeScreenshot(mockImageData)).rejects.toThrow(VisionError);
 		});
 
 		it('should include error type in VisionError', async () => {
 			const client = new VisionClient();
-			
+
 			try {
 				await client.analyzeScreenshot(mockImageData);
 			} catch (error) {
@@ -168,7 +163,7 @@ describe('VisionClient', () => {
 		it('should retry failed requests', async () => {
 			const client = new VisionClient('test-key');
 			let attempts = 0;
-			
+
 			const failingFn = async () => {
 				attempts++;
 				if (attempts < 3) {
@@ -185,18 +180,13 @@ describe('VisionClient', () => {
 		it('should not retry on invalid image errors', async () => {
 			const client = new VisionClient('test-key');
 			let attempts = 0;
-			
+
 			const failingFn = async () => {
 				attempts++;
-				throw new VisionError(
-					VisionErrorType.INVALID_IMAGE,
-					'Invalid image'
-				);
+				throw new VisionError(VisionErrorType.INVALID_IMAGE, 'Invalid image');
 			};
 
-			await expect(client.retryRequest(failingFn, 3)).rejects.toThrow(
-				VisionError
-			);
+			await expect(client.retryRequest(failingFn, 3)).rejects.toThrow(VisionError);
 			expect(attempts).toBe(1);
 		});
 	});
@@ -204,7 +194,7 @@ describe('VisionClient', () => {
 	describe('Response Parsing', () => {
 		it('should parse valid JSON response', async () => {
 			const client = new VisionClient('test-key');
-			
+
 			// Test the private parseAnalysisResponse via analyzeScreenshot
 			// This is tested indirectly through the public API
 			expect(client).toBeDefined();
@@ -212,7 +202,7 @@ describe('VisionClient', () => {
 
 		it('should handle malformed JSON', async () => {
 			const client = new VisionClient('test-key');
-			
+
 			// Error handling is tested through the public API
 			expect(client).toBeDefined();
 		});
@@ -224,7 +214,7 @@ describe('getVisionClient', () => {
 		const { getVisionClient } = await import('../VisionClient');
 		const client1 = getVisionClient();
 		const client2 = getVisionClient();
-		
+
 		expect(client1).toBe(client2);
 	});
 });
@@ -233,7 +223,7 @@ describe('isVisionAPIAvailable', () => {
 	it('should check API availability', async () => {
 		const { isVisionAPIAvailable } = await import('../VisionClient');
 		const available = isVisionAPIAvailable();
-		
+
 		expect(typeof available).toBe('boolean');
 	});
 });

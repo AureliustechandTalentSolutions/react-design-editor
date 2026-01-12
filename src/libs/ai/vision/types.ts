@@ -36,7 +36,7 @@ export interface ImageData {
 /**
  * UI element types detected from screenshots
  */
-export type UIElementType = 
+export type UIElementType =
 	| 'button'
 	| 'input'
 	| 'textarea'
@@ -167,7 +167,7 @@ export class VisionError extends Error {
 	constructor(
 		public type: VisionErrorType,
 		message: string,
-		public details?: any
+		public details?: any,
 	) {
 		super(message);
 		this.name = 'VisionError';

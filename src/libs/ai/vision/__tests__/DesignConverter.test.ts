@@ -3,6 +3,7 @@
  */
 
 import { describe, it, expect, beforeEach } from 'vitest';
+
 import { DesignConverter, convertToFabricObjects } from '../DesignConverter';
 import type { DetectedElement, ScreenshotAnalysis } from '../types';
 
@@ -45,7 +46,7 @@ describe('DesignConverter', () => {
 			];
 
 			const objects = converter.convertToFabricObjects(elements);
-			
+
 			expect(Array.isArray(objects)).toBe(true);
 			expect(objects.length).toBeGreaterThan(0);
 		});
@@ -152,7 +153,7 @@ describe('DesignConverter', () => {
 
 			const objects = converter.convertToFabricObjects(elements);
 			const obj = objects[0];
-			
+
 			// Check if scaling is applied
 			expect(obj.left).toBe(50);
 			expect(obj.top).toBe(50);
@@ -171,7 +172,7 @@ describe('DesignConverter', () => {
 			};
 
 			const styles = converter.inferStyles(element);
-			
+
 			expect(styles).toHaveProperty('width');
 			expect(styles).toHaveProperty('height');
 			expect(styles.cursor).toBe('pointer');
@@ -221,7 +222,7 @@ describe('DesignConverter', () => {
 			];
 
 			const layout = converter.buildLayout(elements);
-			
+
 			expect(layout).toHaveProperty('type');
 			expect(layout).toHaveProperty('direction');
 			expect(layout).toHaveProperty('gap');
@@ -282,7 +283,7 @@ describe('DesignConverter', () => {
 			];
 
 			const assigned = converter.assignZIndices(elements);
-			
+
 			assigned.forEach(element => {
 				expect(element.styles).toHaveProperty('zIndex');
 				expect(typeof element.styles!.zIndex).toBe('number');
@@ -326,7 +327,7 @@ describe('DesignConverter', () => {
 			];
 
 			const design = converter.generateDesign(elements);
-			
+
 			expect(design).toHaveProperty('design');
 			expect(design).toHaveProperty('layout');
 			expect(design).toHaveProperty('styles');
@@ -346,7 +347,7 @@ describe('DesignConverter', () => {
 			];
 
 			const design = converter.generateDesign(elements);
-			
+
 			expect(design.metadata.source).toBe('screenshot-to-code');
 			expect(design.metadata).toHaveProperty('timestamp');
 			expect(design.metadata).toHaveProperty('elementsCount');
