@@ -40,7 +40,6 @@
 		"prepare": "husky",
 		"precommit": "lint-staged"
 	},
-	,
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/salgum1114/react-design-editor.git"
