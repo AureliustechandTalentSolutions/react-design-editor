@@ -36,7 +36,7 @@ class AIUIEditor extends Component<any, IState> {
 		activePanel: 'prompt',
 	};
 
-	canvasRef: CanvasInstance;
+	canvasRef: CanvasInstance | null = null;
 
 	componentDidMount() {
 		if (!isAIAvailable()) {

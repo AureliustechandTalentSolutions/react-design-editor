@@ -67,7 +67,7 @@ export const sanitizeComponentName = (name: string): string => {
  * Generate unique ID
  */
 export const generateId = (prefix: string = 'el'): string => {
-	return `${prefix}_${Math.random().toString(36).substr(2, 9)}`;
+	return `${prefix}_${Math.random().toString(36).slice(2, 11)}`;
 };
 
 /**

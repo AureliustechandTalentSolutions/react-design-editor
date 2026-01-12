@@ -34,6 +34,8 @@ const callClaudeAPI = async (systemPrompt: string, userPrompt: string): Promise<
 	try {
 		// Dynamic import to avoid bundling issues
 		const Anthropic = (await import('@anthropic-ai/sdk')).default;
+		// NOTE: dangerouslyAllowBrowser is used here for demo/development purposes.
+		// In production, implement a backend proxy to keep API keys secure.
 		const client = new Anthropic({ apiKey, dangerouslyAllowBrowser: true });
 
 		const message = await client.messages.create({

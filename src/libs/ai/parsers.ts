@@ -84,7 +84,8 @@ export const validateFabricObject = (obj: any): any => {
 	const numericProps = ['left', 'top', 'width', 'height', 'fontSize', 'strokeWidth', 'rx', 'ry'];
 	numericProps.forEach(prop => {
 		if (obj[prop] !== undefined) {
-			obj[prop] = parseFloat(obj[prop]) || 0;
+			const parsed = parseFloat(obj[prop]);
+			obj[prop] = isNaN(parsed) ? 0 : parsed;
 		}
 	});
 	

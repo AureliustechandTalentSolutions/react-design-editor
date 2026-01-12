@@ -95,6 +95,8 @@ Set the `ANTHROPIC_API_KEY` or `REACT_APP_ANTHROPIC_API_KEY` environment variabl
 ANTHROPIC_API_KEY=your-api-key-here
 ```
 
+**Security Note**: The current implementation uses `dangerouslyAllowBrowser: true` for demo/development purposes. In production, you should implement a backend proxy to keep API keys secure and prevent exposure in client-side code.
+
 ### Demo Mode
 
 Without an API key, the module runs in demo mode with:
