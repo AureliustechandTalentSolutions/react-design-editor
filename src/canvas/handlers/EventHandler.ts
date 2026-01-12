@@ -1,9 +1,11 @@
 import anime from 'animejs';
 import { fabric } from 'fabric';
+
 import { code } from '../constants';
 import { FabricEvent, FabricObject } from '../models';
 import { NodeObject } from '../objects/Node';
 import { VideoObject } from '../objects/Video';
+
 import AbstractHandler from './AbstractHandler';
 
 /**
@@ -121,7 +123,6 @@ class EventHandler extends AbstractHandler {
 		 */
 		mousedown: (opt: FabricEvent) => {
 			const { target } = opt;
-			console.log(opt);
 			if (target && target.link && target.link.enabled) {
 				this.handler.onClick?.(this.canvas, target);
 			}
@@ -499,7 +500,6 @@ class EventHandler extends AbstractHandler {
 			}
 			this.canvas.requestRenderAll();
 		}
-		return;
 	};
 
 	/**
@@ -670,7 +670,7 @@ class EventHandler extends AbstractHandler {
 		if (e.stopPropagation) {
 			e.stopPropagation();
 		}
-		const clipboardData = e.clipboardData;
+		const { clipboardData } = e;
 		if (clipboardData.types.length) {
 			clipboardData.types.forEach((clipboardType: string) => {
 				if (clipboardType === 'text/plain') {
@@ -846,9 +846,7 @@ class EventHandler extends AbstractHandler {
 				e.preventDefault();
 				this.handler.zoomHandler.zoomToFit();
 			}
-			return;
 		}
-		return;
 	};
 
 	/**

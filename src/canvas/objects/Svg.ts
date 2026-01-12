@@ -1,4 +1,5 @@
 import { fabric } from 'fabric';
+
 import { FabricGroup, FabricObject, FabricObjectOption } from '../models';
 import { toObject } from '../utils';
 

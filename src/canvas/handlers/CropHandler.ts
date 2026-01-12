@@ -1,7 +1,8 @@
 import { fabric } from 'fabric';
 
-import { Handler } from '.';
 import { FabricImage } from '../models';
+
+import { Handler } from '.';
 
 class CropHandler {
 	handler: Handler;

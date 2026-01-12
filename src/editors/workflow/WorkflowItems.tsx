@@ -5,10 +5,12 @@ import i18n from 'i18next';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { v4 as uuid } from 'uuid';
+
 import { CanvasInstance, FabricObject, LinkObject, NodeObject } from '../../canvas';
 import { CommonButton, Scrollbar } from '../../components/common';
 import { Flex } from '../../components/flex';
 import Icon from '../../components/icon/Icon';
+
 import { getNode } from './configuration/NodeConfiguration';
 import { NODE_COLORS } from './constant/constants';
 
@@ -76,7 +78,8 @@ class WorkflowItems extends React.Component<IProps> {
 		addItem: (item, centered?: boolean) => {
 			const { instance } = this.props;
 			const id = uuid();
-			const option = Object.assign({}, item, {
+			const option = {
+				...item,
 				id,
 				subType: item.type,
 				superType: 'node',
@@ -84,7 +87,7 @@ class WorkflowItems extends React.Component<IProps> {
 				configuration: item.defaultConfiguration,
 				description: '',
 				color: NODE_COLORS[item.type].fill,
-			});
+			};
 			instance.handler
 				.getObjects()
 				.filter(obj => obj.type === 'link')
@@ -234,7 +237,7 @@ class WorkflowItems extends React.Component<IProps> {
 				e.stopPropagation();
 			}
 			const { layerX, layerY } = e;
-			const option = Object.assign({}, this.item, { left: layerX, top: layerY });
+			const option = { ...this.item, left: layerX, top: layerY };
 			this.handlers.addItem(option, false);
 			return false;
 		},

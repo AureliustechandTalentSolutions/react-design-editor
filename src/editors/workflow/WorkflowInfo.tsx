@@ -1,9 +1,11 @@
-import React, { Component } from 'react';
 import { Divider, Form, Input, Switch } from 'antd';
-import i18n from 'i18next';
-import WorkflowSiderContainer from './WorkflowSiderContainer';
 import { FormComponentProps } from 'antd/lib/form';
+import i18n from 'i18next';
+import React, { Component } from 'react';
+
 import { CommonButton } from '../../components/common';
+
+import WorkflowSiderContainer from './WorkflowSiderContainer';
 
 interface IProps extends FormComponentProps {
 	workflow?: any;
@@ -39,7 +41,7 @@ class WorkflowInfo extends Component<IProps> {
 		const { workflow, form } = this.props;
 		const { isEdit } = this.state;
 		const component = isEdit ? (
-			<React.Fragment>
+			<>
 				<Form.Item label={i18n.t('common.name')} colon={false}>
 					{form.getFieldDecorator('name', {
 						initialValue: workflow.name,
@@ -62,13 +64,13 @@ class WorkflowInfo extends Component<IProps> {
 						valuePropName: 'checked',
 					})(<Switch />)}
 				</Form.Item>
-			</React.Fragment>
+			</>
 		) : (
-			<React.Fragment>
+			<>
 				<h2 style={{ color: workflow.enabled ? '#49a9ee' : 'rgba(0, 0, 0, 0.65)' }}>{workflow.name}</h2>
 				<Divider style={{ margin: '12px 0' }} />
 				<div>{workflow.description}</div>
-			</React.Fragment>
+			</>
 		);
 		const extra = (
 			<CommonButton

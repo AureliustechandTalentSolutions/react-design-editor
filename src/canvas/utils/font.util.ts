@@ -20,9 +20,9 @@ export function adjustCharactersToFitWidth(
 	rectWidth: number,
 ) {
 	let line = '';
-	let lines: string[] = [];
+	const lines: string[] = [];
 	let currentWidth = 0;
-	for (let char of text) {
+	for (const char of text) {
 		const charWidth = getCharacterWidth(context, char, fontSize, fontFamily);
 		if (currentWidth + charWidth > rectWidth) {
 			lines.push(line); // 현재 줄 추가

@@ -1,12 +1,14 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { Tabs } from 'antd';
 import classnames from 'classnames';
-import WorkflowInfo from './WorkflowInfo';
-import WorkflowGlobalParameters from './WorkflowGlobalParameters';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
+
 import { Canvas, FabricObject } from '../../canvas';
 import { CommonButton } from '../../components/common';
 import Icon from '../../components/icon/Icon';
+
+import WorkflowGlobalParameters from './WorkflowGlobalParameters';
+import WorkflowInfo from './WorkflowInfo';
 
 interface IProps {
 	canvasRef?: Canvas;

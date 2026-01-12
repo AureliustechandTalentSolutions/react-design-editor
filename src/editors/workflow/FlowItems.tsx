@@ -20,6 +20,7 @@ import memoize from 'lodash/memoize';
 import React, { Component } from 'react';
 import { CanvasInstance, LinkObject } from 'react-design-editor';
 import { connect, ConnectedProps } from 'react-redux';
+
 import { AppRootState } from '../../reducers';
 
 const mapStateToProps = (state: AppRootState) => ({
@@ -67,9 +68,7 @@ class FlowItems extends Component<IProps, IState> {
 
 	onDragStart = (e: any, descriptor: IFlowNodeDescriptor) => {
 		this.setState({
-			tooltipVisible: Object.assign({}, this.state.tooltipVisible, {
-				[descriptor.customNodeId || descriptor.nodeClazz]: false,
-			}),
+			tooltipVisible: { ...this.state.tooltipVisible, [descriptor.customNodeId || descriptor.nodeClazz]: false },
 		});
 		this.item = descriptor;
 		const { target } = e;
@@ -126,7 +125,7 @@ class FlowItems extends Component<IProps, IState> {
 			return false;
 		}
 		const { layerX, layerY } = e;
-		const option = Object.assign({}, this.item, { left: layerX, top: layerY });
+		const option = { ...this.item, left: layerX, top: layerY };
 		this.handleAddItem(option, false);
 		return false;
 	};
@@ -214,7 +213,8 @@ class FlowItems extends Component<IProps, IState> {
 		const type = getNodeClass(descriptor.nodeClazz);
 		if (instance.handler.interactionMode === 'selection') {
 			const id = simpleid();
-			const option = Object.assign({}, descriptor, {
+			const option = {
+				...descriptor,
 				id,
 				type,
 				configuration:
@@ -229,7 +229,7 @@ class FlowItems extends Component<IProps, IState> {
 				name: descriptor.customNodeId ? descriptor.name : i18next.t(`flow.node-title.${type}`),
 				customNodeId: descriptor.customNodeId,
 				descriptor,
-			});
+			};
 			instance.handler
 				.getObjects()
 				.filter(obj => obj.type === 'link')
@@ -255,7 +255,7 @@ class FlowItems extends Component<IProps, IState> {
 					instance.handler.linkHandler.remove(this.intersectedLink);
 				}
 			} else {
-				const selectedNode = this.props.selectedNode;
+				const { selectedNode } = this.props;
 				const unusedFromPort = selectedNode?.fromPort
 					? selectedNode?.fromPort?.find(port => !port.links.length)
 					: undefined;
@@ -335,9 +335,10 @@ class FlowItems extends Component<IProps, IState> {
 				visible={this.state.tooltipVisible[descriptor.customNodeId || descriptor.nodeClazz]}
 				onVisibleChange={visible =>
 					this.setState({
-						tooltipVisible: Object.assign({}, this.state.tooltipVisible, {
+						tooltipVisible: {
+							...this.state.tooltipVisible,
 							[descriptor.customNodeId || descriptor.nodeClazz]: visible,
-						}),
+						},
 					})
 				}
 			>

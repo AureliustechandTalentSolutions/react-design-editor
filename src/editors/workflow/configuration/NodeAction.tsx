@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
 import i18n from 'i18next';
+import React, { Component } from 'react';
+
 import { Canvas } from '../../../canvas';
-import { Flex } from '../../../components/flex';
 import { CommonButton } from '../../../components/common';
+import { Flex } from '../../../components/flex';
 
 interface IProps {
 	canvasRef?: Canvas;

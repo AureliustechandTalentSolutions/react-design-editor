@@ -2,6 +2,7 @@ import { fabric } from 'fabric';
 import { defineGrid, extendHex } from 'honeycomb-grid';
 import { useRef } from 'react';
 import { v4 as uuid } from 'uuid';
+
 import { Canvas, Handler } from '../../canvas';
 import { CanvasInstance } from '../../canvas/Canvas';
 import { Content } from '../../components/layout';
@@ -18,7 +19,7 @@ const Hexagon = fabric.util.createClass(fabric.Polygon, {
 	},
 });
 
-const HexGridEditor = () => {
+function HexGridEditor() {
 	const canvasRef = useRef<CanvasInstance>();
 	const handleLoad = (handler: Handler, canvas: fabric.Canvas) => {
 		const size = 20;
@@ -68,6 +69,6 @@ const HexGridEditor = () => {
 			/>
 		</Content>
 	);
-};
+}
 
 export default HexGridEditor;

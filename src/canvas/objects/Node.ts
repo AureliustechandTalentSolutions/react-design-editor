@@ -1,11 +1,14 @@
 import Color from 'color';
 import { fabric } from 'fabric';
 import { v4 as uuid } from 'uuid';
-import { FromPort, ToPort } from '.';
+
 import { FabricObject } from '../models';
 import { fitTextToRect } from '../utils';
+
 import { LinkObject } from './Link';
 import Port, { PortObject } from './Port';
+
+import { FromPort, ToPort } from '.';
 
 export const OUT_PORT_TYPE = {
 	SINGLE: 'SINGLE',
@@ -84,7 +87,8 @@ const Node = fabric.util.createClass(fabric.Group, {
 			this.button = this.createActionButton();
 			node.push(this.button);
 		}
-		const option = Object.assign({}, options, {
+		const option = {
+			...options,
 			id: options.id || uuid(),
 			width: 240,
 			height: 60,
@@ -97,7 +101,7 @@ const Node = fabric.util.createClass(fabric.Group, {
 			color: options.color,
 			subTargetCheck: !!options.descriptor.actionButton,
 			originStroke: options.stroke,
-		});
+		};
 		this.callSuper('initialize', node, option);
 		this.label.set({
 			left: this.nodeIcon.left + this.nodeIcon.width + 10,

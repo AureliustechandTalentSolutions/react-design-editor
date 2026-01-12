@@ -1,5 +1,6 @@
 import * as echarts from 'echarts';
 import { fabric } from 'fabric';
+
 import { FabricElement } from '../models';
 import { toObject } from '../utils';
 

@@ -1,4 +1,5 @@
 import { fabric } from 'fabric';
+
 import 'mediaelement';
 import 'mediaelement/build/mediaelementplayer.min.css';
 import { FabricElement } from '../models';

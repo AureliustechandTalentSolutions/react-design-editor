@@ -1,5 +1,6 @@
 import { NodeObject } from '../objects/Node';
 import { PortObject } from '../objects/Port';
+
 import AbstractHandler from './AbstractHandler';
 
 class PortHandler extends AbstractHandler {

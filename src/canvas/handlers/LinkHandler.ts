@@ -1,7 +1,9 @@
 import warning from 'warning';
+
 import { Link, LinkObject } from '../objects';
 import { NodeObject } from '../objects/Node';
 import { PortObject } from '../objects/Port';
+
 import Handler from './Handler';
 
 export interface LinkOption {

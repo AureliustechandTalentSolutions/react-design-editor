@@ -1,5 +1,6 @@
 import { code } from '../constants';
 import { KeyEvent } from '../models';
+
 import Handler from './Handler';
 
 /**

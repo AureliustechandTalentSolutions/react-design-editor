@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import Item from './Item';
 
 export interface BoxProps extends React.HTMLAttributes<any> {
@@ -38,25 +39,22 @@ class Flex extends Component<BoxProps> {
 			children,
 			...other
 		} = this.props;
-		const newStyle = Object.assign(
-			{},
-			{
-				display: 'flex',
-				flexDirection,
-				flexWrap,
-				flexFlow,
-				justifyContent,
-				alignItems,
-				alignContent,
-				alignSelf,
-				order,
-				flexGrow,
-				flexShrink,
-				flexBasis,
-				flex,
-			},
-			style,
-		) as any;
+		const newStyle = {
+			display: 'flex',
+			flexDirection,
+			flexWrap,
+			flexFlow,
+			justifyContent,
+			alignItems,
+			alignContent,
+			alignSelf,
+			order,
+			flexGrow,
+			flexShrink,
+			flexBasis,
+			flex,
+			...style,
+		} as any;
 		return (
 			<div
 				style={Object.keys(newStyle).reduce((prev, key) => {

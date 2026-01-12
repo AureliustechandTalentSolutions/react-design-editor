@@ -2,6 +2,7 @@ import { fabric } from 'fabric';
 
 import { FabricObject, GridOption } from '../models';
 import { NodeObject } from '../objects/Node';
+
 import AbstractHandler from './AbstractHandler';
 
 class GridHandler extends AbstractHandler {

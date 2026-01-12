@@ -1,12 +1,14 @@
 import { useRef } from 'react';
 import { v4 as uuid } from 'uuid';
+
 import { Canvas } from '../../canvas';
 import { CanvasInstance } from '../../canvas/Canvas';
 import FiberHandler from '../../canvas/handlers/FiberHandler';
 import { Content } from '../../components/layout';
+
 import { CableSectionNode } from './node';
 
-const FiberEditor = () => {
+function FiberEditor() {
 	const canvasRef = useRef<CanvasInstance>();
 	const handleLoad = () => {
 		const createdObj = canvasRef.current.handler.add(
@@ -36,6 +38,6 @@ const FiberEditor = () => {
 			/>
 		</Content>
 	);
-};
+}
 
 export default FiberEditor;
