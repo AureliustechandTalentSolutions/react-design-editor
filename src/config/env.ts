@@ -1,5 +1,7 @@
 import { z } from 'zod';
 
+// Environment variable schema
+// Note: Vite requires VITE_ prefix for client-side env vars
 const envSchema = z.object({
 	ANTHROPIC_API_KEY: z.string().optional(),
 	VITE_DEBUG_MODE: z
@@ -13,6 +15,7 @@ const envSchema = z.object({
 });
 
 export const env = envSchema.parse({
+	// Vite env vars are prefixed with VITE_ but we store without prefix
 	ANTHROPIC_API_KEY:
 		typeof process !== 'undefined'
 			? process.env.VITE_ANTHROPIC_API_KEY

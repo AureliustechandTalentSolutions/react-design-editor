@@ -54,6 +54,6 @@
 		}
 	},
 	"remoteEnv": {
-		"ANTHROPIC_API_KEY": "${localEnv:ANTHROPIC_API_KEY}"
+		"VITE_ANTHROPIC_API_KEY": "${localEnv:VITE_ANTHROPIC_API_KEY}"
 	}
 }
