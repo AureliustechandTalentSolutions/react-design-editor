@@ -8,3 +8,6 @@ lib/
 .vscode/
 docs/
 .DS_Store
+
+# Test coverage
+coverage/
