@@ -8,3 +8,14 @@ lib/
 .vscode/
 docs/
 .DS_Store
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Test coverage
+coverage/
+
+# Vitest
+.vitest/

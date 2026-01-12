@@ -2,9 +2,9 @@
 	"root": true,
 	"parser": "@typescript-eslint/parser",
 	"parserOptions": {
-		"project": "./tsconfig.json",
+		"project": "./tsconfig.json"
 	},
-	"plugins": ["@typescript-eslint"],
+	"plugins": ["@typescript-eslint", "react-hooks"],
 	"extends": [
 		"airbnb",
 		"airbnb-typescript",
@@ -12,11 +12,11 @@
 		"eslint:recommended",
 		"plugin:@typescript-eslint/eslint-recommended",
 		"plugin:@typescript-eslint/recommended",
-		"plugin:prettier/recommended",
+		"plugin:prettier/recommended"
 	],
 	"env": {
 		"browser": true,
-		"node": true,
+		"node": true
 	},
 	"rules": {
 		"indent": "off",
@@ -36,9 +36,11 @@
 		"react/destructuring-assignment": "off",
 		"react/jsx-indent": [4, "tab"],
 		"react/no-unused-class-component-methods": "warn",
+		"react-hooks/rules-of-hooks": "error",
+		"react-hooks/exhaustive-deps": "warn",
 		"@typescript-eslint/indent": "off",
 		"@typescript-eslint/no-explicit-any": "off",
 		"@typescript-eslint/no-shadow": "off",
-		"@typescript-eslint/ban-ts-comment": "off",
-	},
+		"@typescript-eslint/ban-ts-comment": "off"
+	}
 }
