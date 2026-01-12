@@ -4,22 +4,9 @@
  * Features: visibility toggle, lock toggle, z-index management, layer type icons
  */
 
-import {
-	EyeOutlined,
-	EyeInvisibleOutlined,
-	LockOutlined,
-	UnlockOutlined,
-	UpOutlined,
-	DownOutlined,
-	BorderOutlined,
-	FontSizeOutlined,
-	FileImageOutlined,
-	GroupOutlined,
-	AppstoreOutlined,
-} from '@ant-design/icons';
 import { DndContext, closestCenter, DragEndEvent } from '@dnd-kit/core';
 import { SortableContext, verticalListSortingStrategy, arrayMove } from '@dnd-kit/sortable';
-import { Card, Button, Tooltip } from 'antd';
+import { Card, Button, Tooltip, Icon } from 'antd';
 import React, { useReducer, useEffect } from 'react';
 
 import { SortableItem } from '@/libs/dnd';
@@ -34,17 +21,17 @@ interface IProps {
 const getLayerIcon = (type: LayerType) => {
 	switch (type) {
 		case 'shape':
-			return <BorderOutlined />;
+			return 'border';
 		case 'text':
-			return <FontSizeOutlined />;
+			return 'font-size';
 		case 'image':
-			return <FileImageOutlined />;
+			return 'file-image';
 		case 'group':
-			return <GroupOutlined />;
+			return 'group';
 		case 'component':
-			return <AppstoreOutlined />;
+			return 'appstore';
 		default:
-			return <BorderOutlined />;
+			return 'border';
 	}
 };
 
@@ -180,42 +167,44 @@ export const LayerPanel: React.FC<IProps> = ({ objects, onSelectObject, onLayers
 											opacity: layer.visible ? 1 : 0.5,
 										}}
 									>
-										<span style={{ marginRight: 8, fontSize: 16 }}>{getLayerIcon(layer.type)}</span>
+										<span style={{ marginRight: 8, fontSize: 16 }}>
+											<Icon type={getLayerIcon(layer.type)} />
+										</span>
 										<span style={{ flex: 1, fontSize: 14 }}>{layer.name}</span>
 										<div style={{ display: 'flex', gap: 4 }}>
 											<Tooltip title={layer.visible ? 'Hide' : 'Show'}>
 												<Button
-													type="text"
 													size="small"
-													icon={layer.visible ? <EyeOutlined /> : <EyeInvisibleOutlined />}
-													onClick={e => handleToggleVisibility(layer.id, e)}
-												/>
+													onClick={(e: React.MouseEvent) => handleToggleVisibility(layer.id, e)}
+												>
+													<Icon type={layer.visible ? 'eye' : 'eye-invisible'} />
+												</Button>
 											</Tooltip>
 											<Tooltip title={layer.locked ? 'Unlock' : 'Lock'}>
 												<Button
-													type="text"
 													size="small"
-													icon={layer.locked ? <LockOutlined /> : <UnlockOutlined />}
-													onClick={e => handleToggleLock(layer.id, e)}
-												/>
+													onClick={(e: React.MouseEvent) => handleToggleLock(layer.id, e)}
+												>
+													<Icon type={layer.locked ? 'lock' : 'unlock'} />
+												</Button>
 											</Tooltip>
 											<Tooltip title="Bring to Front">
 												<Button
-													type="text"
 													size="small"
-													icon={<UpOutlined />}
-													onClick={e => handleBringToFront(layer.id, e)}
+													onClick={(e: React.MouseEvent) => handleBringToFront(layer.id, e)}
 													disabled={layer.locked}
-												/>
+												>
+													<Icon type="up" />
+												</Button>
 											</Tooltip>
 											<Tooltip title="Send to Back">
 												<Button
-													type="text"
 													size="small"
-													icon={<DownOutlined />}
-													onClick={e => handleSendToBack(layer.id, e)}
+													onClick={(e: React.MouseEvent) => handleSendToBack(layer.id, e)}
 													disabled={layer.locked}
-												/>
+												>
+													<Icon type="down" />
+												</Button>
 											</Tooltip>
 										</div>
 									</div>
