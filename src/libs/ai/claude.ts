@@ -5,6 +5,7 @@
  */
 
 import { GenerateOptions, GeneratedDesign, RefinementInstruction, StyleVariationRequest } from '../../types/aiui';
+
 import { createMockDesign, parseAndValidateDesign, safeParseDesign } from './parsers';
 import { formatRefinementPrompt, formatStyleVariationPrompt, formatUserPrompt, getSystemPrompt } from './prompts';
 
@@ -66,10 +67,7 @@ const callClaudeAPI = async (systemPrompt: string, userPrompt: string): Promise<
  * Generate UI from prompt using Claude AI
  * Falls back to mock design if API key is not available
  */
-export const generateUIFromPrompt = async (
-	prompt: string,
-	options: GenerateOptions
-): Promise<GeneratedDesign> => {
+export const generateUIFromPrompt = async (prompt: string, options: GenerateOptions): Promise<GeneratedDesign> => {
 	// If no API key, return mock design
 	if (!hasApiKey()) {
 		console.warn('No API key found. Using mock design for demo.');
@@ -93,10 +91,7 @@ export const generateUIFromPrompt = async (
 /**
  * Refine specific design element using Claude AI
  */
-export const refineDesign = async (
-	instruction: RefinementInstruction,
-	context: any
-): Promise<any> => {
+export const refineDesign = async (instruction: RefinementInstruction, context: any): Promise<any> => {
 	// If no API key, return mock refinement
 	if (!hasApiKey()) {
 		console.warn('No API key found. Refinement not available in demo mode.');
@@ -108,7 +103,7 @@ export const refineDesign = async (
 		const userPrompt = formatRefinementPrompt(
 			instruction.instruction,
 			instruction.targetObjectId ? context.objects.find((o: any) => o.id === instruction.targetObjectId) : null,
-			context
+			context,
 		);
 
 		const response = await callClaudeAPI(systemPrompt, userPrompt);
@@ -122,9 +117,7 @@ export const refineDesign = async (
 /**
  * Generate style variations of a design
  */
-export const generateStyleVariations = async (
-	request: StyleVariationRequest
-): Promise<GeneratedDesign[]> => {
+export const generateStyleVariations = async (request: StyleVariationRequest): Promise<GeneratedDesign[]> => {
 	// If no API key, return empty array
 	if (!hasApiKey()) {
 		console.warn('No API key found. Style variations not available in demo mode.');

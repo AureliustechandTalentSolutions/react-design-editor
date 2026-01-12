@@ -343,9 +343,7 @@ export const uswdsComponents: USWDSComponent[] = [
 /**
  * Get components by category
  */
-export function getComponentsByCategory(
-	category: 'layout' | 'forms' | 'navigation' | 'components'
-): USWDSComponent[] {
+export function getComponentsByCategory(category: 'layout' | 'forms' | 'navigation' | 'components'): USWDSComponent[] {
 	return uswdsComponents.filter(component => component.category === category);
 }
 

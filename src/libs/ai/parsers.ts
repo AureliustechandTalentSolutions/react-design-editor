@@ -22,7 +22,7 @@ export const parseClaudeResponse = (response: string): any => {
 				throw new Error('Failed to parse JSON from code block');
 			}
 		}
-		
+
 		// Try to find JSON object in the response
 		const objectMatch = response.match(/\{[\s\S]*\}/);
 		if (objectMatch) {
@@ -32,7 +32,7 @@ export const parseClaudeResponse = (response: string): any => {
 				throw new Error('Failed to parse JSON object from response');
 			}
 		}
-		
+
 		throw new Error('No valid JSON found in response');
 	}
 };
@@ -44,19 +44,19 @@ export const validateGeneratedDesign = (data: any): GeneratedDesign => {
 	if (!data || typeof data !== 'object') {
 		throw new Error('Invalid design data: not an object');
 	}
-	
+
 	if (!data.design || typeof data.design !== 'object') {
 		throw new Error('Invalid design data: missing design property');
 	}
-	
+
 	if (!Array.isArray(data.design.objects)) {
 		throw new Error('Invalid design data: design.objects must be an array');
 	}
-	
+
 	if (!Array.isArray(data.colorPalette)) {
 		data.colorPalette = ['#3b82f6', '#6366f1', '#8b5cf6', '#ec4899', '#f59e0b'];
 	}
-	
+
 	if (!data.metadata || typeof data.metadata !== 'object') {
 		data.metadata = {
 			screenName: 'Generated Design',
@@ -64,11 +64,11 @@ export const validateGeneratedDesign = (data: any): GeneratedDesign => {
 			components: [],
 		};
 	}
-	
+
 	if (!data.styles || typeof data.styles !== 'object') {
 		data.styles = {};
 	}
-	
+
 	return data as GeneratedDesign;
 };
 
@@ -79,7 +79,7 @@ export const validateFabricObject = (obj: any): any => {
 	if (!obj || typeof obj !== 'object') {
 		return null;
 	}
-	
+
 	// Ensure numeric values are numbers, not strings
 	const numericProps = ['left', 'top', 'width', 'height', 'fontSize', 'strokeWidth', 'rx', 'ry'];
 	numericProps.forEach(prop => {
@@ -88,21 +88,21 @@ export const validateFabricObject = (obj: any): any => {
 			obj[prop] = isNaN(parsed) ? 0 : parsed;
 		}
 	});
-	
+
 	// Ensure required properties exist
 	if (obj.type === 'text' && !obj.text) {
 		obj.text = 'Text';
 	}
-	
+
 	if ((obj.type === 'rect' || obj.type === 'circle') && !obj.fill) {
 		obj.fill = '#ffffff';
 	}
-	
+
 	// Recursively validate grouped objects
 	if (obj.type === 'group' && Array.isArray(obj.objects)) {
 		obj.objects = obj.objects.map(validateFabricObject).filter(Boolean);
 	}
-	
+
 	return obj;
 };
 
@@ -112,12 +112,10 @@ export const validateFabricObject = (obj: any): any => {
 export const parseAndValidateDesign = (response: string): GeneratedDesign => {
 	const parsed = parseClaudeResponse(response);
 	const validated = validateGeneratedDesign(parsed);
-	
+
 	// Validate all objects in the design
-	validated.design.objects = validated.design.objects
-		.map(validateFabricObject)
-		.filter(Boolean);
-	
+	validated.design.objects = validated.design.objects.map(validateFabricObject).filter(Boolean);
+
 	return validated;
 };
 

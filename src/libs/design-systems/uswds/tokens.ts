@@ -260,11 +260,11 @@ export function getUSWDSColor(colorKey: string, shade: string = 'base'): string 
 	if (!colorFamily) {
 		return '#000000';
 	}
-	
+
 	if (typeof colorFamily === 'object' && colorFamily !== null) {
 		return (colorFamily as any)[shade] || (colorFamily as any).base || '#000000';
 	}
-	
+
 	return '#000000';
 }
 

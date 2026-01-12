@@ -106,7 +106,7 @@ export class ShortcutManager {
 			shortcut.ctrlKey,
 			shortcut.shiftKey,
 			shortcut.altKey,
-			shortcut.metaKey
+			shortcut.metaKey,
 		);
 	}
 
@@ -118,7 +118,7 @@ export class ShortcutManager {
 		ctrlKey?: boolean,
 		shiftKey?: boolean,
 		altKey?: boolean,
-		metaKey?: boolean
+		metaKey?: boolean,
 	): string {
 		const parts: string[] = [];
 		if (ctrlKey) parts.push('ctrl');
@@ -133,13 +133,7 @@ export class ShortcutManager {
 	 * Create a key from keyboard event
 	 */
 	private createKeyFromEvent(event: KeyboardEvent): string {
-		return this.createKeyFromParts(
-			event.key,
-			event.ctrlKey,
-			event.shiftKey,
-			event.altKey,
-			event.metaKey
-		);
+		return this.createKeyFromParts(event.key, event.ctrlKey, event.shiftKey, event.altKey, event.metaKey);
 	}
 
 	/**
@@ -148,8 +142,7 @@ export class ShortcutManager {
 	public static formatShortcut(shortcut: Shortcut): string {
 		const parts: string[] = [];
 		// Use userAgent as a more reliable platform detection method
-		const isMac = typeof navigator !== 'undefined' && 
-			/(Mac|iPhone|iPod|iPad)/i.test(navigator.userAgent);
+		const isMac = typeof navigator !== 'undefined' && /(Mac|iPhone|iPod|iPad)/i.test(navigator.userAgent);
 
 		if (shortcut.ctrlKey || shortcut.metaKey) {
 			parts.push(isMac ? '⌘' : 'Ctrl');
@@ -176,7 +169,7 @@ export function registerAIUIGeneratorShortcuts(
 		onOpenGenerateDialog?: () => void;
 		onExportCode?: () => void;
 		onSaveAsTemplate?: () => void;
-	}
+	},
 ): void {
 	// Ctrl/Cmd + G: Generate from last prompt
 	if (callbacks.onGenerate) {

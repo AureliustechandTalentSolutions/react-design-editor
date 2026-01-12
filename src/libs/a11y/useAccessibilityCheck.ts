@@ -4,6 +4,7 @@
  */
 
 import { useState, useEffect, useRef, useCallback } from 'react';
+
 import { AccessibilityChecker, A11yReport } from './AccessibilityChecker';
 
 export interface UseAccessibilityCheckOptions {
@@ -27,7 +28,7 @@ export interface AccessibilityCheckState {
  */
 export function useAccessibilityCheck(
 	elementRef: React.RefObject<HTMLElement>,
-	options: UseAccessibilityCheckOptions = {}
+	options: UseAccessibilityCheckOptions = {},
 ): AccessibilityCheckState & {
 	runCheck: () => Promise<void>;
 	clear: () => void;
@@ -78,7 +79,7 @@ export function useAccessibilityCheck(
 	 */
 	useEffect(() => {
 		if (!enabled || checkInterval <= 0) {
-			return;
+			return undefined;
 		}
 
 		// Initial check

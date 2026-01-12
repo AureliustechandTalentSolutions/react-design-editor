@@ -4,6 +4,7 @@
  */
 
 import React, { useState } from 'react';
+
 import { getComponentCount } from '../../../libs/design-systems/uswds/components';
 
 export interface DesignSystemOption {
@@ -72,9 +73,7 @@ export const FederalDesignSystemSelector: React.FC<FederalDesignSystemSelectorPr
 
 	return (
 		<div className={`federal-design-system-selector ${className}`}>
-			<h2 style={{ marginBottom: '16px', fontSize: '20px', fontWeight: 600 }}>
-				Select Federal Design System
-			</h2>
+			<h2 style={{ marginBottom: '16px', fontSize: '20px', fontWeight: 600 }}>Select Federal Design System</h2>
 			<div
 				style={{
 					display: 'grid',
@@ -114,9 +113,7 @@ export const FederalDesignSystemSelector: React.FC<FederalDesignSystemSelectorPr
 							}}
 						>
 							<div>
-								<h3 style={{ margin: 0, fontSize: '18px', fontWeight: 600 }}>
-									{system.name}
-								</h3>
+								<h3 style={{ margin: 0, fontSize: '18px', fontWeight: 600 }}>{system.name}</h3>
 								<p
 									style={{
 										margin: '4px 0 0',

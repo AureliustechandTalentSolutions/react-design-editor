@@ -4,7 +4,6 @@
  */
 
 import { getComponentByName, generateUSWDSImport } from './components';
-import { getUSWDSColor, getUSWDSSpacing, getUSWDSFontSize } from './tokens';
 
 /**
  * Design element interface
@@ -160,7 +159,7 @@ function generateElementJSX(element: DesignElement, indent: number = 0): string 
 			jsx += '\n';
 		}
 		element.children!.forEach(child => {
-			jsx += generateElementJSX(child, indent + 1) + '\n';
+			jsx += `${generateElementJSX(child, indent + 1)}\n`;
 		});
 		jsx += indentation;
 	}
@@ -174,10 +173,7 @@ function generateElementJSX(element: DesignElement, indent: number = 0): string 
 /**
  * Generate complete React component code
  */
-export function generateUSWDSReactCode(
-	elements: DesignElement[],
-	componentName: string = 'USWDSComponent'
-): string {
+export function generateUSWDSReactCode(elements: DesignElement[], componentName: string = 'USWDSComponent'): string {
 	// Collect all component names used
 	const usedComponents = new Set<string>();
 
@@ -260,7 +256,7 @@ export function generateUSWDSComponent(description: string): string {
 					props: { type: 'button' },
 				},
 			],
-			'ButtonComponent'
+			'ButtonComponent',
 		);
 	}
 
@@ -282,7 +278,7 @@ export function generateUSWDSComponent(description: string): string {
 					],
 				},
 			],
-			'FormComponent'
+			'FormComponent',
 		);
 	}
 
@@ -303,7 +299,7 @@ export function generateUSWDSComponent(description: string): string {
 					],
 				},
 			],
-			'CardComponent'
+			'CardComponent',
 		);
 	}
 
@@ -316,7 +312,7 @@ export function generateUSWDSComponent(description: string): string {
 					props: { type: 'info' },
 				},
 			],
-			'AlertComponent'
+			'AlertComponent',
 		);
 	}
 
@@ -333,6 +329,6 @@ export function generateUSWDSComponent(description: string): string {
 				],
 			},
 		],
-		'DefaultComponent'
+		'DefaultComponent',
 	);
 }

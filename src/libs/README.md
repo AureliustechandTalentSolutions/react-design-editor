@@ -32,14 +32,14 @@ const tokenManager = new TokenManager();
 
 // Create with custom tokens
 const customTokenManager = new TokenManager({
-  colors: {
-    primary: '#007bff',
-    secondary: '#6c757d',
-  },
-  spacing: {
-    sm: 8,
-    md: 16,
-  },
+	colors: {
+		primary: '#007bff',
+		secondary: '#6c757d',
+	},
+	spacing: {
+		sm: 8,
+		md: 16,
+	},
 });
 
 // Get values
@@ -143,7 +143,7 @@ historyManager.import(exported);
 
 // Check availability
 if (historyManager.canUndo()) {
-  // Undo is available
+	// Undo is available
 }
 ```
 
@@ -175,13 +175,15 @@ const library = new TemplateLibrary();
 
 // Add template
 const template: DesignTemplate = {
-  id: 'my-template',
-  name: 'My Template',
-  description: 'A custom template',
-  category: 'dashboard',
-  thumbnail: '/path/to/thumbnail.png',
-  design: { /* canvas objects */ },
-  tags: ['dashboard', 'admin'],
+	id: 'my-template',
+	name: 'My Template',
+	description: 'A custom template',
+	category: 'dashboard',
+	thumbnail: '/path/to/thumbnail.png',
+	design: {
+		/* canvas objects */
+	},
+	tags: ['dashboard', 'admin'],
 };
 
 library.addTemplate(template);
@@ -234,20 +236,20 @@ const shortcutManager = new ShortcutManager();
 
 // Register individual shortcut
 shortcutManager.register({
-  key: 's',
-  ctrlKey: true,
-  description: 'Save',
-  handler: () => {
-    console.log('Save triggered');
-  },
+	key: 's',
+	ctrlKey: true,
+	description: 'Save',
+	handler: () => {
+		console.log('Save triggered');
+	},
 });
 
 // Register AI UI Generator shortcuts
 registerAIUIGeneratorShortcuts(shortcutManager, {
-  onGenerate: () => console.log('Generate'),
-  onOpenGenerateDialog: () => console.log('Open dialog'),
-  onExportCode: () => console.log('Export'),
-  onSaveAsTemplate: () => console.log('Save as template'),
+	onGenerate: () => console.log('Generate'),
+	onOpenGenerateDialog: () => console.log('Open dialog'),
+	onExportCode: () => console.log('Export'),
+	onSaveAsTemplate: () => console.log('Save as template'),
 });
 
 // Initialize event listener
@@ -293,7 +295,7 @@ import { isFeatureEnabled, enableFeature, disableFeature } from '../config/featu
 
 // Check if feature is enabled
 if (isFeatureEnabled('enableTemplateLibrary')) {
-  // Show template library
+	// Show template library
 }
 
 // Enable feature

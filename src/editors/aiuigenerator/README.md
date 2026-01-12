@@ -44,21 +44,23 @@ Use the AI assistant to refine specific elements, explore styles, and export to 
 Main component that provides the AI UI generation interface.
 
 **Props:**
+
 - `apiKey: string` - Anthropic API key for Claude AI
 - `onDesignGenerated?: (design: GeneratedDesign) => void` - Callback when design is generated
 - `initialPrompt?: string` - Optional initial prompt to start with
 
 **Example:**
+
 ```tsx
 import { AIUIGenerator } from 'react-design-editor';
 
 function App() {
-  return (
-    <AIUIGenerator
-      apiKey={process.env.ANTHROPIC_API_KEY}
-      onDesignGenerated={(design) => console.log('Generated:', design)}
-    />
-  );
+	return (
+		<AIUIGenerator
+			apiKey={process.env.ANTHROPIC_API_KEY}
+			onDesignGenerated={design => console.log('Generated:', design)}
+		/>
+	);
 }
 ```
 
@@ -67,6 +69,7 @@ function App() {
 Text input component for natural language UI descriptions.
 
 **Props:**
+
 - `value: string` - Current prompt text
 - `onChange: (value: string) => void` - Change handler
 - `onSubmit: () => void` - Submit handler
@@ -78,6 +81,7 @@ Text input component for natural language UI descriptions.
 Component for browsing and applying different style presets.
 
 **Props:**
+
 - `currentStyle: StylePreset` - Currently applied style
 - `onStyleChange: (style: StylePreset) => void` - Style change handler
 - `styles: StylePreset[]` - Available style presets
@@ -87,6 +91,7 @@ Component for browsing and applying different style presets.
 Export generated designs to various code formats.
 
 **Props:**
+
 - `design: GeneratedDesign` - The design to export
 - `format: ExportFormat` - Export format (react, vue, html)
 - `stylingOption: StylingOption` - CSS-in-JS, Tailwind, CSS modules, etc.
@@ -117,18 +122,18 @@ See [API Documentation](../../../docs/api/ai-ui-generator.md) for detailed API r
 import { AIUIGenerator } from 'react-design-editor';
 
 function MyApp() {
-  const handleDesignGenerated = (design) => {
-    console.log('New design:', design);
-    // Save or process the design
-  };
+	const handleDesignGenerated = design => {
+		console.log('New design:', design);
+		// Save or process the design
+	};
 
-  return (
-    <AIUIGenerator
-      apiKey={process.env.ANTHROPIC_API_KEY}
-      onDesignGenerated={handleDesignGenerated}
-      initialPrompt="Create a landing page for a SaaS product"
-    />
-  );
+	return (
+		<AIUIGenerator
+			apiKey={process.env.ANTHROPIC_API_KEY}
+			onDesignGenerated={handleDesignGenerated}
+			initialPrompt="Create a landing page for a SaaS product"
+		/>
+	);
 }
 ```
 
@@ -138,28 +143,23 @@ function MyApp() {
 import { AIUIGenerator, StylePreset } from 'react-design-editor';
 
 const customStyles: StylePreset[] = [
-  {
-    name: 'Corporate Blue',
-    colors: {
-      primary: '#1e40af',
-      secondary: '#3b82f6',
-      background: '#ffffff',
-      text: '#1f2937',
-    },
-    typography: {
-      fontFamily: 'Inter, sans-serif',
-      scale: 1.2,
-    },
-  },
+	{
+		name: 'Corporate Blue',
+		colors: {
+			primary: '#1e40af',
+			secondary: '#3b82f6',
+			background: '#ffffff',
+			text: '#1f2937',
+		},
+		typography: {
+			fontFamily: 'Inter, sans-serif',
+			scale: 1.2,
+		},
+	},
 ];
 
 function MyApp() {
-  return (
-    <AIUIGenerator
-      apiKey={process.env.ANTHROPIC_API_KEY}
-      stylePresets={customStyles}
-    />
-  );
+	return <AIUIGenerator apiKey={process.env.ANTHROPIC_API_KEY} stylePresets={customStyles} />;
 }
 ```
 
@@ -169,20 +169,17 @@ function MyApp() {
 import { generateUIFromPrompt } from 'react-design-editor';
 
 async function generateDesign() {
-  try {
-    const design = await generateUIFromPrompt(
-      'Create a login form with email and password',
-      {
-        style: 'modern',
-        platform: 'web',
-        framework: 'react',
-      }
-    );
-    
-    console.log('Generated design:', design);
-  } catch (error) {
-    console.error('Generation failed:', error);
-  }
+	try {
+		const design = await generateUIFromPrompt('Create a login form with email and password', {
+			style: 'modern',
+			platform: 'web',
+			framework: 'react',
+		});
+
+		console.log('Generated design:', design);
+	} catch (error) {
+		console.error('Generation failed:', error);
+	}
 }
 ```
 
@@ -191,17 +188,17 @@ async function generateDesign() {
 ### Writing Effective Prompts
 
 1. **Be Specific**: Include details about layout, components, and functionality
-   - ❌ "Create a dashboard"
-   - ✅ "Create a dashboard with a left sidebar, top navigation bar, and a 3-column grid of metric cards"
+    - ❌ "Create a dashboard"
+    - ✅ "Create a dashboard with a left sidebar, top navigation bar, and a 3-column grid of metric cards"
 
 2. **Mention Visual Style**: Describe colors, spacing, and design aesthetic
-   - ✅ "Use a modern, minimalist design with blue accents and generous white space"
+    - ✅ "Use a modern, minimalist design with blue accents and generous white space"
 
 3. **Specify Components**: List the UI elements you need
-   - ✅ "Include a search bar, filter dropdown, data table with pagination, and export button"
+    - ✅ "Include a search bar, filter dropdown, data table with pagination, and export button"
 
 4. **Include Interactivity**: Describe user interactions when relevant
-   - ✅ "Add a modal that opens when clicking the 'Add New' button"
+    - ✅ "Add a modal that opens when clicking the 'Add New' button"
 
 ### Iterative Refinement
 
@@ -210,9 +207,9 @@ Start with a broad description, then refine specific areas:
 1. Generate initial design
 2. Review the output
 3. Use refinement prompts like:
-   - "Make the header taller and add a logo on the left"
-   - "Change the color scheme to use purple as the primary color"
-   - "Add more spacing between the cards"
+    - "Make the header taller and add a logo on the left"
+    - "Change the color scheme to use purple as the primary color"
+    - "Add more spacing between the cards"
 
 ### Performance Tips
 
@@ -226,20 +223,24 @@ Start with a broad description, then refine specific areas:
 ### Common Issues
 
 **Issue: API key not found**
+
 - Ensure `.env.local` file exists with `ANTHROPIC_API_KEY`
 - Restart the development server after adding environment variables
 
 **Issue: Generation takes too long**
+
 - Complex UIs may take 10-30 seconds to generate
 - Check your internet connection
 - Consider simplifying the initial prompt
 
 **Issue: Generated UI doesn't match prompt**
+
 - Try rephrasing your prompt with more specific details
 - Break complex UIs into multiple generation steps
 - Use refinement prompts to adjust specific elements
 
 **Issue: Export code doesn't work**
+
 - Verify you've selected the correct framework
 - Check that all required dependencies are installed
 - Review the exported code for any missing imports
@@ -264,14 +265,14 @@ AIUI_TEMPERATURE=0.7
 import { AIUIGenerator, AIUIConfig } from 'react-design-editor';
 
 const config: AIUIConfig = {
-  model: 'claude-3-sonnet-20240229',
-  maxTokens: 4000,
-  temperature: 0.7,
-  cacheResults: true,
-  timeout: 30000,
+	model: 'claude-3-sonnet-20240229',
+	maxTokens: 4000,
+	temperature: 0.7,
+	cacheResults: true,
+	timeout: 30000,
 };
 
-<AIUIGenerator apiKey={apiKey} config={config} />
+<AIUIGenerator apiKey={apiKey} config={config} />;
 ```
 
 ## Contributing

@@ -176,7 +176,7 @@ export class AccessibilityChecker {
 
 		const [r, g, b] = [rgb.r, rgb.g, rgb.b].map(val => {
 			const v = val / 255;
-			return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
+			return v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4;
 		});
 
 		return 0.2126 * r + 0.7152 * g + 0.0722 * b;
@@ -203,7 +203,7 @@ export class AccessibilityChecker {
 					r: parseInt(result[1], 16),
 					g: parseInt(result[2], 16),
 					b: parseInt(result[3], 16),
-			  }
+				}
 			: null;
 	}
 
@@ -249,7 +249,7 @@ export class AccessibilityChecker {
 						targetRatio: 4.5,
 						adjustMethod: 'darken-text',
 					};
-				} else if (issue.message.indexOf('font size') !== -1) {
+				} else if (issue.message.indexOf('Font size') !== -1 || issue.message.indexOf('font size') !== -1) {
 					fix.action = 'adjustFontSize';
 					fix.params = {
 						minSize: 12,
@@ -303,7 +303,7 @@ export class AccessibilityChecker {
 		// Check if axe is available in the environment
 		if (typeof window !== 'undefined' && (window as any).axe) {
 			try {
-				const axe = (window as any).axe;
+				const { axe } = window as any;
 
 				// Configure axe to run specific rules or all WCAG 2.1 AA rules
 				const options: any = {
@@ -351,7 +351,7 @@ export class AccessibilityChecker {
 	 * Map axe impact level to issue type
 	 */
 	private mapAxeImpactToIssueType(
-		impact: 'minor' | 'moderate' | 'serious' | 'critical'
+		impact: 'minor' | 'moderate' | 'serious' | 'critical',
 	): 'error' | 'warning' | 'info' {
 		switch (impact) {
 			case 'critical':
@@ -397,4 +397,4 @@ export class AccessibilityChecker {
 
 		return criteria;
 	}
-
+}

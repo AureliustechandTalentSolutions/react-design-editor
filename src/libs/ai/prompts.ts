@@ -11,7 +11,7 @@ import { tokens } from '../design-system/tokens';
  */
 export const getSystemPrompt = (options: GenerateOptions): string => {
 	const colorPalette = tokens.colors[options.style] || tokens.colors.modern;
-	
+
 	return `You are an expert UI/UX designer specializing in creating beautiful, functional user interfaces.
 Your task is to generate UI designs as JSON objects compatible with Fabric.js canvas library.
 
@@ -89,11 +89,7 @@ Generate a complete, production-ready design with all necessary components.`;
 /**
  * Refinement prompt template
  */
-export const formatRefinementPrompt = (
-	instruction: string,
-	targetObject: any,
-	context: any
-): string => {
+export const formatRefinementPrompt = (instruction: string, targetObject: any, context: any): string => {
 	return `Refine the following UI element based on this instruction: "${instruction}"
 
 Current element: ${JSON.stringify(targetObject, null, 2)}
