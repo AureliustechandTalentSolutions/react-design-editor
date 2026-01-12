@@ -1,0 +1,309 @@
+{
+  "name": "Mobile App Home Template",
+  "description": "Mobile app home screen with navigation and content cards",
+  "category": "mobile",
+  "version": "1.0.0",
+  "objects": [
+    {
+      "type": "rect",
+      "id": "screen-background",
+      "left": 0,
+      "top": 0,
+      "width": 375,
+      "height": 812,
+      "fill": "#f9fafb"
+    },
+    {
+      "type": "rect",
+      "id": "header",
+      "left": 0,
+      "top": 0,
+      "width": 375,
+      "height": 100,
+      "fill": "#ffffff"
+    },
+    {
+      "type": "text",
+      "id": "greeting",
+      "left": 20,
+      "top": 50,
+      "text": "Good Morning",
+      "fontSize": 14,
+      "fill": "#6b7280"
+    },
+    {
+      "type": "text",
+      "id": "username",
+      "left": 20,
+      "top": 70,
+      "text": "John Doe",
+      "fontSize": 24,
+      "fontWeight": "bold",
+      "fill": "#111827"
+    },
+    {
+      "type": "rect",
+      "id": "notification-icon",
+      "left": 320,
+      "top": 55,
+      "width": 40,
+      "height": 40,
+      "fill": "#f3f4f6",
+      "rx": 20,
+      "ry": 20
+    },
+    {
+      "type": "text",
+      "id": "bell-icon",
+      "left": 333,
+      "top": 67,
+      "text": "🔔",
+      "fontSize": 16
+    },
+    {
+      "type": "rect",
+      "id": "search-bar",
+      "left": 20,
+      "top": 120,
+      "width": 335,
+      "height": 50,
+      "fill": "#ffffff",
+      "stroke": "#e5e7eb",
+      "strokeWidth": 1,
+      "rx": 25,
+      "ry": 25
+    },
+    {
+      "type": "text",
+      "id": "search-placeholder",
+      "left": 50,
+      "top": 137,
+      "text": "🔍 Search...",
+      "fontSize": 14,
+      "fill": "#9ca3af"
+    },
+    {
+      "type": "text",
+      "id": "section-title",
+      "left": 20,
+      "top": 200,
+      "text": "Quick Actions",
+      "fontSize": 18,
+      "fontWeight": "bold",
+      "fill": "#111827"
+    },
+    {
+      "type": "rect",
+      "id": "action-card1",
+      "left": 20,
+      "top": 240,
+      "width": 165,
+      "height": 120,
+      "fill": "#3b82f6",
+      "rx": 12,
+      "ry": 12
+    },
+    {
+      "type": "text",
+      "id": "action1-icon",
+      "left": 35,
+      "top": 265,
+      "text": "📊",
+      "fontSize": 32
+    },
+    {
+      "type": "text",
+      "id": "action1-title",
+      "left": 35,
+      "top": 315,
+      "text": "Analytics",
+      "fontSize": 16,
+      "fontWeight": "bold",
+      "fill": "#ffffff"
+    },
+    {
+      "type": "rect",
+      "id": "action-card2",
+      "left": 190,
+      "top": 240,
+      "width": 165,
+      "height": 120,
+      "fill": "#10b981",
+      "rx": 12,
+      "ry": 12
+    },
+    {
+      "type": "text",
+      "id": "action2-icon",
+      "left": 205,
+      "top": 265,
+      "text": "💰",
+      "fontSize": 32
+    },
+    {
+      "type": "text",
+      "id": "action2-title",
+      "left": 205,
+      "top": 315,
+      "text": "Payments",
+      "fontSize": 16,
+      "fontWeight": "bold",
+      "fill": "#ffffff"
+    },
+    {
+      "type": "text",
+      "id": "recent-title",
+      "left": 20,
+      "top": 390,
+      "text": "Recent Activity",
+      "fontSize": 18,
+      "fontWeight": "bold",
+      "fill": "#111827"
+    },
+    {
+      "type": "rect",
+      "id": "activity-card1",
+      "left": 20,
+      "top": 430,
+      "width": 335,
+      "height": 80,
+      "fill": "#ffffff",
+      "stroke": "#e5e7eb",
+      "strokeWidth": 1,
+      "rx": 8,
+      "ry": 8
+    },
+    {
+      "type": "rect",
+      "id": "activity-icon1",
+      "left": 35,
+      "top": 450,
+      "width": 40,
+      "height": 40,
+      "fill": "#dbeafe",
+      "rx": 20,
+      "ry": 20
+    },
+    {
+      "type": "text",
+      "id": "activity1-emoji",
+      "left": 49,
+      "top": 463,
+      "text": "📝",
+      "fontSize": 16
+    },
+    {
+      "type": "text",
+      "id": "activity1-title",
+      "left": 90,
+      "top": 450,
+      "text": "Task Completed",
+      "fontSize": 14,
+      "fontWeight": "bold",
+      "fill": "#111827"
+    },
+    {
+      "type": "text",
+      "id": "activity1-time",
+      "left": 90,
+      "top": 475,
+      "text": "2 hours ago",
+      "fontSize": 12,
+      "fill": "#9ca3af"
+    },
+    {
+      "type": "rect",
+      "id": "activity-card2",
+      "left": 20,
+      "top": 530,
+      "width": 335,
+      "height": 80,
+      "fill": "#ffffff",
+      "stroke": "#e5e7eb",
+      "strokeWidth": 1,
+      "rx": 8,
+      "ry": 8
+    },
+    {
+      "type": "rect",
+      "id": "activity-icon2",
+      "left": 35,
+      "top": 550,
+      "width": 40,
+      "height": 40,
+      "fill": "#d1fae5",
+      "rx": 20,
+      "ry": 20
+    },
+    {
+      "type": "text",
+      "id": "activity2-emoji",
+      "left": 49,
+      "top": 563,
+      "text": "💵",
+      "fontSize": 16
+    },
+    {
+      "type": "text",
+      "id": "activity2-title",
+      "left": 90,
+      "top": 550,
+      "text": "Payment Received",
+      "fontSize": 14,
+      "fontWeight": "bold",
+      "fill": "#111827"
+    },
+    {
+      "type": "text",
+      "id": "activity2-time",
+      "left": 90,
+      "top": 575,
+      "text": "5 hours ago",
+      "fontSize": 12,
+      "fill": "#9ca3af"
+    },
+    {
+      "type": "rect",
+      "id": "bottom-nav",
+      "left": 0,
+      "top": 732,
+      "width": 375,
+      "height": 80,
+      "fill": "#ffffff",
+      "stroke": "#e5e7eb",
+      "strokeWidth": 1
+    },
+    {
+      "type": "text",
+      "id": "nav-home",
+      "left": 45,
+      "top": 755,
+      "text": "🏠",
+      "fontSize": 24
+    },
+    {
+      "type": "text",
+      "id": "nav-explore",
+      "left": 135,
+      "top": 755,
+      "text": "🔍",
+      "fontSize": 24
+    },
+    {
+      "type": "text",
+      "id": "nav-add",
+      "left": 225,
+      "top": 755,
+      "text": "➕",
+      "fontSize": 24
+    },
+    {
+      "type": "text",
+      "id": "nav-profile",
+      "left": 315,
+      "top": 755,
+      "text": "👤",
+      "fontSize": 24
+    }
+  ]
+}
