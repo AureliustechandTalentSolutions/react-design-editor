@@ -2,10 +2,11 @@
 
 [![](https://img.shields.io/npm/l/react-design-editor?style=flat-square)](https://en.wikipedia.org/wiki/MIT_License) [![build](https://github.com/salgum1114/react-design-editor/workflows/build/badge.svg)](https://github.com/salgum1114/react-design-editor/actions) [![](https://flat.badgen.net/npm/v/react-design-editor?icon=npm)](https://www.npmjs.com/package/react-design-editor)
 
-React Design Editor is a module for React, written in Javascript/Typescript which provides two primary features:
+React Design Editor is a module for React, written in Javascript/Typescript which provides three primary features:
 
--   Image Editor - Create images in React, draw diagrams and arrange compositions using the image editor and save the result to one of several export formats, provides functionality similar to Powerpoint.
--   Business Process Modelling (BPM) - Design flowcharts and process workflows in React and export the model to JSON, which can be imported into the tool (load/save).
+-   **AI UI Generator** - Transform natural language descriptions into complete, editable UI designs using Claude AI. Generate modern interfaces with text prompts, refine with AI assistance, and export to React, Vue, or HTML.
+-   **Image Editor** - Create images in React, draw diagrams and arrange compositions using the image editor and save the result to one of several export formats, provides functionality similar to Powerpoint.
+-   **Business Process Modelling (BPM)** - Design flowcharts and process workflows in React and export the model to JSON, which can be imported into the tool (load/save).
 
 The module primarily uses the [Ant Design](https://github.com/ant-design/ant-design/), [Fabric.js](https://github.com/fabricjs/fabric.js) and [React](https://github.com/facebook/react) libraries, but a full list of required dependencies can be found below.
 
@@ -14,6 +15,17 @@ Try it out today - the project is being continually developed to support a varie
 [View Demo](https://salgum1114.github.io/react-design-editor/)
 
 # Feature List
+
+## AI UI Generator Features
+
+-   [x] 🎨 **Text-to-UI Generation** - Describe your UI in plain English and watch it come to life
+-   [x] ✨ **AI-Powered Refinement** - Fine-tune designs with natural language instructions
+-   [x] 🎭 **Style Exploration** - Multiple color palettes and typography options with live preview
+-   [x] 📱 **Multi-Platform Support** - Generate designs for web, mobile, tablet, and responsive layouts
+-   [x] 💻 **Code Export** - Export to React, Vue, or HTML/CSS with multiple styling options
+-   [x] 🧩 **Component Library** - Pre-built draggable UI components for manual adjustments
+
+## Core Editor Features
 
 -   [x] Add, remove, resize, reorder, clone, copy/paste and drag/drop elements
 -   [x] Drawing capability, with polygon, line, arrows and link support
@@ -37,6 +49,26 @@ Try it out today - the project is being continually developed to support a varie
 
 Run `npm install react-design-editor` or `yarn add react-design-editor`
 
+## AI UI Generator Setup
+
+To use the AI UI Generator feature, you'll need an Anthropic API key:
+
+1. Get your API key from [Anthropic](https://www.anthropic.com)
+2. Create a `.env.local` file in your project root:
+   ```env
+   ANTHROPIC_API_KEY=your-api-key-here
+   ```
+3. Use the AI UI Generator in your app:
+   ```tsx
+   import { AIUIGenerator } from 'react-design-editor';
+   
+   function App() {
+     return <AIUIGenerator apiKey={process.env.ANTHROPIC_API_KEY} />;
+   }
+   ```
+
+See the [AI UI Generator documentation](src/editors/aiuigenerator/README.md) for detailed usage instructions.
+
 
 
 # Getting Started
@@ -49,6 +81,19 @@ Run `npm install react-design-editor` or `yarn add react-design-editor`
 # Ask AI
 
 [React Design Editor](https://codeparrot.ai/oracle?owner=salgum1114&repo=react-design-editor) AI will help you understand this repository better. 
+
+# Documentation
+
+## AI UI Generator
+- [Module README](src/editors/aiuigenerator/README.md) - Quick start and component reference
+- [API Reference](docs/api/ai-ui-generator.md) - Complete API documentation
+- [User Guide](docs/guides/ai-ui-generator-user-guide.md) - Step-by-step tutorials and best practices
+- [Developer Guide](docs/guides/ai-ui-generator-developer-guide.md) - Extend and customize the module
+- [Architecture](docs/architecture/ai-ui-generator.md) - System design and data flow
+- [Prompt Library](docs/examples/prompt-library.md) - 50+ example prompts for various UI types
+
+## General
+- [Changelog](CHANGELOG.md) - Version history and release notes 
 
 
 # Screenshots
@@ -97,3 +142,13 @@ Run `npm install react-design-editor` or `yarn add react-design-editor`
 | [Webpack 4](https://github.com/webpack/webpack)                 | MIT                                                |
 | [Babel](https://github.com/babel/babel)                         | MIT                                                |
 | [fontawesome5](https://github.com/FortAwesome/Font-Awesome)     | Icons (CC BY 4.0), Fonts (SIL OFL 1.1), Code (MIT) |
+
+## AI UI Generator Dependencies
+
+The AI UI Generator module integrates with:
+
+| Service/Library                                                 | Purpose                                            |
+| --------------------------------------------------------------- | -------------------------------------------------- |
+| [Anthropic Claude API](https://www.anthropic.com)               | AI-powered UI generation (API key required)        |
+
+**Note**: An Anthropic API key is required to use the AI UI Generator features. See the [Installation](#installation) section for setup instructions.
