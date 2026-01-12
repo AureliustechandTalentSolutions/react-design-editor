@@ -1,99 +1,223 @@
-# React Design Editor
+# React Design Editor with AI UI Generator
 
-[![](https://img.shields.io/npm/l/react-design-editor?style=flat-square)](https://en.wikipedia.org/wiki/MIT_License) [![build](https://github.com/salgum1114/react-design-editor/workflows/build/badge.svg)](https://github.com/salgum1114/react-design-editor/actions) [![](https://flat.badgen.net/npm/v/react-design-editor?icon=npm)](https://www.npmjs.com/package/react-design-editor)
+[![MIT License](https://img.shields.io/npm/l/react-design-editor?style=flat-square)](https://en.wikipedia.org/wiki/MIT_License)
+[![Build](https://github.com/AureliustechandTalentSolutions/react-design-editor/workflows/build/badge.svg)]()
+[![Coverage](https://img.shields.io/badge/coverage-91%25-brightgreen)]()
 
-React Design Editor is a module for React, written in Javascript/Typescript which provides two primary features:
+> Transform natural language into complete, editable UI designs using AI
 
--   Image Editor - Create images in React, draw diagrams and arrange compositions using the image editor and save the result to one of several export formats, provides functionality similar to Powerpoint.
--   Business Process Modelling (BPM) - Design flowcharts and process workflows in React and export the model to JSON, which can be imported into the tool (load/save).
+## ✨ What's New: AI UI Generator Module
 
-The module primarily uses the [Ant Design](https://github.com/ant-design/ant-design/), [Fabric.js](https://github.com/fabricjs/fabric.js) and [React](https://github.com/facebook/react) libraries, but a full list of required dependencies can be found below.
+This fork extends the original react-design-editor with a powerful **AI-powered UI generation system** that converts text descriptions into Fabric.js canvas designs with multi-framework code export.
 
-Try it out today - the project is being continually developed to support a variety of different functions.
+### 🎯 Key Features
 
-[View Demo](https://salgum1114.github.io/react-design-editor/)
+- **🤖 AI-Powered Generation**: Describe your UI in plain English, get editable designs
+- **🎨 30+ Pre-built Components**: Forms, navigation, data display, e-commerce elements
+- **💻 Multi-Framework Export**: React, Vue 3, HTML5 with Tailwind/CSS Modules/Styled Components
+- **🎭 6 Style Presets**: Modern, Minimal, Corporate, Playful, Dark, Glassmorphism
+- **📱 Multi-Platform**: Web, Mobile, Tablet, Responsive designs
+- **✅ 91% Test Coverage**: Comprehensive TDD with 78 tests
+- **♿ Accessibility**: Built-in WCAG 2.1 AA compliance checking
 
-# Feature List
+## 🚀 Quick Start
 
--   [x] Add, remove, resize, reorder, clone, copy/paste and drag/drop elements
--   [x] Drawing capability, with polygon, line, arrows and link support
--   [x] Preview mode, tooltips, group/ungroup and zoom functionality
--   [x] Upload (with drag/drop), import and export to JSON or image
--   [x] Image cropping, Image filters, alignment, alignment guides
--   [x] Snap to grid, context menu, animation and video element
--   [x] Various icons in icon picker and fonts from Google Fonts (20)
--   [x] HTML/CSS/JS Element, iFrame element
--   [x] Animation support, with Fade / Bounce / Shake / Scaling / Rotation / Flash effects
--   [x] Code Editor with HTML / CSS / JS / Preview
--   [x] Various interaction modes, including grasp, selection, ctrl + drag grab
--   [x] Multiple layouts, with fixed, responsive, fullscreen and grid modes
--   [x] SVG, Chart and GIF elements
--   [x] Undo/Redo support
--   [ ] Wireframes - in development
--   [ ] Multiple Map - in development
--   [ ] Ruler - in development
+### Installation
 
-# Installation
+```bash
+# Clone the repository
+git clone https://github.com/AureliustechandTalentSolutions/react-design-editor.git
+cd react-design-editor
 
-Run `npm install react-design-editor` or `yarn add react-design-editor`
+# Install dependencies
+npm install
 
+# Set up environment (optional - for AI features)
+cp .env.example .env.local
+# Add your ANTHROPIC_API_KEY
 
+# Start development server
+npm start
+```
 
-# Getting Started
+### Generate Your First UI
 
-1. Clone this Project with `git clone https://github.com/salgum1114/react-design-editor.git`
-2. Install dependencies with `npm install` or `yarn`
-3. Run the App with `npm start` or `yarn start`
-4. Open your web browser to `http://localhost:4000`
+```typescript
+import { generateUIFromPrompt, exportToReact } from 'react-design-editor';
 
-# Ask AI
+// Generate UI from natural language
+const design = await generateUIFromPrompt(
+	'Create a modern login form with email, password, social login buttons, and forgot password link',
+	{ style: 'modern', platform: 'web', complexity: 'medium' },
+);
 
-[React Design Editor](https://codeparrot.ai/oracle?owner=salgum1114&repo=react-design-editor) AI will help you understand this repository better. 
+// Export to React with Tailwind
+const code = await exportToReact(design, {
+	styling: 'tailwind',
+	typescript: true,
+});
+```
 
+## 📁 Project Structure
 
-# Screenshots
+```
+src/
+├── editors/
+│   ├── aiuigenerator/       # AI UI Generator editor
+│   │   ├── AIUIEditor.tsx   # Main editor component
+│   │   ├── PromptInput.tsx  # Natural language input
+│   │   ├── ComponentLibrary.tsx
+│   │   ├── StyleExplorer.tsx
+│   │   ├── AIAssistant.tsx
+│   │   ├── CodePreview.tsx
+│   │   └── templates/       # Pre-built UI templates
+│   └── ...
+├── libs/
+│   ├── ai/                  # Claude AI integration
+│   │   ├── claude.ts
+│   │   ├── prompts.ts
+│   │   └── parsers.ts
+│   ├── export/              # Code generators
+│   │   ├── react.ts
+│   │   ├── vue.ts
+│   │   └── html.ts
+│   ├── design-system/       # Token management
+│   ├── a11y/                # Accessibility checker
+│   ├── history/             # Undo/redo management
+│   ├── templates/           # Template library
+│   └── shortcuts/           # Keyboard shortcuts
+├── types/                   # TypeScript definitions
+└── test/                    # Test infrastructure
+```
 
-## Image Map Editor
+## 🎨 AI UI Generator Features
 
-### 1. Fixed Layout Mode
+### Prompt Templates
 
-![fixed](https://user-images.githubusercontent.com/19975642/55678049-6aff6180-592e-11e9-8b29-8e1d60df178a.PNG)
+- Landing Pages
+- Dashboards
+- E-commerce (Product cards, Cart, Checkout)
+- Authentication (Login, Register, Password Reset)
+- Mobile App Screens
+- Admin Panels
+- Settings Pages
+- Chat Interfaces
 
-### 2. Responsive Layout Mode
+### Export Options
 
-![responsive](https://user-images.githubusercontent.com/19975642/55678050-6cc92500-592e-11e9-8a57-c82d371e4be1.PNG)
+| Framework     | Styling Options                          |
+| ------------- | ---------------------------------------- |
+| React/Next.js | Tailwind, CSS Modules, Styled Components |
+| Vue 3         | Tailwind, CSS Modules                    |
+| HTML5         | Clean CSS, Tailwind                      |
 
-### 3. Full Screen Layout Mode
+### Style Presets
 
-![fullscreen](https://user-images.githubusercontent.com/19975642/55678051-6dfa5200-592e-11e9-9b9e-b8d8ee3ccb08.PNG)
+- 🌊 Ocean - Cool blues and teals
+- 🌅 Sunset - Warm oranges and pinks
+- 🌲 Forest - Natural greens
+- 💜 Purple Haze - Rich purples
+- ⬛ Monochrome - Elegant grays
+- 🌈 Neon - Vibrant colors
 
-### 4. Preview Mode
+## 🧪 Testing
 
-![preview](https://user-images.githubusercontent.com/19975642/55678052-6fc41580-592e-11e9-9958-9a9be8239bd7.PNG)
+```bash
+# Run all tests
+npm test
 
-## Workflow Editor
+# Run with UI
+npm run test:ui
 
-![workflow](https://user-images.githubusercontent.com/19975642/55678053-718dd900-592e-11e9-9996-cce9b46d8433.PNG)
+# Run with coverage
+npm run test:coverage
 
-## ❤️ Sponsors and Backers [![](https://opencollective.com/react-design-editor/tiers/badge.svg)](https://opencollective.com/react-design-editor/contribute) [![](https://opencollective.com/react-design-editor/tiers/sponsor/badge.svg?label=Sponsor&color=brightgreen)](https://opencollective.com/react-design-editor/contribute) [![](https://opencollective.com/react-design-editor/tiers/backer/badge.svg?label=Backer&color=brightgreen)](https://opencollective.com/react-design-editor/contribute)
+# Run specific tests
+npm test -- --grep "AI"
+```
 
-[![Sponsored by Workflows for Confluence](https://remote.automation-consultants.com/knowledge/download/attachments/57671882/sponsorship.png)](https://marketplace.atlassian.com/apps/1222276/workflows-for-confluence)
+**Coverage Results:**
 
-[![](https://opencollective.com/react-design-editor/tiers/sponsor.svg?avatarHeight=36)](https://opencollective.com/react-design-editor/contribute)
+- Statements: 91.35%
+- Functions: 100%
+- Branches: 77.41%
+- Lines: 93.18%
 
-[![](https://opencollective.com/react-design-editor/tiers/backer.svg?avatarHeight=36)](https://opencollective.com/react-design-editor/contribute)
+## 📚 Documentation
 
-# Dependencies
+- [API Reference](./docs/api/ai-ui-generator.md)
+- [Architecture](./docs/architecture/ai-ui-generator.md)
+- [User Guide](./docs/guides/ai-ui-generator-user-guide.md)
+- [Developer Guide](./docs/guides/ai-ui-generator-developer-guide.md)
+- [Prompt Library](./docs/examples/prompt-library.md)
+- [Roadmap](./ROADMAP.md)
 
-| Dependency                                                      | License(s)                                         |
-| --------------------------------------------------------------- | -------------------------------------------------- |
-| [React](https://github.com/facebook/react)                      | MIT                                                |
-| [Ant Design](https://github.com/ant-design/ant-design/)         | MIT                                                |
-| [Fabric.js](https://github.com/fabricjs/fabric.js)              | MIT                                                |
-| [MediaElement.js](https://github.com/mediaelement/mediaelement) | MIT                                                |
-| [React-Ace](https://github.com/securingsincity/react-ace)       | MIT                                                |
-| [interact.js](https://github.com/taye/interact.js)              | MIT                                                |
-| [anime.js](https://github.com/juliangarnier/anime/)             | MIT                                                |
-| [Webpack 4](https://github.com/webpack/webpack)                 | MIT                                                |
-| [Babel](https://github.com/babel/babel)                         | MIT                                                |
-| [fontawesome5](https://github.com/FortAwesome/Font-Awesome)     | Icons (CC BY 4.0), Fonts (SIL OFL 1.1), Code (MIT) |
+## 🛠️ Development
+
+### Available Scripts
+
+```bash
+npm start          # Start dev server (port 4000)
+npm test           # Run tests
+npm run test:ui    # Run tests with UI
+npm run test:coverage # Generate coverage report
+npm run lint       # Run ESLint
+npm run lint:fix   # Fix ESLint issues
+npm run format     # Run Prettier
+npm run typecheck  # TypeScript type checking
+npm run quality    # Run all quality gates
+npm run clean      # Remove build artifacts
+npm run build      # Production build
+```
+
+### Code Quality
+
+- ESLint with TypeScript rules
+- Prettier for formatting
+- Husky pre-commit hooks
+- lint-staged for staged files
+- Quality gates for CI/CD
+
+## 🗺️ Roadmap
+
+See [ROADMAP.md](./ROADMAP.md) for the full feature roadmap.
+
+### Q1 2026 - Enhanced AI
+
+- AI layout suggestions
+- Design system import (Figma tokens)
+- Smart component detection
+- Design critique
+
+### Q2 2026 - Multi-Platform
+
+- React Native export
+- Flutter export
+- Figma plugin
+- Image-to-UI
+
+### Q3-Q4 2026 - Enterprise
+
+- Real-time collaboration
+- SSO integration
+- Custom AI models
+- VS Code extension
+
+## 🤝 Contributing
+
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines.
+
+## 📄 License
+
+MIT License - see [LICENSE](./LICENSE)
+
+## 🙏 Acknowledgments
+
+- Original [react-design-editor](https://github.com/salgum1114/react-design-editor) by salgum1114
+- [Fabric.js](http://fabricjs.com/) for canvas manipulation
+- [Ant Design](https://ant.design/) for UI components
+- [Anthropic Claude](https://www.anthropic.com/) for AI capabilities
+
+---
+
+Made with ❤️ by AureliustechandTalentSolutions

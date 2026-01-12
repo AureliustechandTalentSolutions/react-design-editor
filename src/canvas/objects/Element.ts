@@ -1,4 +1,5 @@
 import { fabric } from 'fabric';
+
 import { FabricElement } from '../models';
 import { toObject } from '../utils';
 

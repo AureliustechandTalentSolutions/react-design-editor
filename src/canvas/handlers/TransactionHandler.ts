@@ -1,8 +1,10 @@
 import { fabric } from 'fabric';
 import sortBy from 'lodash/sortBy';
 import throttle from 'lodash/throttle';
+
 import { FabricObject } from '../models';
 import { NodeObject } from '../objects/Node';
+
 import AbstractHandler from './AbstractHandler';
 
 export type TransactionType =
@@ -48,7 +50,7 @@ class TransactionHandler extends AbstractHandler {
 	private currentObjects: FabricObject[] = [];
 	redos: TransactionEvent[];
 	undos: TransactionEvent[];
-	active: boolean = false;
+	active = false;
 
 	constructor(handler: any) {
 		super(handler);

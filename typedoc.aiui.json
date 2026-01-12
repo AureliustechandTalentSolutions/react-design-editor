@@ -1,0 +1,43 @@
+{
+  "name": "AI UI Generator API Documentation",
+  "entryPoints": ["src/editors/aiuigenerator"],
+  "entryPointStrategy": "expand",
+  "out": "docs/api-docs/aiui",
+  "exclude": [
+    "**/*.test.ts",
+    "**/*.test.tsx",
+    "**/*.spec.ts",
+    "**/*.spec.tsx",
+    "**/node_modules/**"
+  ],
+  "excludePrivate": true,
+  "excludeProtected": false,
+  "excludeExternals": true,
+  "readme": "src/editors/aiuigenerator/README.md",
+  "theme": "default",
+  "includeVersion": true,
+  "disableSources": false,
+  "sourceLinkTemplate": "https://github.com/salgum1114/react-design-editor/blob/{gitRevision}/{path}#L{line}",
+  "sort": ["source-order"],
+  "categorizeByGroup": true,
+  "categoryOrder": [
+    "Core Functions",
+    "Components",
+    "Hooks",
+    "Types",
+    "Utilities",
+    "*"
+  ],
+  "plugin": [],
+  "validation": {
+    "notExported": true,
+    "invalidLink": true,
+    "notDocumented": false
+  },
+  "treatWarningsAsErrors": false,
+  "gitRevision": "main",
+  "githubPages": true,
+  "hideGenerator": false,
+  "searchInComments": true,
+  "cleanOutputDir": true
+}

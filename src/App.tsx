@@ -1,10 +1,11 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
+
 import Title from './components/layout/Title';
 import FlowContainer from './containers/FlowContainer';
-import { FiberEditor, HexGridEditor, ImageMapEditor, WorkflowEditor } from './editors';
+import { AIUIEditor, FiberEditor, HexGridEditor, ImageMapEditor, WorkflowEditor } from './editors';
 
-type EditorType = 'imagemap' | 'workflow' | 'hexgrid' | 'fiber';
+type EditorType = 'imagemap' | 'workflow' | 'hexgrid' | 'fiber' | 'aiui';
 
 interface IState {
 	activeEditor?: EditorType;
@@ -31,6 +32,8 @@ class App extends React.Component<any, IState> {
 				return <HexGridEditor />;
 			case 'fiber':
 				return <FiberEditor />;
+			case 'aiui':
+				return <AIUIEditor />;
 		}
 	};
 

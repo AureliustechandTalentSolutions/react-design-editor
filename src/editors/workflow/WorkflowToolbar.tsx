@@ -3,6 +3,7 @@ import clsx from 'clsx';
 import i18n from 'i18next';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+
 import { CanvasInstance, LinkObject, NodeObject } from '../../canvas';
 import { code } from '../../canvas/constants';
 import { CommonButton } from '../../components/common';
@@ -84,7 +85,7 @@ class WorkflowToolbar extends Component<IProps> {
 		const { selection, grab } = this.handlers;
 		const zoomValue = parseInt((zoomRatio * 100).toFixed(2), 10);
 		return (
-			<React.Fragment>
+			<>
 				<div className={clsx('rde-editor-toolbar', 'interaction')}>
 					<Button.Group>
 						<CommonButton
@@ -154,7 +155,7 @@ class WorkflowToolbar extends Component<IProps> {
 						/>
 					</Button.Group>
 				</div>
-			</React.Fragment>
+			</>
 		);
 	}
 }

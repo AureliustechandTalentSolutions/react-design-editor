@@ -1,0 +1,30 @@
+Title,Description,Team,Priority,Status,Milestone
+"Core AI UI Editor","Main editor component with canvas integration",team:core,priority:critical,status:in-progress,v1.0.0
+"Claude AI Integration","Integrate Anthropic Claude API",team:core,priority:critical,status:in-progress,v1.0.0
+"Prompt Input Component","Text input with templates and options",team:core,priority:high,status:in-progress,v1.0.0
+"Component Library","Draggable UI components palette",team:core,priority:high,status:in-progress,v1.0.0
+"Style Explorer","Color palettes and typography",team:core,priority:medium,status:in-progress,v1.0.0
+"Code Export - React","Export to React/Next.js",team:core,priority:high,status:in-progress,v1.0.0
+"Code Export - Vue","Export to Vue.js",team:core,priority:medium,status:in-progress,v1.0.0
+"Code Export - HTML","Export to HTML/CSS",team:core,priority:medium,status:in-progress,v1.0.0
+"DevContainer Setup","Full development container",team:devops,priority:critical,status:in-progress,v1.0.0
+"Dependencies Installation","All npm packages",team:devops,priority:critical,status:in-progress,v1.0.0
+"Vitest Configuration","Test framework setup",team:devops,priority:high,status:in-progress,v1.0.0
+"ESLint/Prettier Config","Code quality tools",team:devops,priority:high,status:in-progress,v1.0.0
+"CI/CD Pipeline","GitHub Actions workflow",team:devops,priority:high,status:in-progress,v1.0.0
+"Module README","AI UI Generator documentation",team:docs,priority:high,status:in-progress,v1.0.0
+"API Reference","Complete API documentation",team:docs,priority:high,status:in-progress,v1.0.0
+"User Guide","Step-by-step tutorials",team:docs,priority:medium,status:in-progress,v1.0.0
+"Developer Guide","Extension and contribution guide",team:docs,priority:medium,status:in-progress,v1.0.0
+"Unit Tests - AI Lib","Tests for Claude integration",team:testing,priority:critical,status:in-progress,v1.0.0
+"Unit Tests - Components","Tests for React components",team:testing,priority:high,status:in-progress,v1.0.0
+"Integration Tests","Full workflow tests",team:testing,priority:high,status:in-progress,v1.0.0
+"E2E Tests","Playwright browser tests",team:testing,priority:medium,status:in-progress,v1.0.0
+"ROADMAP.md","Feature roadmap document",team:features,priority:high,status:in-progress,v1.0.0
+"Template Library","Pre-built design templates",team:features,priority:medium,status:in-progress,v1.0.0
+"History Manager","Undo/redo functionality",team:features,priority:medium,status:in-progress,v1.0.0
+"Feature Flags","Toggle features on/off",team:features,priority:low,status:in-progress,v1.0.0
+"Code Cleanup","Remove unused code",team:quality,priority:high,status:in-progress,v1.0.0
+"Pre-commit Hooks","Husky git hooks",team:quality,priority:high,status:in-progress,v1.0.0
+"Quality Gates","Automated quality checks",team:quality,priority:high,status:in-progress,v1.0.0
+"Tech Debt Tracker","Document technical debt",team:quality,priority:medium,status:in-progress,v1.0.0

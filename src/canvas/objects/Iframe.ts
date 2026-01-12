@@ -1,4 +1,5 @@
 import { fabric } from 'fabric';
+
 import { FabricElement } from '../models';
 import { toObject } from '../utils';
 
@@ -13,7 +14,7 @@ const Iframe = fabric.util.createClass(fabric.Rect, {
 	type: 'iframe',
 	superType: 'element',
 	hasRotatingPoint: false,
-	initialize(src: string = '', options: any) {
+	initialize(src = '', options: any) {
 		options = options || {};
 		this.callSuper('initialize', options);
 		this.set({

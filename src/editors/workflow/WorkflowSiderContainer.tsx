@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Icon from '../../components/icon/Icon';
+import React, { Component } from 'react';
+
 import { Flex } from '../../components/flex';
+import Icon from '../../components/icon/Icon';
 
 interface IProps {
 	title?: React.ReactNode;
@@ -27,7 +28,7 @@ class WorkflowSiderContainer extends Component<IProps> {
 		const { children, title, content, icon, extra, titleStyle, contentStyle } = this.props;
 		return (
 			<Flex flexDirection="column" style={{ height: '100%' }}>
-				<Flex style={Object.assign({}, { background: '#f5f4f3', height: '40px' }, titleStyle)}>
+				<Flex style={{ background: '#f5f4f3', height: '40px', ...titleStyle }}>
 					<Flex
 						flex="1"
 						justifyContent="flex-start"
@@ -43,10 +44,7 @@ class WorkflowSiderContainer extends Component<IProps> {
 						</Flex>
 					) : null}
 				</Flex>
-				<Flex
-					flexDirection="column"
-					style={Object.assign({}, { height: '100%', margin: '8px 16px' }, contentStyle)}
-				>
+				<Flex flexDirection="column" style={{ height: '100%', margin: '8px 16px', ...contentStyle }}>
 					{children || content}
 				</Flex>
 			</Flex>

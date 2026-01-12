@@ -2,6 +2,7 @@ import { fabric } from 'fabric';
 import React, { Component, useRef } from 'react';
 import ResizeObserver from 'resize-observer-polyfill';
 import { v4 as uuid } from 'uuid';
+
 import { defaults } from './constants';
 import Handler, { HandlerOptions } from './handlers/Handler';
 import { FabricCanvas } from './models';
@@ -52,11 +53,13 @@ class InternalCanvas extends Component<CanvasProps, IState> implements CanvasIns
 	componentDidMount() {
 		const { editable, canvasOption, width, height, responsive, ...other } = this.props;
 		const { id } = this.state;
-		const mergedCanvasOption = Object.assign({}, defaults.canvasOption, canvasOption, {
+		const mergedCanvasOption = {
+			...defaults.canvasOption,
+			...canvasOption,
 			width,
 			height,
 			selection: (typeof canvasOption?.selection !== 'undefined' && canvasOption?.selection) || editable,
-		});
+		};
 		this.canvas = new fabric.Canvas(`canvas_${id}`, mergedCanvasOption);
 		this.canvas.setBackgroundColor(mergedCanvasOption.backgroundColor, this.canvas.renderAll.bind(this.canvas));
 		this.canvas.renderAll();

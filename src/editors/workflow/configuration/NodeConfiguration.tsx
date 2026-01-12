@@ -3,9 +3,11 @@ import i18n from 'i18next';
 import isEmpty from 'lodash/isEmpty';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+
 import { CanvasInstance } from '../../../canvas';
 import { InputJson, InputScript, InputTemplate } from '../../../components/common';
 import Icon from '../../../components/icon/Icon';
+
 import Configuration from './index';
 
 export const getNode = nodeClazz => {
@@ -156,7 +158,7 @@ export default class NodeConfiguration extends Component<IProps> {
 		}
 		const label =
 			description && description.length ? (
-				<React.Fragment>
+				<>
 					{icon ? <Icon name={icon} /> : null}
 					<span>{formConfig.label}</span>
 					<Tooltip title={description} placement="topRight">
@@ -164,12 +166,12 @@ export default class NodeConfiguration extends Component<IProps> {
 							<Icon name="question-circle" />
 						</span>
 					</Tooltip>
-				</React.Fragment>
+				</>
 			) : (
-				<React.Fragment>
+				<>
 					{icon ? <Icon name={icon} /> : null}
 					<span>{formConfig.label}</span>
-				</React.Fragment>
+				</>
 			);
 		return (
 			<React.Fragment key={key}>

@@ -2,6 +2,7 @@ import { Button, Menu, Modal, Tooltip } from 'antd';
 import { ClickParam } from 'antd/lib/menu';
 import i18next from 'i18next';
 import React from 'react';
+
 import { Flex } from '../flex';
 import { ShortcutHelp } from '../help';
 import Icon from '../icon/Icon';
@@ -100,6 +101,9 @@ class Title extends React.Component<IProps> {
 						</Menu.Item>
 						<Menu.Item key="workflow" style={{ color: '#fff' }}>
 							{i18next.t('workflow.workflow')}
+						</Menu.Item>
+						<Menu.Item key="aiui" style={{ color: '#fff' }}>
+							AI UI Generator
 						</Menu.Item>
 						{/* <Menu.Item key="flow" style={{ color: '#fff' }}>{i18n.t('flow.flow')}</Menu.Item> */}
 						{/* <Menu.Item key="hexgrid" style={{ color: '#fff' }}>

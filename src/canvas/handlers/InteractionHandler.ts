@@ -1,5 +1,7 @@
 import { fabric } from 'fabric';
+
 import { FabricObject, InteractionMode } from '../models';
+
 import Handler from './Handler';
 
 type IReturnType = { selectable?: boolean; evented?: boolean } | boolean;
@@ -71,7 +73,7 @@ class InteractionHandler {
 				this.interactionCallback(obj, callback);
 			} else {
 				obj.selectable = false;
-				obj.evented = this.handler.editable ? false : true;
+				obj.evented = !this.handler.editable;
 			}
 		});
 		this.handler.canvas.renderAll();
@@ -96,7 +98,7 @@ class InteractionHandler {
 				this.interactionCallback(obj, callback);
 			} else {
 				obj.selectable = false;
-				obj.evented = this.handler.editable ? false : true;
+				obj.evented = !this.handler.editable;
 			}
 		});
 		this.handler.canvas.renderAll();
@@ -122,7 +124,7 @@ class InteractionHandler {
 					return;
 				}
 				obj.selectable = false;
-				obj.evented = this.handler.editable ? false : true;
+				obj.evented = !this.handler.editable;
 			}
 		});
 		this.handler.canvas.renderAll();
