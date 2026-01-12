@@ -57,11 +57,11 @@ interface FederalDesignSystemSelectorProps {
 	onViewDocs: (url: string) => void;
 }
 
-export const FederalDesignSystemSelector: React.FC<FederalDesignSystemSelectorProps> = ({
+export function FederalDesignSystemSelector({
 	selectedSystem,
 	onSelectSystem,
 	onViewDocs,
-}) => {
+}: FederalDesignSystemSelectorProps): JSX.Element {
 	return (
 		<div className="federal-ds-selector" style={{ padding: '16px' }}>
 			<div style={{ marginBottom: '16px' }}>
@@ -96,10 +96,16 @@ export const FederalDesignSystemSelector: React.FC<FederalDesignSystemSelectorPr
 				{FEDERAL_DESIGN_SYSTEMS.map(system => (
 					<div
 						key={system.id}
+						role="button"
+						tabIndex={0}
 						onClick={() => onSelectSystem(system.id)}
+						onKeyPress={e => {
+							if (e.key === 'Enter' || e.key === ' ') {
+								onSelectSystem(system.id);
+							}
+						}}
 						style={{
-							border:
-								selectedSystem === system.id ? '2px solid #005ea2' : '1px solid #dfe1e2',
+							border: selectedSystem === system.id ? '2px solid #005ea2' : '1px solid #dfe1e2',
 							borderRadius: '8px',
 							padding: '16px',
 							cursor: 'pointer',
@@ -147,6 +153,7 @@ export const FederalDesignSystemSelector: React.FC<FederalDesignSystemSelectorPr
 							</div>
 
 							<button
+								type="button"
 								onClick={e => {
 									e.stopPropagation();
 									onViewDocs(system.docsUrl);
@@ -169,6 +176,6 @@ export const FederalDesignSystemSelector: React.FC<FederalDesignSystemSelectorPr
 			</div>
 		</div>
 	);
-};
+}
 
 export default FederalDesignSystemSelector;

@@ -1,5 +1,12 @@
-import { FabricObject } from '../../canvas/models';
 import { AxeResults } from 'axe-core';
+
+import { FabricObject } from '../../canvas/models';
+
+export interface A11yNode {
+	target: string[];
+	html: string;
+	failureSummary: string;
+}
 
 export interface A11yIssue {
 	type: 'error' | 'warning' | 'info';
@@ -17,12 +24,6 @@ export interface AxeA11yIssue {
 	helpUrl: string;
 	nodes: A11yNode[];
 	wcagCriteria: string[];
-}
-
-export interface A11yNode {
-	target: string[];
-	html: string;
-	failureSummary: string;
 }
 
 export interface A11yReport {
@@ -156,7 +157,7 @@ export class AccessibilityChecker {
 
 		const [r, g, b] = [rgb.r, rgb.g, rgb.b].map(val => {
 			const v = val / 255;
-			return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
+			return v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4;
 		});
 
 		return 0.2126 * r + 0.7152 * g + 0.0722 * b;
@@ -165,9 +166,9 @@ export class AccessibilityChecker {
 	/**
 	 * Convert hex color to RGB
 	 */
-	private hexToRgb(hex: string): { r: number; g: number; b: number } | null {
+	private hexToRgb(hexColor: string): { r: number; g: number; b: number } | null {
 		// Remove # if present
-		hex = hex.replace('#', '');
+		let hex = hexColor.replace('#', '');
 
 		// Handle 3-digit hex
 		if (hex.length === 3) {
@@ -183,14 +184,14 @@ export class AccessibilityChecker {
 					r: parseInt(result[1], 16),
 					g: parseInt(result[2], 16),
 					b: parseInt(result[3], 16),
-			  }
+				}
 			: null;
 	}
 
 	/**
 	 * Extract color from fabric object fill property
 	 */
-	private extractColor(fill: any): string {
+	private extractColor(fill: string | Record<string, any>): string {
 		if (typeof fill === 'string') {
 			return fill;
 		}
