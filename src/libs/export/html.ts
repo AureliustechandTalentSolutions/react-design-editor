@@ -12,7 +12,6 @@ import { cssObjectToString, fabricToCSS, formatCode, generateId, kebabToCamel } 
  */
 const generateHTML = (objects: any[], componentName: string, includeAria: boolean = true): string => {
 	let sectionIndex = 0;
-	
 
 	const getSemanticTag = (obj: any, index: number): { tag: string; role?: string } => {
 		if (obj.semanticType === 'header') return { tag: 'header', role: 'banner' };

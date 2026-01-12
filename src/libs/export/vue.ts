@@ -40,25 +40,22 @@ const generateVueComponent = (objects: any[], options: ExportOptions, componentN
 	const scriptLang = typescript ? ' lang="ts"' : '';
 
 	// Use script setup syntax for Vue 3 Composition API
-	const scriptSetup = `<script setup${scriptLang}>
-import { ref, computed, onMounted } from 'vue';
+	// Include reactive features only if components have interactivity
+	const hasInteractivity = objects.some(obj => obj.interactive || obj.onClick);
+	
+	const scriptSetup = hasInteractivity 
+		? `<script setup${scriptLang}>
+import { ref } from 'vue';
 
 // Component state
-const isLoaded = ref(false);
-
-// Computed properties
-const containerClass = computed(() => {
-  return isLoaded.value ? 'container loaded' : 'container';
-});
-
-// Lifecycle hooks
-onMounted(() => {
-  isLoaded.value = true;
-});
+const isActive = ref(false);
+</script>`
+		: `<script setup${scriptLang}>
+// Vue 3 Composition API component
 </script>`;
 
 	const component = `<template>
-  <div :class="containerClass">
+  <div class="container">
     ${elements}
   </div>
 </template>

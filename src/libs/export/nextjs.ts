@@ -232,8 +232,7 @@ const generateStyledComponents = (objects: any[]): string => {
 			.map(([key, value]) => `  ${key.replace(/([A-Z])/g, '-$1').toLowerCase()}: ${value};`)
 			.join('\n');
 
-		const tag = obj.type === 'text' ? 'div' : 'div';
-		return `const StyledText_${index} = styled.${tag}\`\n${cssString}\n\`;\n`;
+		return `const StyledText_${index} = styled.div\`\n${cssString}\n\`;\n`;
 	};
 
 	return objects.map((obj, index) => generateStyledComponent(obj, index)).join('\n');
