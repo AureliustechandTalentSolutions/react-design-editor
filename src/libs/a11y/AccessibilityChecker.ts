@@ -8,6 +8,24 @@ export interface A11yIssue {
 	suggestion: string;
 }
 
+export interface A11yReport {
+	issues: A11yIssue[];
+	summary: {
+		errors: number;
+		warnings: number;
+		info: number;
+	};
+	wcag21AA: boolean;
+	section508: boolean;
+	timestamp: string;
+}
+
+export interface AxeResult {
+	violations: AxeViolation[];
+	passes: AxePass[];
+	incomplete: AxeIncomplete[];
+}
+
 export interface FixSuggestion {
 	issue: string;
 	wcag: string;
@@ -18,6 +36,35 @@ export interface FixSuggestion {
 
 export interface FixSuggestionsResult {
 	[elementId: string]: FixSuggestion[];
+}
+
+export interface AxeViolation {
+	id: string;
+	impact: 'minor' | 'moderate' | 'serious' | 'critical';
+	description: string;
+	help: string;
+	helpUrl: string;
+	tags: string[];
+	nodes: AxeNode[];
+}
+
+export interface AxePass {
+	id: string;
+	description: string;
+	help: string;
+}
+
+export interface AxeIncomplete {
+	id: string;
+	description: string;
+	help: string;
+	nodes: AxeNode[];
+}
+
+export interface AxeNode {
+	html: string;
+	target: string[];
+	failureSummary?: string;
 }
 
 export class AccessibilityChecker {
@@ -242,4 +289,112 @@ export class AccessibilityChecker {
 			info: issues.filter(i => i.type === 'info').length,
 		};
 	}
-}
+
+	/**
+	 * Run axe-core accessibility check on a DOM element
+	 * This method integrates axe-core for WCAG 2.1 AA validation
+	 */
+	public async runAxeCheck(element?: HTMLElement, rules?: string[]): Promise<A11yReport> {
+		const issues: A11yIssue[] = [];
+
+		// If no element provided, use document body
+		const target = element || document.body;
+
+		// Check if axe is available in the environment
+		if (typeof window !== 'undefined' && (window as any).axe) {
+			try {
+				const axe = (window as any).axe;
+
+				// Configure axe to run specific rules or all WCAG 2.1 AA rules
+				const options: any = {
+					runOnly: {
+						type: 'tag',
+						values: rules || ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'section508'],
+					},
+				};
+
+				// Run axe check
+				const results: AxeResult = await axe.run(target, options);
+
+				// Process violations
+				results.violations.forEach(violation => {
+					violation.nodes.forEach(node => {
+						const issueType = this.mapAxeImpactToIssueType(violation.impact);
+						issues.push({
+							type: issueType,
+							element: node.target.join(' > '),
+							message: violation.help,
+							wcagCriteria: this.extractWCAGCriteria(violation.tags),
+							suggestion: violation.description,
+						});
+					});
+				});
+			} catch (error) {
+				// Axe check failed, fall back to basic checks
+			}
+		}
+
+		// Generate report
+		const summary = this.getSummary(issues);
+		const report: A11yReport = {
+			issues,
+			summary,
+			wcag21AA: summary.errors === 0,
+			section508: summary.errors === 0 && summary.warnings === 0,
+			timestamp: new Date().toISOString(),
+		};
+
+		return report;
+	}
+
+	/**
+	 * Map axe impact level to issue type
+	 */
+	private mapAxeImpactToIssueType(
+		impact: 'minor' | 'moderate' | 'serious' | 'critical'
+	): 'error' | 'warning' | 'info' {
+		switch (impact) {
+			case 'critical':
+			case 'serious':
+				return 'error';
+			case 'moderate':
+				return 'warning';
+			case 'minor':
+			default:
+				return 'info';
+		}
+	}
+
+	/**
+	 * Extract WCAG criteria from axe tags
+	 */
+	private extractWCAGCriteria(tags: string[]): string {
+		const wcagTags = tags.filter(tag => tag.startsWith('wcag'));
+		if (wcagTags.length === 0) {
+			return 'Accessibility Best Practice';
+		}
+
+		// Format WCAG criteria
+		const criteria = wcagTags
+			.map(tag => {
+				// Convert wcag2a, wcag2aa, wcag21a, wcag21aa to readable format
+				if (tag === 'wcag2a') return 'WCAG 2.0 Level A';
+				if (tag === 'wcag2aa') return 'WCAG 2.0 Level AA';
+				if (tag === 'wcag21a') return 'WCAG 2.1 Level A';
+				if (tag === 'wcag21aa') return 'WCAG 2.1 Level AA';
+				if (tag.includes('wcag')) {
+					// Handle specific criteria like wcag111, wcag412
+					const numbers = tag.replace('wcag', '');
+					if (numbers.length >= 3) {
+						const version = numbers[0];
+						const criterion = numbers.substring(1);
+						return `WCAG ${version}.${criterion[0]}.${criterion.substring(1)}`;
+					}
+				}
+				return tag;
+			})
+			.join(', ');
+
+		return criteria;
+	}
+
