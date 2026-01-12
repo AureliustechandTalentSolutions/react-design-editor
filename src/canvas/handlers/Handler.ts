@@ -2,6 +2,7 @@ import { fabric } from 'fabric';
 import { union } from 'lodash';
 import { v4 as uuid } from 'uuid';
 import warning from 'warning';
+
 import CanvasObject from '../CanvasObject';
 import { defaults } from '../constants';
 import {
@@ -24,6 +25,7 @@ import { LinkObject } from '../objects';
 import { NodeObject } from '../objects/Node';
 import { PortObject } from '../objects/Port';
 import { SvgObject } from '../objects/Svg';
+
 import AlignmentHandler from './AlignmentHandler';
 import AnimationHandler from './AnimationHandler';
 import ChartHandler from './ChartHandler';
@@ -230,7 +232,7 @@ class Handler implements HandlerOptions {
 	public interactionMode: InteractionMode;
 	public minZoom: number;
 	public maxZoom: number;
-	public zoomStep: number = 0.05;
+	public zoomStep = 0.05;
 	public propertiesToInclude?: string[] = defaults.propertiesToInclude;
 	public workareaOption?: WorkareaOption = defaults.workareaOption;
 	public canvasOption?: CanvasOption = defaults.canvasOption;
@@ -793,16 +795,13 @@ class Handler implements HandlerOptions {
 			option.scaleX = this.workarea.scaleX;
 			option.scaleY = this.workarea.scaleY;
 		}
-		const newOption = Object.assign(
-			{},
-			objectOption,
-			obj,
-			{
-				container: this.container.id,
-				editable,
-			},
-			option,
-		);
+		const newOption = {
+			...objectOption,
+			...obj,
+			container: this.container.id,
+			editable,
+			...option,
+		};
 		// Individually create canvas object
 		if (obj.superType === 'link') {
 			return this.linkHandler.create(newOption, loaded);
@@ -1920,7 +1919,7 @@ class Handler implements HandlerOptions {
 	 * @param {CanvasOption} canvasOption
 	 */
 	public setCanvasOption = (canvasOption: CanvasOption) => {
-		this.canvasOption = Object.assign({}, this.canvasOption, canvasOption);
+		this.canvasOption = { ...this.canvasOption, ...canvasOption };
 		this.canvas.setBackgroundColor(canvasOption.backgroundColor, this.canvas.renderAll.bind(this.canvas));
 		if (typeof canvasOption.width !== 'undefined' && typeof canvasOption.height !== 'undefined') {
 			if (this.eventHandler) {
@@ -1949,7 +1948,7 @@ class Handler implements HandlerOptions {
 	 * @param {KeyEvent} keyEvent
 	 */
 	public setKeyEvent = (keyEvent: KeyEvent) => {
-		this.keyEvent = Object.assign({}, this.keyEvent, keyEvent);
+		this.keyEvent = { ...this.keyEvent, ...keyEvent };
 	};
 
 	/**
@@ -1958,7 +1957,7 @@ class Handler implements HandlerOptions {
 	 * @param {FabricObjects} fabricObjects
 	 */
 	public setFabricObjects = (fabricObjects: FabricObjects) => {
-		this.fabricObjects = Object.assign({}, this.fabricObjects, fabricObjects);
+		this.fabricObjects = { ...this.fabricObjects, ...fabricObjects };
 	};
 
 	/**
@@ -1967,7 +1966,7 @@ class Handler implements HandlerOptions {
 	 * @param {WorkareaOption} workareaOption
 	 */
 	public setWorkareaOption = (workareaOption: WorkareaOption) => {
-		this.workareaOption = Object.assign({}, this.workareaOption, workareaOption);
+		this.workareaOption = { ...this.workareaOption, ...workareaOption };
 		if (this.workarea) {
 			this.workarea.set({
 				...workareaOption,
@@ -1981,7 +1980,7 @@ class Handler implements HandlerOptions {
 	 * @param {GuidelineOption} guidelineOption
 	 */
 	public setGuidelineOption = (guidelineOption: GuidelineOption) => {
-		this.guidelineOption = Object.assign({}, this.guidelineOption, guidelineOption);
+		this.guidelineOption = { ...this.guidelineOption, ...guidelineOption };
 		if (this.guidelineHandler) {
 			this.guidelineHandler.initialize();
 		}
@@ -1993,7 +1992,7 @@ class Handler implements HandlerOptions {
 	 * @param {GridOption} gridOption
 	 */
 	public setGridOption = (gridOption: GridOption) => {
-		this.gridOption = Object.assign({}, this.gridOption, gridOption);
+		this.gridOption = { ...this.gridOption, ...gridOption };
 	};
 
 	/**
@@ -2002,11 +2001,11 @@ class Handler implements HandlerOptions {
 	 * @param {FabricObjectOption} objectOption
 	 */
 	public setObjectOption = (objectOption: FabricObjectOption) => {
-		this.objectOption = Object.assign({}, this.objectOption, objectOption);
+		this.objectOption = { ...this.objectOption, ...objectOption };
 	};
 
 	public setLinkOption = (option: FabricObjectOption) => {
-		this.linkOption = Object.assign({}, this.linkOption, option);
+		this.linkOption = { ...this.linkOption, ...option };
 	};
 
 	/**
@@ -2015,7 +2014,7 @@ class Handler implements HandlerOptions {
 	 * @param {Partial<FabricObjectOption<fabric.ActiveSelection>>} activeSelectionOption
 	 */
 	public setActiveSelectionOption = (activeSelectionOption: Partial<FabricObjectOption<fabric.ActiveSelection>>) => {
-		this.activeSelectionOption = Object.assign({}, this.activeSelectionOption, activeSelectionOption);
+		this.activeSelectionOption = { ...this.activeSelectionOption, ...activeSelectionOption };
 	};
 
 	/**

@@ -11,18 +11,15 @@ export interface ItemProps extends React.HTMLAttributes<any> {
 
 const Item: React.SFC<ItemProps> = props => {
 	const { alignSelf, order, flexGrow, flexShrink, flexBasis, flex, style, children, ...other } = props;
-	const newStyle = Object.assign(
-		{},
-		{
-			alignSelf,
-			order,
-			flexGrow,
-			flexShrink,
-			flexBasis,
-			flex,
-		},
-		style,
-	) as any;
+	const newStyle = {
+		alignSelf,
+		order,
+		flexGrow,
+		flexShrink,
+		flexBasis,
+		flex,
+		...style,
+	} as any;
 	return (
 		<div
 			style={Object.keys(newStyle).reduce((prev, key) => {

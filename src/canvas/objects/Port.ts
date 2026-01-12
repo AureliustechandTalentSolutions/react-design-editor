@@ -1,6 +1,7 @@
 import { fabric } from 'fabric';
 
 import { FabricObject } from '../models';
+
 import { LinkObject } from './Link';
 
 export interface PortObject extends FabricObject<fabric.Rect> {

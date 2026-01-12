@@ -14,6 +14,6 @@ export const toObject = (obj: any, propertiesToInclude: string[], properties?: {
 				Object.assign(prev, {
 					[property]: obj.get(property),
 				}),
-			Object.assign({}, properties),
+			{ ...properties },
 		),
 	);

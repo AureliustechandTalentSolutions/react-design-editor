@@ -6,18 +6,28 @@
 
 | Item | File | Description | Effort | Impact |
 | ---- | ---- | ----------- | ------ | ------ |
-| -    | -    | -           | -      | -      |
+| Console.log statements | src/serviceWorker.ts | 4 console.log statements for logging | Small | Low |
+| Console.log statements | src/canvas/handlers/FiberHandler.ts:13 | Debug console.log | Small | Low |
+| Console.log statements | src/canvas/handlers/EventHandler.ts:124 | Debug console.log | Small | Low |
+| Console.log statements | src/canvas/objects/Link.ts:167 | Debug console.log | Small | Low |
 
 ### Medium Priority
 
 | Item | File | Description | Effort | Impact |
 | ---- | ---- | ----------- | ------ | ------ |
-| -    | -    | -           | -      | -      |
+| TODO comment | src/canvas/handlers/DrawingHandler.ts:151 | polygon resize | Medium | Medium |
+| TODO comment | src/canvas/handlers/Handler.ts:1383 | Incomplete implementation | Medium | Medium |
+| TODO comment | src/canvas/handlers/GuidelineHandler.ts:374 | object scaling guideline | Medium | Medium |
+| TODO comment | src/canvas/handlers/EventHandler.ts:182 | Element object incorrect position | Medium | High |
+| TODO comment | src/canvas/handlers/EventHandler.ts:226 | scaling guidelines | Medium | Medium |
+| TODO comment | src/canvas/handlers/LinkHandler.ts:115 | Incomplete implementation | Medium | Medium |
+| Security vulnerabilities | package.json | 35 vulnerabilities (16 moderate, 16 high, 3 critical) | Large | High |
 
 ### Low Priority
 
 | Item | File | Description | Effort | Impact |
 | ---- | ---- | ----------- | ------ | ------ |
+| -    | -    | -           | -      | -      |
 | -    | -    | -           | -      | -      |
 
 ## Resolved Debt

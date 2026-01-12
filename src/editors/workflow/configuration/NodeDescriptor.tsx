@@ -1,11 +1,12 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { message } from 'antd';
 import i18n from 'i18next';
-import { NODE_COLORS } from '../constant/constants';
-import { Flex } from '../../../components/flex';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
+
 import { CommonButton } from '../../../components/common';
+import { Flex } from '../../../components/flex';
 import Icon from '../../../components/icon/Icon';
+import { NODE_COLORS } from '../constant/constants';
 
 interface IProps {
 	workflow?: any;

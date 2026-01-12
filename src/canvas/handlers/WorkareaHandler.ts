@@ -1,8 +1,9 @@
 import { fabric } from 'fabric';
 
-import { Handler } from '.';
 import { FabricImage, WorkareaLayout, WorkareaObject } from '../models';
 import { VideoObject } from '../objects/Video';
+
+import { Handler } from '.';
 
 class WorkareaHandler {
 	handler: Handler;
@@ -139,7 +140,7 @@ class WorkareaHandler {
 	 * @returns
 	 */
 	public setResponsiveImage = async (source: string | File, loaded?: boolean) => {
-		const imageFromUrl = async (src: string = '') => {
+		const imageFromUrl = async (src = '') => {
 			return new Promise<WorkareaObject>(resolve => {
 				fabric.Image.fromURL(src, (img: any) => {
 					const { canvas, workarea, editable } = this.handler;
@@ -343,12 +344,12 @@ class WorkareaHandler {
 		if (height >= width) {
 			scaleX = scaleY;
 			if (canvas.getWidth() < width * scaleX) {
-				scaleX = scaleX * (canvas.getWidth() / (width * scaleX));
+				scaleX *= canvas.getWidth() / (width * scaleX);
 			}
 		} else {
 			scaleY = scaleX;
 			if (canvas.getHeight() < height * scaleX) {
-				scaleX = scaleX * (canvas.getHeight() / (height * scaleX));
+				scaleX *= canvas.getHeight() / (height * scaleX);
 			}
 		}
 		return { scaleX, scaleY };

@@ -1,7 +1,9 @@
 import { fabric } from 'fabric';
 import { svgPathProperties } from 'svg-path-properties';
 import { v4 as uuid } from 'uuid';
+
 import { FabricObject } from '../models';
+
 import { NodeObject, OUT_PORT_TYPE } from './Node';
 import { PortObject } from './Port';
 
@@ -130,7 +132,7 @@ const Link = fabric.util.createClass(fabric.Group, {
 			top: midY,
 			originX: 'center',
 			originY: 'center',
-			angle: angle,
+			angle,
 			width: 9,
 			height: 9,
 			fill: stroke,
@@ -154,7 +156,7 @@ const Link = fabric.util.createClass(fabric.Group, {
 			objectCaching: false,
 		});
 		this.addWithUpdate(this.line);
-		this.arrow.set({ left: midX - this.left, top: midY - this.top, angle: angle });
+		this.arrow.set({ left: midX - this.left, top: midY - this.top, angle });
 		this.arrow.setCoords();
 		this.canvas.requestRenderAll();
 	},
@@ -164,20 +166,19 @@ const Link = fabric.util.createClass(fabric.Group, {
 		const width = this.fromNode?.width || 240;
 		const height = this.fromNode?.height || 60;
 		const curvedOffset = Math.floor(p1.x) === Math.floor(p2.x) ? 0 : 40;
-		console.log(p1.x, p2.x);
 		const offset = 40;
 		const fromGroup = this.fromNode.group;
 		const toGroup = this.toNode.group;
 		const fromNodeLeft = this.fromNode.left + (fromGroup ? fromGroup.left + fromGroup.width / 2 : 0);
 		const toNodeLeft = this.toNode.left + (toGroup ? toGroup.left + toGroup.width / 2 : 0);
-		let x1 = p1.x;
-		let y1 = p1.y;
-		let x2 = x1;
-		let y2 = y1 + height / 2;
+		const x1 = p1.x;
+		const y1 = p1.y;
+		const x2 = x1;
+		const y2 = y1 + height / 2;
 		let x3 = x2 - fromPort.left + fromNodeLeft - offset;
-		let y3 = p2.y - height / 2;
-		let x4 = p2.x;
-		let y4 = p2.y;
+		const y3 = p2.y - height / 2;
+		const x4 = p2.x;
+		const y4 = p2.y;
 		const useCurve = p2.y > p1.y;
 		const diff = x3 - (x2 - width);
 		let path;
@@ -190,8 +191,8 @@ const Link = fabric.util.createClass(fabric.Group, {
 			const dx = p1.x - p2.x;
 			const isUpward = width - diff <= dx && dx >= 0;
 			const distance = Math.abs(width - diff - dx);
-			let ratio = Math.min(1, distance / offset);
-			let radius = baseRadius * ratio;
+			const ratio = Math.min(1, distance / offset);
+			const radius = baseRadius * ratio;
 			if (this.onlyLeft) {
 				path = [
 					`M ${x1} ${y1}`,

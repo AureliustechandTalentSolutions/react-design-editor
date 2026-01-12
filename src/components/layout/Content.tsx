@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { Layout, Spin } from 'antd';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 
 interface IProps {
 	title?: React.ReactNode;

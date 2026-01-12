@@ -1,7 +1,9 @@
 import dagre from '@dagrejs/dagre';
 import ELK, { ElkNode } from 'elkjs/lib/elk.bundled.js';
-import { AbstractHandler } from '.';
+
 import { LinkObject, NodeObject } from '../objects';
+
+import { AbstractHandler } from '.';
 
 export type LayoutType = 'dagre' | 'elk';
 export type LayoutDirection = 'vertical' | 'horizontal';
@@ -110,7 +112,7 @@ export default class LayoutHandler extends AbstractHandler {
 		dagre.layout(g);
 		const grid = this.handler.gridOption.grid || 20;
 		g.nodes().forEach(id => {
-			let { x, y, width, height } = g.node(id);
+			const { x, y, width, height } = g.node(id);
 			let left = x - width / 2;
 			let top = y - height / 2;
 			left = Math.round(left / grid) * grid;

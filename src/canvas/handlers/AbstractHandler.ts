@@ -1,5 +1,6 @@
-import { Handler } from '.';
 import { FabricCanvas } from '../models';
+
+import { Handler } from '.';
 
 export default abstract class AbstractHandler {
 	protected handler: Handler;

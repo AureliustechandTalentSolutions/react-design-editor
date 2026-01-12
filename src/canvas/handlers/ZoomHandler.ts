@@ -2,13 +2,14 @@ import { fabric } from 'fabric';
 
 import { FabricObject } from '../models';
 import { VideoObject } from '../objects/Video';
+
 import AbstractHandler from './AbstractHandler';
 import type Handler from './Handler';
 
 class ZoomHandler extends AbstractHandler {
 	private _zoomStep?: number;
 
-	constructor(handler: Handler, zoomStep: number = 0.05) {
+	constructor(handler: Handler, zoomStep = 0.05) {
 		super(handler);
 		this._zoomStep = zoomStep;
 	}
@@ -67,12 +68,10 @@ class ZoomHandler extends AbstractHandler {
 		if (this.handler.workarea.height >= this.handler.workarea.width) {
 			scaleX = scaleY;
 			if (this.handler.canvas.getWidth() < this.handler.workarea.width * scaleX) {
-				scaleX = scaleX * (this.handler.canvas.getWidth() / (this.handler.workarea.width * scaleX));
+				scaleX *= this.handler.canvas.getWidth() / (this.handler.workarea.width * scaleX);
 			}
-		} else {
-			if (this.handler.canvas.getHeight() < this.handler.workarea.height * scaleX) {
-				scaleX = scaleX * (this.handler.canvas.getHeight() / (this.handler.workarea.height * scaleX));
-			}
+		} else if (this.handler.canvas.getHeight() < this.handler.workarea.height * scaleX) {
+			scaleX *= this.handler.canvas.getHeight() / (this.handler.workarea.height * scaleX);
 		}
 		const center = this.handler.canvas.getCenter();
 		this.handler.canvas.setViewportTransform([1, 0, 0, 1, 0, 0]);
@@ -119,12 +118,12 @@ class ZoomHandler extends AbstractHandler {
 			if (height > width) {
 				scaleX = scaleY;
 				if (this.handler.canvas.getWidth() < width * scaleX) {
-					scaleX = scaleX * (this.handler.canvas.getWidth() / (width * scaleX));
+					scaleX *= this.handler.canvas.getWidth() / (width * scaleX);
 				}
 			} else {
 				scaleY = scaleX;
 				if (this.handler.canvas.getHeight() < height * scaleX) {
-					scaleX = scaleX * (this.handler.canvas.getHeight() / (height * scaleX));
+					scaleX *= this.handler.canvas.getHeight() / (height * scaleX);
 				}
 			}
 			this.handler.canvas.setViewportTransform([1, 0, 0, 1, diffLeft, diffTop]);

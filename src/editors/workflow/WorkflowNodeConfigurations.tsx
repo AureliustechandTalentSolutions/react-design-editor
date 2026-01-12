@@ -3,8 +3,10 @@ import { FormComponentProps } from 'antd/lib/form';
 import i18n from 'i18next';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+
 import { Scrollbar } from '../../components/common';
 import { Flex } from '../../components/flex';
+
 import NodeAction from './configuration/NodeAction';
 import NodeConfiguration from './configuration/NodeConfiguration';
 import NodeDescriptor from './configuration/NodeDescriptor';
@@ -40,7 +42,7 @@ class WorkflowNodeConfigurations extends Component<IProps> {
 			<Scrollbar>
 				<Form layout="horizontal">
 					{selectedItem ? (
-						<React.Fragment>
+						<>
 							<NodeDescriptor workflow={workflow} selectedItem={selectedItem} />
 							<Flex flexDirection="column" style={{ margin: '8px 16px' }}>
 								<Form.Item label={i18n.t('common.name')} colon={false}>
@@ -80,7 +82,7 @@ class WorkflowNodeConfigurations extends Component<IProps> {
 								/>
 							</Flex>
 							<NodeAction workflow={workflow} selectedItem={selectedItem} canvasRef={canvasRef} />
-						</React.Fragment>
+						</>
 					) : null}
 				</Form>
 			</Scrollbar>

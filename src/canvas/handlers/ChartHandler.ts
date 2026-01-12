@@ -1,4 +1,5 @@
 import * as echarts from 'echarts';
+
 import Handler from './Handler';
 
 class ChartHandler {

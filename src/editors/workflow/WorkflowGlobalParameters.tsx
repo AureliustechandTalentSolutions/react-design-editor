@@ -1,12 +1,14 @@
-import React, { Component } from 'react';
+import { List, Divider, Modal, Form, Input, Select, InputNumber, Switch } from 'antd';
+import { FormComponentProps } from 'antd/lib/form';
 import i18n from 'i18next';
 import PropTypes from 'prop-types';
-import { List, Divider, Modal, Form, Input, Select, InputNumber, Switch } from 'antd';
+import React, { Component } from 'react';
 import ReactJson from 'react-json-view';
-import WorkflowSiderContainer from './WorkflowSiderContainer';
+
 import { CommonButton, InputJson } from '../../components/common';
 import { Flex } from '../../components/flex';
-import { FormComponentProps } from 'antd/lib/form';
+
+import WorkflowSiderContainer from './WorkflowSiderContainer';
 
 interface IProps extends FormComponentProps {
 	workflow?: any;
@@ -49,12 +51,10 @@ class WorkflowGlobalParameters extends Component<IProps> {
 			return 'number';
 		} else if (typeof variable.value === 'boolean') {
 			return 'boolean';
+		} else if (variable.value.startsWith('{') && variable.value.endsWith('}')) {
+			return 'json';
 		} else {
-			if (variable.value.startsWith('{') && variable.value.endsWith('}')) {
-				return 'json';
-			} else {
-				return 'text';
-			}
+			return 'text';
 		}
 	};
 
@@ -126,7 +126,7 @@ class WorkflowGlobalParameters extends Component<IProps> {
 				if (this.state.isEdit) {
 					delete this.state.vars[this.state.selectedVar.key];
 				}
-				const vars = Object.assign({}, this.state.vars, { [values.key]: values.value });
+				const vars = { ...this.state.vars, [values.key]: values.value };
 				this.setState(
 					{
 						vars,
@@ -148,10 +148,7 @@ class WorkflowGlobalParameters extends Component<IProps> {
 			} else if (value === 'boolean') {
 				newValue = false;
 			}
-			const selectedVar = Object.assign({}, this.state.selectedVar, {
-				type: value,
-				value: newValue,
-			});
+			const selectedVar = { ...this.state.selectedVar, type: value, value: newValue };
 			this.setState({
 				selectedVar,
 			});

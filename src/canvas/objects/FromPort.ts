@@ -1,4 +1,5 @@
 import { fabric } from 'fabric';
+
 import { PortObject } from './Port';
 
 const FromPort = fabric.util.createClass(fabric.Path, {

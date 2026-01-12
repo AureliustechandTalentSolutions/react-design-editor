@@ -1,4 +1,5 @@
 import { fabric } from 'fabric';
+
 import CustomHandler from './CustomHandler';
 
 class FiberHandler extends CustomHandler {
@@ -10,7 +11,6 @@ class FiberHandler extends CustomHandler {
 		const { subTargets } = opt;
 		if (subTargets.length) {
 			const target = subTargets[0];
-			console.log(target);
 			if (target.type === 'container') {
 			} else if (target.type === 'coreContainer') {
 			}

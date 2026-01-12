@@ -1,20 +1,22 @@
 import { message, Popconfirm } from 'antd';
 import i18n from 'i18next';
 import React from 'react';
+
 import { FabricObject } from '../../canvas';
 import Canvas, { CanvasInstance } from '../../canvas/Canvas';
 import { CommonButton } from '../../components/common';
 import { Content } from '../../components/layout';
-import { getNode } from './configuration/NodeConfiguration';
-import { OUT_PORT_TYPE } from './constant/constants';
-import NodeConfigurationError from './error/NodeConfigurationError';
-import Links from './link';
-import Nodes from './node';
+
 import WorkflowConfigurations from './WorkflowConfigurations';
 import WorkflowItems from './WorkflowItems';
 import WorkflowNodeConfigurations from './WorkflowNodeConfigurations';
 import WorkflowTitle from './WorkflowTitle';
 import WorkflowToolbar from './WorkflowToolbar';
+import { getNode } from './configuration/NodeConfiguration';
+import { OUT_PORT_TYPE } from './constant/constants';
+import NodeConfigurationError from './error/NodeConfigurationError';
+import Links from './link';
+import Nodes from './node';
 
 interface IState {
 	loading: boolean;
@@ -167,7 +169,7 @@ class WorkflowEditor extends React.Component {
 			}
 		},
 		exportJsonCode: () => {
-			const workflow = Object.assign({}, this.state.workflow);
+			const workflow = { ...this.state.workflow };
 			const nodes = [];
 			const links = [];
 			try {
@@ -225,7 +227,7 @@ class WorkflowEditor extends React.Component {
 				this.changeEditing(true);
 			}
 			if (changedValues.workflow) {
-				const workflow = Object.assign({}, this.state.workflow, changedValues.workflow);
+				const workflow = { ...this.state.workflow, ...changedValues.workflow };
 				this.setState({
 					workflow,
 				});
@@ -242,7 +244,7 @@ class WorkflowEditor extends React.Component {
 					}
 					this.canvasRef.canvas.renderAll();
 				}, 0);
-				const configuration = Object.assign({}, selectedItem?.configuration, changedValues.configuration);
+				const configuration = { ...selectedItem?.configuration, ...changedValues.configuration };
 				this.canvasRef.handler.setObject({
 					configuration,
 					name: allValues.name,
@@ -280,7 +282,7 @@ class WorkflowEditor extends React.Component {
 		const { onZoom, onAdd, onSelect, onRemove, onModified } = this.canvasHandlers;
 		const nodes = Nodes(descriptors);
 		const action = (
-			<React.Fragment>
+			<>
 				<CommonButton
 					className="rde-action-btn"
 					shape="circle"
@@ -316,14 +318,14 @@ class WorkflowEditor extends React.Component {
 						onClick={onUpload}
 					/>
 				)}
-			</React.Fragment>
+			</>
 		);
 		const titleContent = (
-			<React.Fragment>
+			<>
 				<span>{i18n.t('workflow.workflow-editor')}</span>
 				<span style={{ width: 40, textAlign: 'center' }}>/</span>
 				<span style={{ color: workflow.enabled ? '#49a9ee' : 'rgba(0, 0, 0, 0.65)' }}>{workflow.name}</span>
-			</React.Fragment>
+			</>
 		);
 		const title = <WorkflowTitle title={titleContent} action={action} />;
 		const content = (

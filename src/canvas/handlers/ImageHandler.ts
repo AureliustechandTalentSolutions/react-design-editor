@@ -1,5 +1,6 @@
 import { fabric } from 'fabric';
 import isEqual from 'lodash/isEqual';
+
 import Handler from './Handler';
 
 export type GrayscaleModeType = 'average' | 'luminosity' | 'lightness';
@@ -82,7 +83,7 @@ export interface RemoveWhiteFilter {
 export type ValuesOf<T extends any[]> = T[number];
 
 export interface IFilter {
-	type: typeof FILTER_TYPES[number];
+	type: (typeof FILTER_TYPES)[number];
 	[key: string]: any;
 }
 
@@ -215,7 +216,7 @@ class ImageHandler {
 	 */
 	public createFilters = (filters: IFilter[]) => {
 		return filters.reduce((prev, filter) => {
-			let type = filter.type;
+			let { type } = filter;
 			if (type.toLowerCase() === 'convolute' && isEqual(filter.matrix, SHARPEN_MATRIX)) {
 				type = 'sharpen';
 			} else if (type.toLowerCase() === 'convolute' && isEqual(filter.matrix, EMBOSS_MATRIX)) {
@@ -306,7 +307,7 @@ class ImageHandler {
 					value
 						? {
 								mode: value,
-						  }
+							}
 						: undefined,
 				),
 			imageObj,
@@ -364,7 +365,7 @@ class ImageHandler {
 					value
 						? {
 								brightness: value,
-						  }
+							}
 						: undefined,
 				),
 			imageObj,
@@ -385,7 +386,7 @@ class ImageHandler {
 					value
 						? {
 								contrast: value,
-						  }
+							}
 						: undefined,
 				),
 			imageObj,
@@ -406,7 +407,7 @@ class ImageHandler {
 					value
 						? {
 								saturation: value,
-						  }
+							}
 						: undefined,
 				),
 			imageObj,
@@ -427,7 +428,7 @@ class ImageHandler {
 					value
 						? {
 								noise: value,
-						  }
+							}
 						: undefined,
 				),
 			imageObj,
@@ -457,7 +458,7 @@ class ImageHandler {
 					value
 						? {
 								blocksize: value,
-						  }
+							}
 						: undefined,
 				),
 			imageObj,
@@ -490,7 +491,7 @@ class ImageHandler {
 					value
 						? {
 								matrix: value,
-						  }
+							}
 						: undefined,
 				),
 			imageObj,
@@ -511,7 +512,7 @@ class ImageHandler {
 					value
 						? {
 								matrix: value,
-						  }
+							}
 						: undefined,
 				),
 			imageObj,
