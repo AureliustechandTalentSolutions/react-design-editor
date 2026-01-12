@@ -1,0 +1,25 @@
+name: Project Automation
+
+on:
+  issues:
+    types: [opened, closed, labeled]
+  pull_request:
+    types: [opened, closed, merged, review_requested]
+
+jobs:
+  add-to-project:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Add issue to project
+        if: github.event_name == 'issues' && github.event.action == 'opened'
+        uses: actions/add-to-project@v0.5.0
+        with:
+          project-url: https://github.com/orgs/AureliustechandTalentSolutions/projects/1
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Move to Done when closed
+        if: github.event.action == 'closed'
+        run: |
+          echo "Issue/PR #${{ github.event.number }} closed"
+          echo "In a production setup, add GraphQL mutation here to move card to Done column"
+          echo "See: https://docs.github.com/en/graphql/reference/mutations#updateprojectv2itemfieldvalue"

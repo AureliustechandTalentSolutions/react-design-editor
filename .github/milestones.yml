@@ -1,0 +1,30 @@
+milestones:
+  - title: "v1.0.0 - AI UI Generator MVP"
+    description: |
+      Initial release of the AI UI Generator module with core features:
+      - Text-to-UI generation
+      - Component library
+      - Code export (React, Vue, HTML)
+      - Style explorer
+    due_on: "2026-02-01"
+    state: open
+
+  - title: "v1.1.0 - Enhanced AI Features"
+    description: |
+      Improved AI capabilities:
+      - AI layout suggestions
+      - Design system import
+      - Accessibility checker
+      - Design critique
+    due_on: "2026-03-15"
+    state: open
+
+  - title: "v1.2.0 - Collaboration"
+    description: |
+      Team collaboration features:
+      - Real-time collaboration
+      - Comments & annotations
+      - Version history
+      - Team libraries
+    due_on: "2026-04-30"
+    state: open

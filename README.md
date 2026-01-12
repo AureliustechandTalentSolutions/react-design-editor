@@ -46,6 +46,25 @@ Run `npm install react-design-editor` or `yarn add react-design-editor`
 3. Run the App with `npm start` or `yarn start`
 4. Open your web browser to `http://localhost:4000`
 
+## 📊 Project Status
+
+### AI UI Generator Module
+
+| Component | Status | Team | Progress |
+|-----------|--------|------|----------|
+| Core Editor | 🚧 In Progress | Core | ████████░░ 80% |
+| AI Integration | 🚧 In Progress | Core | ███████░░░ 70% |
+| DevOps Setup | 🚧 In Progress | DevOps | ██████░░░░ 60% |
+| Documentation | 🚧 In Progress | Docs | █████░░░░░ 50% |
+| Test Suite | 🚧 In Progress | Testing | ████░░░░░░ 40% |
+| Code Quality | 🚧 In Progress | Quality | ████░░░░░░ 40% |
+
+### Active PRs
+See [Pull Requests](../../pulls) for all active development.
+
+### Project Board
+Track progress on our [Project Board](../../projects/1).
+
 # Ask AI
 
 [React Design Editor](https://codeparrot.ai/oracle?owner=salgum1114&repo=react-design-editor) AI will help you understand this repository better. 
