@@ -245,6 +245,7 @@ export const ScreenshotUpload: React.FC<ScreenshotUploadProps> = ({
 						tabIndex={0}
 						onKeyDown={(e) => {
 							if (e.key === 'Enter' || e.key === ' ') {
+								e.preventDefault();
 								fileInputRef.current?.click();
 							}
 						}}

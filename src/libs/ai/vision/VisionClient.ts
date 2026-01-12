@@ -139,6 +139,9 @@ export class VisionClient {
 		try {
 			// Dynamic import to avoid bundling issues
 			const Anthropic = (await import('@anthropic-ai/sdk')).default;
+			// WARNING: dangerouslyAllowBrowser exposes API keys in browser
+			// For production, use a server-side proxy to handle API calls
+			// and avoid exposing the API key to the client
 			const client = new Anthropic({
 				apiKey: this.apiKey,
 				dangerouslyAllowBrowser: true, // For demo purposes
