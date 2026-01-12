@@ -1,6 +1,7 @@
-import { describe, it, expect, vi } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { describe, it, expect, vi } from 'vitest';
+
 import { AIUIEditor } from '../AIUIEditor';
 
 describe('AIUIEditor Integration', () => {
@@ -24,7 +25,7 @@ describe('AIUIEditor Integration', () => {
 			() => {
 				expect(screen.queryByText(/generating/i)).not.toBeInTheDocument();
 			},
-			{ timeout: 1000 }
+			{ timeout: 1000 },
 		);
 
 		// Should switch to AI tab after generation
@@ -79,7 +80,7 @@ describe('AIUIEditor Integration', () => {
 			() => {
 				expect(screen.queryByText(/generating/i)).not.toBeInTheDocument();
 			},
-			{ timeout: 1000 }
+			{ timeout: 1000 },
 		);
 
 		// Check for design information
@@ -101,7 +102,7 @@ describe('AIUIEditor Integration', () => {
 			() => {
 				expect(screen.queryByText(/generating/i)).not.toBeInTheDocument();
 			},
-			{ timeout: 1000 }
+			{ timeout: 1000 },
 		);
 
 		// Then export
@@ -156,7 +157,7 @@ describe('AIUIEditor Integration', () => {
 			() => {
 				expect(screen.queryByText(/generating/i)).not.toBeInTheDocument();
 			},
-			{ timeout: 1000 }
+			{ timeout: 1000 },
 		);
 
 		// Go back to prompt
@@ -175,7 +176,7 @@ describe('AIUIEditor Integration', () => {
 			() => {
 				expect(screen.queryByText(/generating/i)).not.toBeInTheDocument();
 			},
-			{ timeout: 1000 }
+			{ timeout: 1000 },
 		);
 
 		// Should have new design

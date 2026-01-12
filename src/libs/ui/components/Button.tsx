@@ -1,10 +1,9 @@
 import React, { forwardRef, ButtonHTMLAttributes } from 'react';
+
 import { buttonVariants, type ButtonVariants } from '../variants';
 import { cn } from '../variants';
 
-export interface ButtonProps
-	extends ButtonHTMLAttributes<HTMLButtonElement>,
-		ButtonVariants {
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>, ButtonVariants {
 	/**
 	 * Loading state - shows loading spinner
 	 */
@@ -24,21 +23,7 @@ export interface ButtonProps
  * Built with class-variance-authority for consistent styling
  */
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-	(
-		{
-			className,
-			variant,
-			size,
-			state,
-			isLoading,
-			leftIcon,
-			rightIcon,
-			children,
-			disabled,
-			...props
-		},
-		ref
-	) => {
+	({ className, variant, size, state, isLoading, leftIcon, rightIcon, children, disabled, ...props }, ref) => {
 		const effectiveState = isLoading ? 'loading' : disabled ? 'disabled' : state;
 
 		return (
@@ -55,14 +40,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 						fill="none"
 						viewBox="0 0 24 24"
 					>
-						<circle
-							className="opacity-25"
-							cx="12"
-							cy="12"
-							r="10"
-							stroke="currentColor"
-							strokeWidth="4"
-						/>
+						<circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
 						<path
 							className="opacity-75"
 							fill="currentColor"
@@ -75,7 +53,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 				{!isLoading && rightIcon && <span className="ml-2">{rightIcon}</span>}
 			</button>
 		);
-	}
+	},
 );
 
 Button.displayName = 'Button';

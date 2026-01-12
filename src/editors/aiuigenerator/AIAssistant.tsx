@@ -5,6 +5,7 @@
 
 import { Button, Card } from 'antd';
 import React from 'react';
+
 import Icon from '../../components/icon/Icon';
 import { quickActionPrompts } from '../../libs/ai/prompts';
 
@@ -14,16 +15,31 @@ interface IProps {
 
 const AIAssistant: React.FC<IProps> = ({ onQuickAction }) => {
 	const actions = [
-		{ key: 'improveContrast', label: 'Improve Contrast', icon: 'adjust', prompt: quickActionPrompts.improveContrast },
+		{
+			key: 'improveContrast',
+			label: 'Improve Contrast',
+			icon: 'adjust',
+			prompt: quickActionPrompts.improveContrast,
+		},
 		{ key: 'addShadows', label: 'Add Shadows', icon: 'cube', prompt: quickActionPrompts.addShadows },
-		{ key: 'improveSpacing', label: 'Improve Spacing', icon: 'arrows-alt', prompt: quickActionPrompts.improveSpacing },
+		{
+			key: 'improveSpacing',
+			label: 'Improve Spacing',
+			icon: 'arrows-alt',
+			prompt: quickActionPrompts.improveSpacing,
+		},
 		{ key: 'modernize', label: 'Modernize', icon: 'star', prompt: quickActionPrompts.modernize },
 		{ key: 'simplify', label: 'Simplify', icon: 'compress', prompt: quickActionPrompts.simplify },
 		{ key: 'responsive', label: 'Make Responsive', icon: 'mobile-alt', prompt: quickActionPrompts.responsive },
-		{ key: 'accessibility', label: 'Accessibility', icon: 'universal-access', prompt: quickActionPrompts.accessibility },
+		{
+			key: 'accessibility',
+			label: 'Accessibility',
+			icon: 'universal-access',
+			prompt: quickActionPrompts.accessibility,
+		},
 	];
 
-	const handleAction = (action: typeof actions[0]) => {
+	const handleAction = (action: (typeof actions)[0]) => {
 		if (onQuickAction) {
 			onQuickAction(action.prompt);
 		}

@@ -1,7 +1,7 @@
+import * as TablerIcons from '@tabler/icons-react';
+import * as LucideIcons from 'lucide-react';
 import React from 'react';
 import * as ReactIcons from 'react-icons';
-import * as LucideIcons from 'lucide-react';
-import * as TablerIcons from '@tabler/icons-react';
 
 /**
  * Icon size mapping
@@ -70,13 +70,7 @@ export interface IconProps {
 /**
  * Unified Icon component that works across all icon libraries
  */
-export const Icon: React.FC<IconProps> = ({
-	name,
-	library = 'lucide',
-	size = 'md',
-	color,
-	className,
-}) => {
+export const Icon: React.FC<IconProps> = ({ name, library = 'lucide', size = 'md', color, className }) => {
 	const iconSize = typeof size === 'number' ? size : sizeMap[size];
 
 	let IconComponent: React.ComponentType<any> | null = null;
@@ -113,7 +107,7 @@ export const getLucideIcons = (): IconInfo[] => {
 	const icons: IconInfo[] = [];
 	const lucideIconNames = Object.keys(LucideIcons);
 
-	lucideIconNames.forEach((name) => {
+	lucideIconNames.forEach(name => {
 		if (name !== 'createLucideIcon' && typeof (LucideIcons as any)[name] === 'function') {
 			icons.push({
 				name,
@@ -134,7 +128,7 @@ export const getTablerIcons = (): IconInfo[] => {
 	const icons: IconInfo[] = [];
 	const tablerIconNames = Object.keys(TablerIcons);
 
-	tablerIconNames.forEach((name) => {
+	tablerIconNames.forEach(name => {
 		if (typeof (TablerIcons as any)[name] === 'function') {
 			icons.push({
 				name,
@@ -159,27 +153,23 @@ export const getAllIcons = (): IconInfo[] => {
  * Search icons by name
  */
 export const searchIcons = (query: string, library?: IconLibrary): IconInfo[] => {
-	const allIcons = library
-		? getAllIcons().filter((icon) => icon.library === library)
-		: getAllIcons();
+	const allIcons = library ? getAllIcons().filter(icon => icon.library === library) : getAllIcons();
 
 	if (!query) {
 		return allIcons;
 	}
 
 	const lowerQuery = query.toLowerCase();
-	return allIcons.filter((icon) => icon.name.toLowerCase().includes(lowerQuery));
+	return allIcons.filter(icon => icon.name.toLowerCase().includes(lowerQuery));
 };
 
 /**
  * Get icons by category
  */
 export const getIconsByCategory = (category: IconCategory, library?: IconLibrary): IconInfo[] => {
-	const allIcons = library
-		? getAllIcons().filter((icon) => icon.library === library)
-		: getAllIcons();
+	const allIcons = library ? getAllIcons().filter(icon => icon.library === library) : getAllIcons();
 
-	return allIcons.filter((icon) => icon.category === category);
+	return allIcons.filter(icon => icon.category === category);
 };
 
 /**
@@ -188,11 +178,7 @@ export const getIconsByCategory = (category: IconCategory, library?: IconLibrary
 function categorizeIcon(name: string): IconCategory {
 	const lowerName = name.toLowerCase();
 
-	if (
-		lowerName.includes('arrow') ||
-		lowerName.includes('chevron') ||
-		lowerName.includes('caret')
-	) {
+	if (lowerName.includes('arrow') || lowerName.includes('chevron') || lowerName.includes('caret')) {
 		return 'arrows';
 	}
 
@@ -207,11 +193,7 @@ function categorizeIcon(name: string): IconCategory {
 		return 'social';
 	}
 
-	if (
-		lowerName.includes('file') ||
-		lowerName.includes('folder') ||
-		lowerName.includes('document')
-	) {
+	if (lowerName.includes('file') || lowerName.includes('folder') || lowerName.includes('document')) {
 		return 'file';
 	}
 
@@ -299,9 +281,7 @@ export const getRecentIcons = (): IconInfo[] => {
 export const addRecentIcon = (icon: IconInfo): void => {
 	try {
 		const recent = getRecentIcons();
-		const filtered = recent.filter(
-			(i) => !(i.name === icon.name && i.library === icon.library)
-		);
+		const filtered = recent.filter(i => !(i.name === icon.name && i.library === icon.library));
 		const updated = [icon, ...filtered].slice(0, 20);
 		localStorage.setItem(RECENT_ICONS_KEY, JSON.stringify(updated));
 	} catch {
@@ -332,9 +312,7 @@ export const getFavoriteIcons = (): IconInfo[] => {
 export const toggleFavoriteIcon = (icon: IconInfo): void => {
 	try {
 		const favorites = getFavoriteIcons();
-		const index = favorites.findIndex(
-			(i) => i.name === icon.name && i.library === icon.library
-		);
+		const index = favorites.findIndex(i => i.name === icon.name && i.library === icon.library);
 
 		if (index >= 0) {
 			favorites.splice(index, 1);
@@ -353,5 +331,5 @@ export const toggleFavoriteIcon = (icon: IconInfo): void => {
  */
 export const isFavoriteIcon = (icon: IconInfo): boolean => {
 	const favorites = getFavoriteIcons();
-	return favorites.some((i) => i.name === icon.name && i.library === icon.library);
+	return favorites.some(i => i.name === icon.name && i.library === icon.library);
 };

@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { TabsRoot, TabsList, TabsTrigger, TabsContent } from '../radix';
 import type { TabsProps as RadixTabsProps } from '../radix';
 import { cn } from '../variants';
@@ -29,21 +30,16 @@ export interface TabsProps extends RadixTabsProps {
  * Tabs component built with Radix UI Tabs
  * Accessible tab interface with keyboard navigation
  */
-export const Tabs: React.FC<TabsProps> = ({
-	tabs,
-	listClassName,
-	contentClassName,
-	...props
-}) => {
+export const Tabs: React.FC<TabsProps> = ({ tabs, listClassName, contentClassName, ...props }) => {
 	return (
 		<TabsRoot {...props}>
 			<TabsList
 				className={cn(
 					'inline-flex h-10 items-center justify-center rounded-md bg-gray-100 p-1 text-gray-500',
-					listClassName
+					listClassName,
 				)}
 			>
-				{tabs.map((tab) => (
+				{tabs.map(tab => (
 					<TabsTrigger
 						key={tab.value}
 						value={tab.value}
@@ -54,13 +50,13 @@ export const Tabs: React.FC<TabsProps> = ({
 					</TabsTrigger>
 				))}
 			</TabsList>
-			{tabs.map((tab) => (
+			{tabs.map(tab => (
 				<TabsContent
 					key={tab.value}
 					value={tab.value}
 					className={cn(
 						'mt-2 ring-offset-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2',
-						contentClassName
+						contentClassName,
 					)}
 				>
 					{tab.content}

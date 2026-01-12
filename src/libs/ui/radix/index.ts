@@ -140,12 +140,7 @@ export {
 	Trigger as TabsTrigger,
 	Content as TabsContent,
 } from '@radix-ui/react-tabs';
-export type {
-	TabsProps,
-	TabsListProps,
-	TabsTriggerProps,
-	TabsContentProps,
-} from '@radix-ui/react-tabs';
+export type { TabsProps, TabsListProps, TabsTriggerProps, TabsContentProps } from '@radix-ui/react-tabs';
 
 // Tooltip
 export {

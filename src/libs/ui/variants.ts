@@ -1,6 +1,6 @@
+import { cva, type VariantProps } from 'class-variance-authority';
 import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
-import { cva, type VariantProps } from 'class-variance-authority';
 
 /**
  * Utility function to merge class names with Tailwind CSS classes
@@ -18,15 +18,11 @@ export const buttonVariants = cva(
 	{
 		variants: {
 			variant: {
-				primary:
-					'bg-blue-600 text-white hover:bg-blue-700 focus-visible:ring-blue-600',
-				secondary:
-					'bg-gray-200 text-gray-900 hover:bg-gray-300 focus-visible:ring-gray-400',
-				outline:
-					'border border-gray-300 bg-transparent hover:bg-gray-100 focus-visible:ring-gray-400',
+				primary: 'bg-blue-600 text-white hover:bg-blue-700 focus-visible:ring-blue-600',
+				secondary: 'bg-gray-200 text-gray-900 hover:bg-gray-300 focus-visible:ring-gray-400',
+				outline: 'border border-gray-300 bg-transparent hover:bg-gray-100 focus-visible:ring-gray-400',
 				ghost: 'hover:bg-gray-100 hover:text-gray-900 focus-visible:ring-gray-400',
-				destructive:
-					'bg-red-600 text-white hover:bg-red-700 focus-visible:ring-red-600',
+				destructive: 'bg-red-600 text-white hover:bg-red-700 focus-visible:ring-red-600',
 			},
 			size: {
 				sm: 'h-8 px-3 text-xs',
@@ -44,7 +40,7 @@ export const buttonVariants = cva(
 			size: 'md',
 			state: 'normal',
 		},
-	}
+	},
 );
 
 export type ButtonVariants = VariantProps<typeof buttonVariants>;
@@ -65,7 +61,7 @@ export const inputVariants = cva(
 		defaultVariants: {
 			size: 'md',
 		},
-	}
+	},
 );
 
 export type InputVariants = VariantProps<typeof inputVariants>;
@@ -89,7 +85,7 @@ export const badgeVariants = cva(
 		defaultVariants: {
 			variant: 'default',
 		},
-	}
+	},
 );
 
 export type BadgeVariants = VariantProps<typeof badgeVariants>;

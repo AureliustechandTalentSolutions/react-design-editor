@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+
 import {
 	Button,
 	Dialog,
@@ -179,7 +180,13 @@ export const EnhancedComponentPalette: React.FC<EnhancedComponentPaletteProps> =
 				side: 'bottom',
 			},
 			preview: (
-				<Popover trigger={<Button variant="outline" size="sm">Open</Button>}>
+				<Popover
+					trigger={
+						<Button variant="outline" size="sm">
+							Open
+						</Button>
+					}
+				>
 					<div>Popover content</div>
 				</Popover>
 			),
@@ -203,8 +210,8 @@ export const EnhancedComponentPalette: React.FC<EnhancedComponentPaletteProps> =
 			content: (
 				<div className="grid grid-cols-2 gap-2 p-2">
 					{components
-						.filter((c) => c.category === 'radix')
-						.map((component) => (
+						.filter(c => c.category === 'radix')
+						.map(component => (
 							<div
 								key={component.id}
 								className="relative p-3 rounded border border-gray-200 hover:border-blue-500 hover:bg-blue-50 cursor-move transition-colors group"
@@ -213,7 +220,7 @@ export const EnhancedComponentPalette: React.FC<EnhancedComponentPaletteProps> =
 								onClick={() => handleComponentClick(component)}
 								role="button"
 								tabIndex={0}
-								onKeyDown={(e) => {
+								onKeyDown={e => {
 									if (e.key === 'Enter' || e.key === ' ') {
 										handleComponentClick(component);
 									}
@@ -224,7 +231,7 @@ export const EnhancedComponentPalette: React.FC<EnhancedComponentPaletteProps> =
 									<button
 										type="button"
 										className="opacity-0 group-hover:opacity-100 p-1 hover:bg-gray-200 rounded"
-										onClick={(e) => {
+										onClick={e => {
 											e.stopPropagation();
 											handleConfigureComponent(component);
 										}}
@@ -247,18 +254,12 @@ export const EnhancedComponentPalette: React.FC<EnhancedComponentPaletteProps> =
 		{
 			value: 'headless',
 			title: 'Headless UI Components',
-			content: (
-				<div className="p-2 text-sm text-gray-500">
-					Headless UI components can be added here
-				</div>
-			),
+			content: <div className="p-2 text-sm text-gray-500">Headless UI components can be added here</div>,
 		},
 		{
 			value: 'custom',
 			title: 'Custom Components',
-			content: (
-				<div className="p-2 text-sm text-gray-500">Custom components can be added here</div>
-			),
+			content: <div className="p-2 text-sm text-gray-500">Custom components can be added here</div>,
 		},
 	];
 
@@ -282,12 +283,12 @@ export const EnhancedComponentPalette: React.FC<EnhancedComponentPaletteProps> =
 				>
 					<div className="space-y-4">
 						<div>
-							<label className="block text-sm font-medium mb-2">Library</label>
+							<div className="block text-sm font-medium mb-2">Library</div>
 							<div className="text-sm text-gray-600">{selectedComponent.library}</div>
 						</div>
 
 						<div>
-							<label className="block text-sm font-medium mb-2">Properties</label>
+							<div className="block text-sm font-medium mb-2">Properties</div>
 							<div className="space-y-2">
 								{Object.entries(selectedComponent.props).map(([key, value]) => (
 									<div key={key} className="flex items-center justify-between">

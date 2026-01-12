@@ -1,15 +1,7 @@
 import React from 'react';
-import {
-	AccordionRoot,
-	AccordionItem,
-	AccordionHeader,
-	AccordionTrigger,
-	AccordionContent,
-} from '../radix';
-import type {
-	AccordionSingleProps,
-	AccordionMultipleProps,
-} from '../radix';
+
+import { AccordionRoot, AccordionItem, AccordionHeader, AccordionTrigger, AccordionContent } from '../radix';
+import type { AccordionSingleProps, AccordionMultipleProps } from '../radix';
 import { cn } from '../variants';
 
 export interface AccordionItemType {
@@ -19,8 +11,7 @@ export interface AccordionItemType {
 	disabled?: boolean;
 }
 
-export interface AccordionProps
-	extends Omit<AccordionSingleProps | AccordionMultipleProps, 'type'> {
+export interface AccordionProps extends Omit<AccordionSingleProps | AccordionMultipleProps, 'type'> {
 	/**
 	 * Accordion items
 	 */
@@ -39,12 +30,7 @@ export interface AccordionProps
  * Accordion component built with Radix UI Accordion
  * Accessible collapsible content sections
  */
-export const Accordion: React.FC<AccordionProps> = ({
-	items,
-	multiple = false,
-	className,
-	...props
-}) => {
+export const Accordion: React.FC<AccordionProps> = ({ items, multiple = false, className, ...props }) => {
 	const rootProps = multiple
 		? ({ type: 'multiple' as const, ...props } as AccordionMultipleProps)
 		: ({ type: 'single' as const, collapsible: true, ...props } as AccordionSingleProps);
@@ -54,7 +40,7 @@ export const Accordion: React.FC<AccordionProps> = ({
 			{...rootProps}
 			className={cn('w-full divide-y divide-gray-200 border-b border-gray-200', className)}
 		>
-			{items.map((item) => (
+			{items.map(item => (
 				<AccordionItem
 					key={item.value}
 					value={item.value}

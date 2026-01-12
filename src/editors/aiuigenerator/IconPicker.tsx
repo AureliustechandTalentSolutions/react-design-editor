@@ -1,4 +1,8 @@
 import React, { useState, useMemo } from 'react';
+
+import { Button } from '../../libs/ui/components/Button';
+import { Tabs, type TabItem } from '../../libs/ui/components/Tabs';
+import { Tooltip } from '../../libs/ui/components/Tooltip';
 import {
 	Icon,
 	IconLibrary,
@@ -12,9 +16,6 @@ import {
 	isFavoriteIcon,
 	type IconInfo,
 } from '../../libs/ui/icons';
-import { Tabs, type TabItem } from '../../libs/ui/components/Tabs';
-import { Button } from '../../libs/ui/components/Button';
-import { Tooltip } from '../../libs/ui/components/Tooltip';
 
 export interface IconPickerProps {
 	/**
@@ -35,11 +36,7 @@ export interface IconPickerProps {
  * IconPicker component for browsing and selecting icons
  * Features: Search, category filtering, favorites, recent icons
  */
-export const IconPicker: React.FC<IconPickerProps> = ({
-	onSelect,
-	library,
-	showCopyCode = true,
-}) => {
+export const IconPicker: React.FC<IconPickerProps> = ({ onSelect, library, showCopyCode = true }) => {
 	const [searchQuery, setSearchQuery] = useState('');
 	const [selectedCategory, setSelectedCategory] = useState<IconCategory | 'all'>('all');
 	const [previewSize, setPreviewSize] = useState<'sm' | 'md' | 'lg'>('md');
@@ -68,9 +65,7 @@ export const IconPicker: React.FC<IconPickerProps> = ({
 		if (selectedCategory !== 'all') {
 			icons = getIconsByCategory(selectedCategory, library);
 			if (searchQuery) {
-				icons = icons.filter((icon) =>
-					icon.name.toLowerCase().includes(searchQuery.toLowerCase())
-				);
+				icons = icons.filter(icon => icon.name.toLowerCase().includes(searchQuery.toLowerCase()));
 			}
 		}
 
@@ -105,7 +100,7 @@ export const IconPicker: React.FC<IconPickerProps> = ({
 
 		return (
 			<div className="grid grid-cols-6 gap-2 max-h-96 overflow-y-auto p-2">
-				{icons.slice(0, 100).map((icon) => {
+				{icons.slice(0, 100).map(icon => {
 					const iconKey = `${icon.library}-${icon.name}`;
 					const isFav = isFavoriteIcon(icon);
 					const isCopied = copiedIcon === iconKey;
@@ -125,7 +120,7 @@ export const IconPicker: React.FC<IconPickerProps> = ({
 								onClick={() => handleIconClick(icon)}
 								role="button"
 								tabIndex={0}
-								onKeyDown={(e) => {
+								onKeyDown={e => {
 									if (e.key === 'Enter' || e.key === ' ') {
 										handleIconClick(icon);
 									}
@@ -136,7 +131,7 @@ export const IconPicker: React.FC<IconPickerProps> = ({
 									<button
 										type="button"
 										className="p-1 rounded bg-white shadow-sm hover:bg-gray-100"
-										onClick={(e) => handleToggleFavorite(icon, e)}
+										onClick={e => handleToggleFavorite(icon, e)}
 										title={isFav ? 'Remove from favorites' : 'Add to favorites'}
 									>
 										<svg
@@ -156,7 +151,7 @@ export const IconPicker: React.FC<IconPickerProps> = ({
 										<button
 											type="button"
 											className="p-1 rounded bg-white shadow-sm hover:bg-gray-100"
-											onClick={(e) => handleCopyCode(icon, e)}
+											onClick={e => handleCopyCode(icon, e)}
 											title="Copy code"
 										>
 											{isCopied ? (
@@ -223,12 +218,12 @@ export const IconPicker: React.FC<IconPickerProps> = ({
 						type="text"
 						placeholder="Search icons..."
 						value={searchQuery}
-						onChange={(e) => setSearchQuery(e.target.value)}
+						onChange={e => setSearchQuery(e.target.value)}
 						className="flex-1 h-10 rounded-md border border-gray-300 bg-white px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
 					/>
 					<select
 						value={previewSize}
-						onChange={(e) => setPreviewSize(e.target.value as 'sm' | 'md' | 'lg')}
+						onChange={e => setPreviewSize(e.target.value as 'sm' | 'md' | 'lg')}
 						className="h-10 rounded-md border border-gray-300 bg-white px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
 					>
 						<option value="sm">Small</option>
@@ -238,7 +233,7 @@ export const IconPicker: React.FC<IconPickerProps> = ({
 				</div>
 
 				<div className="flex gap-2 flex-wrap">
-					{categories.map((cat) => (
+					{categories.map(cat => (
 						<Button
 							key={cat}
 							size="sm"
