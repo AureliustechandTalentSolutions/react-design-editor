@@ -1,4 +1,12 @@
+import { AxeResults } from 'axe-core';
+
 import { FabricObject } from '../../canvas/models';
+
+export interface A11yNode {
+	target: string[];
+	html: string;
+	failureSummary: string;
+}
 
 export interface A11yIssue {
 	type: 'error' | 'warning' | 'info';
@@ -6,6 +14,42 @@ export interface A11yIssue {
 	message: string;
 	wcagCriteria: string;
 	suggestion: string;
+}
+
+export interface AxeA11yIssue {
+	id: string;
+	impact: 'critical' | 'serious' | 'moderate' | 'minor';
+	description: string;
+	help: string;
+	helpUrl: string;
+	nodes: A11yNode[];
+	wcagCriteria: string[];
+}
+
+export interface A11yReport {
+	passed: number;
+	failed: number;
+	incomplete: number;
+	issues: AxeA11yIssue[];
+	timestamp: Date;
+	section508Compliant: boolean;
+	wcag21AACompliant: boolean;
+export interface A11yReport {
+	issues: A11yIssue[];
+	summary: {
+		errors: number;
+		warnings: number;
+		info: number;
+	};
+	wcag21AA: boolean;
+	section508: boolean;
+	timestamp: string;
+}
+
+export interface AxeResult {
+	violations: AxeViolation[];
+	passes: AxePass[];
+	incomplete: AxeIncomplete[];
 }
 
 export interface FixSuggestion {
@@ -18,6 +62,35 @@ export interface FixSuggestion {
 
 export interface FixSuggestionsResult {
 	[elementId: string]: FixSuggestion[];
+}
+
+export interface AxeViolation {
+	id: string;
+	impact: 'minor' | 'moderate' | 'serious' | 'critical';
+	description: string;
+	help: string;
+	helpUrl: string;
+	tags: string[];
+	nodes: AxeNode[];
+}
+
+export interface AxePass {
+	id: string;
+	description: string;
+	help: string;
+}
+
+export interface AxeIncomplete {
+	id: string;
+	description: string;
+	help: string;
+	nodes: AxeNode[];
+}
+
+export interface AxeNode {
+	html: string;
+	target: string[];
+	failureSummary?: string;
 }
 
 export class AccessibilityChecker {
@@ -124,23 +197,36 @@ export class AccessibilityChecker {
 	 * Calculate relative luminance of a color
 	 */
 	private getLuminance(color: string): number {
+		// WCAG 2.1 relative luminance constants
+		const SRGB_THRESHOLD = 0.03928;
+		const SRGB_LOW_DIVISOR = 12.92;
+		const SRGB_OFFSET = 0.055;
+		const SRGB_DIVISOR = 1.055;
+		const SRGB_GAMMA = 2.4;
+		const RED_COEFFICIENT = 0.2126;
+		const GREEN_COEFFICIENT = 0.7152;
+		const BLUE_COEFFICIENT = 0.0722;
+
 		const rgb = this.hexToRgb(color);
 		if (!rgb) return 0;
 
 		const [r, g, b] = [rgb.r, rgb.g, rgb.b].map(val => {
 			const v = val / 255;
 			return v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4;
+			return v <= SRGB_THRESHOLD
+				? v / SRGB_LOW_DIVISOR
+				: ((v + SRGB_OFFSET) / SRGB_DIVISOR) ** SRGB_GAMMA;
 		});
 
-		return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+		return RED_COEFFICIENT * r + GREEN_COEFFICIENT * g + BLUE_COEFFICIENT * b;
 	}
 
 	/**
 	 * Convert hex color to RGB
 	 */
-	private hexToRgb(hex: string): { r: number; g: number; b: number } | null {
+	private hexToRgb(hexColor: string): { r: number; g: number; b: number } | null {
 		// Remove # if present
-		hex = hex.replace('#', '');
+		let hex = hexColor.replace('#', '');
 
 		// Handle 3-digit hex
 		if (hex.length === 3) {
@@ -163,7 +249,7 @@ export class AccessibilityChecker {
 	/**
 	 * Extract color from fabric object fill property
 	 */
-	private extractColor(fill: any): string {
+	private extractColor(fill: string | Record<string, any>): string {
 		if (typeof fill === 'string') {
 			return fill;
 		}
@@ -202,7 +288,7 @@ export class AccessibilityChecker {
 						targetRatio: 4.5,
 						adjustMethod: 'darken-text',
 					};
-				} else if (issue.message.indexOf('font size') !== -1) {
+				} else if (issue.message.indexOf('Font size') !== -1 || issue.message.indexOf('font size') !== -1) {
 					fix.action = 'adjustFontSize';
 					fix.params = {
 						minSize: 12,
@@ -241,5 +327,200 @@ export class AccessibilityChecker {
 			warnings: issues.filter(i => i.type === 'warning').length,
 			info: issues.filter(i => i.type === 'info').length,
 		};
+	}
+
+	/**
+	 * Run axe-core accessibility check on a DOM element
+	 */
+	async runAxeCheck(element: HTMLElement): Promise<A11yReport> {
+		// Dynamic import for axe-core (avoid SSR issues)
+		const axe = await import('axe-core');
+
+		const results: AxeResults = await axe.default.run(element, {
+			runOnly: {
+				type: 'tag',
+				values: ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'section508'],
+			},
+		});
+
+		const issues: AxeA11yIssue[] = results.violations.map(violation => ({
+			id: violation.id,
+			impact: violation.impact as AxeA11yIssue['impact'],
+			description: violation.description,
+			help: violation.help,
+			helpUrl: violation.helpUrl,
+			nodes: violation.nodes.map(node => ({
+				target: node.target as string[],
+				html: node.html,
+				failureSummary: node.failureSummary || '',
+			})),
+			wcagCriteria: violation.tags.filter(t => t.startsWith('wcag')),
+		}));
+
+		const hasCriticalOrSerious = issues.some(i => i.impact === 'critical' || i.impact === 'serious');
+
+		return {
+			passed: results.passes.length,
+			failed: results.violations.length,
+			incomplete: results.incomplete.length,
+			issues,
+			timestamp: new Date(),
+			section508Compliant: !hasCriticalOrSerious,
+			wcag21AACompliant: !hasCriticalOrSerious,
+		};
+	}
+
+	/**
+	 * Suggest fixes for accessibility issues
+	 */
+	suggestFixesForAxeIssues(issues: AxeA11yIssue[]): Map<string, string[]> {
+		const suggestions = new Map<string, string[]>();
+
+		const fixSuggestions: Record<string, string[]> = {
+			'color-contrast': [
+				'Increase contrast ratio to at least 4.5:1 for normal text',
+				'Use USWDS color tokens which are pre-validated for contrast',
+				'Consider using usa-prose class for body text',
+			],
+			'image-alt': [
+				'Add alt attribute to images',
+				'Use empty alt="" for decorative images',
+				'Describe the image content, not the file name',
+			],
+			label: [
+				'Add <Label> component from react-uswds',
+				'Use htmlFor attribute matching input id',
+				'Consider using FormGroup wrapper',
+			],
+			'button-name': [
+				'Add text content or aria-label to buttons',
+				'Icon-only buttons need aria-label',
+				'Use descriptive button text',
+			],
+			'link-name': [
+				'Add text content to links',
+				'Avoid "click here" or "read more" without context',
+				'Use aria-label for icon links',
+			],
+			'heading-order': [
+				'Use headings in sequential order (h1, h2, h3...)',
+				'Do not skip heading levels',
+				'Each page should have exactly one h1',
+			],
+		};
+
+		issues.forEach(issue => {
+			if (fixSuggestions[issue.id]) {
+				suggestions.set(issue.id, fixSuggestions[issue.id]);
+			} else {
+				suggestions.set(issue.id, [issue.help, `See: ${issue.helpUrl}`]);
+			}
+		});
+
+		return suggestions;
+	 * This method integrates axe-core for WCAG 2.1 AA validation
+	 */
+	public async runAxeCheck(element?: HTMLElement, rules?: string[]): Promise<A11yReport> {
+		const issues: A11yIssue[] = [];
+
+		// If no element provided, use document body
+		const target = element || document.body;
+
+		// Check if axe is available in the environment
+		if (typeof window !== 'undefined' && (window as any).axe) {
+			try {
+				const { axe } = window as any;
+
+				// Configure axe to run specific rules or all WCAG 2.1 AA rules
+				const options: any = {
+					runOnly: {
+						type: 'tag',
+						values: rules || ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'section508'],
+					},
+				};
+
+				// Run axe check
+				const results: AxeResult = await axe.run(target, options);
+
+				// Process violations
+				results.violations.forEach(violation => {
+					violation.nodes.forEach(node => {
+						const issueType = this.mapAxeImpactToIssueType(violation.impact);
+						issues.push({
+							type: issueType,
+							element: node.target.join(' > '),
+							message: violation.help,
+							wcagCriteria: this.extractWCAGCriteria(violation.tags),
+							suggestion: violation.description,
+						});
+					});
+				});
+			} catch (error) {
+				// Axe check failed, fall back to basic checks
+			}
+		}
+
+		// Generate report
+		const summary = this.getSummary(issues);
+		const report: A11yReport = {
+			issues,
+			summary,
+			wcag21AA: summary.errors === 0,
+			section508: summary.errors === 0 && summary.warnings === 0,
+			timestamp: new Date().toISOString(),
+		};
+
+		return report;
+	}
+
+	/**
+	 * Map axe impact level to issue type
+	 */
+	private mapAxeImpactToIssueType(
+		impact: 'minor' | 'moderate' | 'serious' | 'critical',
+	): 'error' | 'warning' | 'info' {
+		switch (impact) {
+			case 'critical':
+			case 'serious':
+				return 'error';
+			case 'moderate':
+				return 'warning';
+			case 'minor':
+			default:
+				return 'info';
+		}
+	}
+
+	/**
+	 * Extract WCAG criteria from axe tags
+	 */
+	private extractWCAGCriteria(tags: string[]): string {
+		const wcagTags = tags.filter(tag => tag.startsWith('wcag'));
+		if (wcagTags.length === 0) {
+			return 'Accessibility Best Practice';
+		}
+
+		// Format WCAG criteria
+		const criteria = wcagTags
+			.map(tag => {
+				// Convert wcag2a, wcag2aa, wcag21a, wcag21aa to readable format
+				if (tag === 'wcag2a') return 'WCAG 2.0 Level A';
+				if (tag === 'wcag2aa') return 'WCAG 2.0 Level AA';
+				if (tag === 'wcag21a') return 'WCAG 2.1 Level A';
+				if (tag === 'wcag21aa') return 'WCAG 2.1 Level AA';
+				if (tag.includes('wcag')) {
+					// Handle specific criteria like wcag111, wcag412
+					const numbers = tag.replace('wcag', '');
+					if (numbers.length >= 3) {
+						const version = numbers[0];
+						const criterion = numbers.substring(1);
+						return `WCAG ${version}.${criterion[0]}.${criterion.substring(1)}`;
+					}
+				}
+				return tag;
+			})
+			.join(', ');
+
+		return criteria;
 	}
 }

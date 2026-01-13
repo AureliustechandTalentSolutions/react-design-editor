@@ -6,3 +6,4 @@
 export * from './claude';
 export * from './parsers';
 export * from './prompts';
+export * from './vision';
