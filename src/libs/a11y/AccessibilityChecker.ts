@@ -1,4 +1,12 @@
+import { AxeResults } from 'axe-core';
+
 import { FabricObject } from '../../canvas/models';
+
+export interface A11yNode {
+	target: string[];
+	html: string;
+	failureSummary: string;
+}
 
 export interface A11yIssue {
 	type: 'error' | 'warning' | 'info';
@@ -8,6 +16,24 @@ export interface A11yIssue {
 	suggestion: string;
 }
 
+export interface AxeA11yIssue {
+	id: string;
+	impact: 'critical' | 'serious' | 'moderate' | 'minor';
+	description: string;
+	help: string;
+	helpUrl: string;
+	nodes: A11yNode[];
+	wcagCriteria: string[];
+}
+
+export interface A11yReport {
+	passed: number;
+	failed: number;
+	incomplete: number;
+	issues: AxeA11yIssue[];
+	timestamp: Date;
+	section508Compliant: boolean;
+	wcag21AACompliant: boolean;
 export interface A11yReport {
 	issues: A11yIssue[];
 	summary: {
@@ -198,9 +224,9 @@ export class AccessibilityChecker {
 	/**
 	 * Convert hex color to RGB
 	 */
-	private hexToRgb(hex: string): { r: number; g: number; b: number } | null {
+	private hexToRgb(hexColor: string): { r: number; g: number; b: number } | null {
 		// Remove # if present
-		hex = hex.replace('#', '');
+		let hex = hexColor.replace('#', '');
 
 		// Handle 3-digit hex
 		if (hex.length === 3) {
@@ -223,7 +249,7 @@ export class AccessibilityChecker {
 	/**
 	 * Extract color from fabric object fill property
 	 */
-	private extractColor(fill: any): string {
+	private extractColor(fill: string | Record<string, any>): string {
 		if (typeof fill === 'string') {
 			return fill;
 		}
@@ -305,6 +331,93 @@ export class AccessibilityChecker {
 
 	/**
 	 * Run axe-core accessibility check on a DOM element
+	 */
+	async runAxeCheck(element: HTMLElement): Promise<A11yReport> {
+		// Dynamic import for axe-core (avoid SSR issues)
+		const axe = await import('axe-core');
+
+		const results: AxeResults = await axe.default.run(element, {
+			runOnly: {
+				type: 'tag',
+				values: ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'section508'],
+			},
+		});
+
+		const issues: AxeA11yIssue[] = results.violations.map(violation => ({
+			id: violation.id,
+			impact: violation.impact as AxeA11yIssue['impact'],
+			description: violation.description,
+			help: violation.help,
+			helpUrl: violation.helpUrl,
+			nodes: violation.nodes.map(node => ({
+				target: node.target as string[],
+				html: node.html,
+				failureSummary: node.failureSummary || '',
+			})),
+			wcagCriteria: violation.tags.filter(t => t.startsWith('wcag')),
+		}));
+
+		const hasCriticalOrSerious = issues.some(i => i.impact === 'critical' || i.impact === 'serious');
+
+		return {
+			passed: results.passes.length,
+			failed: results.violations.length,
+			incomplete: results.incomplete.length,
+			issues,
+			timestamp: new Date(),
+			section508Compliant: !hasCriticalOrSerious,
+			wcag21AACompliant: !hasCriticalOrSerious,
+		};
+	}
+
+	/**
+	 * Suggest fixes for accessibility issues
+	 */
+	suggestFixesForAxeIssues(issues: AxeA11yIssue[]): Map<string, string[]> {
+		const suggestions = new Map<string, string[]>();
+
+		const fixSuggestions: Record<string, string[]> = {
+			'color-contrast': [
+				'Increase contrast ratio to at least 4.5:1 for normal text',
+				'Use USWDS color tokens which are pre-validated for contrast',
+				'Consider using usa-prose class for body text',
+			],
+			'image-alt': [
+				'Add alt attribute to images',
+				'Use empty alt="" for decorative images',
+				'Describe the image content, not the file name',
+			],
+			label: [
+				'Add <Label> component from react-uswds',
+				'Use htmlFor attribute matching input id',
+				'Consider using FormGroup wrapper',
+			],
+			'button-name': [
+				'Add text content or aria-label to buttons',
+				'Icon-only buttons need aria-label',
+				'Use descriptive button text',
+			],
+			'link-name': [
+				'Add text content to links',
+				'Avoid "click here" or "read more" without context',
+				'Use aria-label for icon links',
+			],
+			'heading-order': [
+				'Use headings in sequential order (h1, h2, h3...)',
+				'Do not skip heading levels',
+				'Each page should have exactly one h1',
+			],
+		};
+
+		issues.forEach(issue => {
+			if (fixSuggestions[issue.id]) {
+				suggestions.set(issue.id, fixSuggestions[issue.id]);
+			} else {
+				suggestions.set(issue.id, [issue.help, `See: ${issue.helpUrl}`]);
+			}
+		});
+
+		return suggestions;
 	 * This method integrates axe-core for WCAG 2.1 AA validation
 	 */
 	public async runAxeCheck(element?: HTMLElement, rules?: string[]): Promise<A11yReport> {
