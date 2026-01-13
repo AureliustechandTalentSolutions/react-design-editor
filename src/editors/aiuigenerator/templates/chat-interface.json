@@ -1,288 +1,288 @@
 {
-  "name": "Chat Interface Template",
-  "description": "Modern chat interface with message bubbles and input field",
-  "category": "messaging",
-  "version": "1.0.0",
-  "objects": [
-    {
-      "type": "rect",
-      "id": "chat-header",
-      "left": 0,
-      "top": 0,
-      "width": 600,
-      "height": 80,
-      "fill": "#3b82f6"
-    },
-    {
-      "type": "rect",
-      "id": "back-button",
-      "left": 20,
-      "top": 30,
-      "width": 40,
-      "height": 40,
-      "fill": "rgba(255,255,255,0.2)",
-      "rx": 20,
-      "ry": 20
-    },
-    {
-      "type": "text",
-      "id": "back-arrow",
-      "left": 33,
-      "top": 44,
-      "text": "←",
-      "fontSize": 20,
-      "fill": "#ffffff"
-    },
-    {
-      "type": "rect",
-      "id": "avatar",
-      "left": 80,
-      "top": 25,
-      "width": 50,
-      "height": 50,
-      "fill": "#ffffff",
-      "rx": 25,
-      "ry": 25
-    },
-    {
-      "type": "text",
-      "id": "avatar-initial",
-      "left": 97,
-      "top": 43,
-      "text": "JD",
-      "fontSize": 16,
-      "fontWeight": "bold",
-      "fill": "#3b82f6"
-    },
-    {
-      "type": "text",
-      "id": "contact-name",
-      "left": 145,
-      "top": 38,
-      "text": "John Doe",
-      "fontSize": 18,
-      "fontWeight": "bold",
-      "fill": "#ffffff"
-    },
-    {
-      "type": "text",
-      "id": "status",
-      "left": 145,
-      "top": 58,
-      "text": "Online",
-      "fontSize": 12,
-      "fill": "#e0e7ff"
-    },
-    {
-      "type": "rect",
-      "id": "chat-background",
-      "left": 0,
-      "top": 80,
-      "width": 600,
-      "height": 520,
-      "fill": "#f9fafb"
-    },
-    {
-      "type": "rect",
-      "id": "message-received1",
-      "left": 20,
-      "top": 120,
-      "width": 300,
-      "height": 60,
-      "fill": "#ffffff",
-      "stroke": "#e5e7eb",
-      "strokeWidth": 1,
-      "rx": 12,
-      "ry": 12
-    },
-    {
-      "type": "text",
-      "id": "message-text1",
-      "left": 35,
-      "top": 135,
-      "text": "Hey! How are you doing?",
-      "fontSize": 14,
-      "fill": "#111827"
-    },
-    {
-      "type": "text",
-      "id": "message-time1",
-      "left": 35,
-      "top": 160,
-      "text": "10:30 AM",
-      "fontSize": 11,
-      "fill": "#9ca3af"
-    },
-    {
-      "type": "rect",
-      "id": "message-sent1",
-      "left": 280,
-      "top": 200,
-      "width": 300,
-      "height": 60,
-      "fill": "#3b82f6",
-      "rx": 12,
-      "ry": 12
-    },
-    {
-      "type": "text",
-      "id": "message-text2",
-      "left": 295,
-      "top": 215,
-      "text": "I'm great! Thanks for asking.",
-      "fontSize": 14,
-      "fill": "#ffffff"
-    },
-    {
-      "type": "text",
-      "id": "message-time2",
-      "left": 295,
-      "top": 240,
-      "text": "10:31 AM",
-      "fontSize": 11,
-      "fill": "#e0e7ff"
-    },
-    {
-      "type": "rect",
-      "id": "message-received2",
-      "left": 20,
-      "top": 280,
-      "width": 320,
-      "height": 80,
-      "fill": "#ffffff",
-      "stroke": "#e5e7eb",
-      "strokeWidth": 1,
-      "rx": 12,
-      "ry": 12
-    },
-    {
-      "type": "text",
-      "id": "message-text3",
-      "left": 35,
-      "top": 295,
-      "text": "That's awesome! Want to grab\ncoffee later this afternoon?",
-      "fontSize": 14,
-      "fill": "#111827"
-    },
-    {
-      "type": "text",
-      "id": "message-time3",
-      "left": 35,
-      "top": 340,
-      "text": "10:32 AM",
-      "fontSize": 11,
-      "fill": "#9ca3af"
-    },
-    {
-      "type": "rect",
-      "id": "message-sent2",
-      "left": 280,
-      "top": 380,
-      "width": 300,
-      "height": 60,
-      "fill": "#3b82f6",
-      "rx": 12,
-      "ry": 12
-    },
-    {
-      "type": "text",
-      "id": "message-text4",
-      "left": 295,
-      "top": 395,
-      "text": "Sounds perfect! See you at 3?",
-      "fontSize": 14,
-      "fill": "#ffffff"
-    },
-    {
-      "type": "text",
-      "id": "message-time4",
-      "left": 295,
-      "top": 420,
-      "text": "10:33 AM",
-      "fontSize": 11,
-      "fill": "#e0e7ff"
-    },
-    {
-      "type": "text",
-      "id": "typing-indicator",
-      "left": 20,
-      "top": 470,
-      "text": "John is typing...",
-      "fontSize": 12,
-      "fill": "#9ca3af",
-      "fontStyle": "italic"
-    },
-    {
-      "type": "rect",
-      "id": "input-container",
-      "left": 0,
-      "top": 600,
-      "width": 600,
-      "height": 80,
-      "fill": "#ffffff",
-      "stroke": "#e5e7eb",
-      "strokeWidth": 1
-    },
-    {
-      "type": "rect",
-      "id": "input-field",
-      "left": 20,
-      "top": 620,
-      "width": 480,
-      "height": 40,
-      "fill": "#f9fafb",
-      "stroke": "#d1d5db",
-      "strokeWidth": 1,
-      "rx": 20,
-      "ry": 20
-    },
-    {
-      "type": "text",
-      "id": "input-placeholder",
-      "left": 40,
-      "top": 633,
-      "text": "Type a message...",
-      "fontSize": 14,
-      "fill": "#9ca3af"
-    },
-    {
-      "type": "rect",
-      "id": "attachment-button",
-      "left": 515,
-      "top": 625,
-      "width": 30,
-      "height": 30,
-      "fill": "#f3f4f6",
-      "rx": 15,
-      "ry": 15
-    },
-    {
-      "type": "text",
-      "id": "attachment-icon",
-      "left": 524,
-      "top": 635,
-      "text": "📎",
-      "fontSize": 14
-    },
-    {
-      "type": "rect",
-      "id": "send-button",
-      "left": 555,
-      "top": 625,
-      "width": 30,
-      "height": 30,
-      "fill": "#3b82f6",
-      "rx": 15,
-      "ry": 15
-    },
-    {
-      "type": "text",
-      "id": "send-icon",
-      "left": 564,
-      "top": 635,
-      "text": "→",
-      "fontSize": 14,
-      "fill": "#ffffff"
-    }
-  ]
+	"name": "Chat Interface Template",
+	"description": "Modern chat interface with message bubbles and input field",
+	"category": "messaging",
+	"version": "1.0.0",
+	"objects": [
+		{
+			"type": "rect",
+			"id": "chat-header",
+			"left": 0,
+			"top": 0,
+			"width": 600,
+			"height": 80,
+			"fill": "#3b82f6"
+		},
+		{
+			"type": "rect",
+			"id": "back-button",
+			"left": 20,
+			"top": 30,
+			"width": 40,
+			"height": 40,
+			"fill": "rgba(255,255,255,0.2)",
+			"rx": 20,
+			"ry": 20
+		},
+		{
+			"type": "text",
+			"id": "back-arrow",
+			"left": 33,
+			"top": 44,
+			"text": "←",
+			"fontSize": 20,
+			"fill": "#ffffff"
+		},
+		{
+			"type": "rect",
+			"id": "avatar",
+			"left": 80,
+			"top": 25,
+			"width": 50,
+			"height": 50,
+			"fill": "#ffffff",
+			"rx": 25,
+			"ry": 25
+		},
+		{
+			"type": "text",
+			"id": "avatar-initial",
+			"left": 97,
+			"top": 43,
+			"text": "JD",
+			"fontSize": 16,
+			"fontWeight": "bold",
+			"fill": "#3b82f6"
+		},
+		{
+			"type": "text",
+			"id": "contact-name",
+			"left": 145,
+			"top": 38,
+			"text": "John Doe",
+			"fontSize": 18,
+			"fontWeight": "bold",
+			"fill": "#ffffff"
+		},
+		{
+			"type": "text",
+			"id": "status",
+			"left": 145,
+			"top": 58,
+			"text": "Online",
+			"fontSize": 12,
+			"fill": "#e0e7ff"
+		},
+		{
+			"type": "rect",
+			"id": "chat-background",
+			"left": 0,
+			"top": 80,
+			"width": 600,
+			"height": 520,
+			"fill": "#f9fafb"
+		},
+		{
+			"type": "rect",
+			"id": "message-received1",
+			"left": 20,
+			"top": 120,
+			"width": 300,
+			"height": 60,
+			"fill": "#ffffff",
+			"stroke": "#e5e7eb",
+			"strokeWidth": 1,
+			"rx": 12,
+			"ry": 12
+		},
+		{
+			"type": "text",
+			"id": "message-text1",
+			"left": 35,
+			"top": 135,
+			"text": "Hey! How are you doing?",
+			"fontSize": 14,
+			"fill": "#111827"
+		},
+		{
+			"type": "text",
+			"id": "message-time1",
+			"left": 35,
+			"top": 160,
+			"text": "10:30 AM",
+			"fontSize": 11,
+			"fill": "#9ca3af"
+		},
+		{
+			"type": "rect",
+			"id": "message-sent1",
+			"left": 280,
+			"top": 200,
+			"width": 300,
+			"height": 60,
+			"fill": "#3b82f6",
+			"rx": 12,
+			"ry": 12
+		},
+		{
+			"type": "text",
+			"id": "message-text2",
+			"left": 295,
+			"top": 215,
+			"text": "I'm great! Thanks for asking.",
+			"fontSize": 14,
+			"fill": "#ffffff"
+		},
+		{
+			"type": "text",
+			"id": "message-time2",
+			"left": 295,
+			"top": 240,
+			"text": "10:31 AM",
+			"fontSize": 11,
+			"fill": "#e0e7ff"
+		},
+		{
+			"type": "rect",
+			"id": "message-received2",
+			"left": 20,
+			"top": 280,
+			"width": 320,
+			"height": 80,
+			"fill": "#ffffff",
+			"stroke": "#e5e7eb",
+			"strokeWidth": 1,
+			"rx": 12,
+			"ry": 12
+		},
+		{
+			"type": "text",
+			"id": "message-text3",
+			"left": 35,
+			"top": 295,
+			"text": "That's awesome! Want to grab\ncoffee later this afternoon?",
+			"fontSize": 14,
+			"fill": "#111827"
+		},
+		{
+			"type": "text",
+			"id": "message-time3",
+			"left": 35,
+			"top": 340,
+			"text": "10:32 AM",
+			"fontSize": 11,
+			"fill": "#9ca3af"
+		},
+		{
+			"type": "rect",
+			"id": "message-sent2",
+			"left": 280,
+			"top": 380,
+			"width": 300,
+			"height": 60,
+			"fill": "#3b82f6",
+			"rx": 12,
+			"ry": 12
+		},
+		{
+			"type": "text",
+			"id": "message-text4",
+			"left": 295,
+			"top": 395,
+			"text": "Sounds perfect! See you at 3?",
+			"fontSize": 14,
+			"fill": "#ffffff"
+		},
+		{
+			"type": "text",
+			"id": "message-time4",
+			"left": 295,
+			"top": 420,
+			"text": "10:33 AM",
+			"fontSize": 11,
+			"fill": "#e0e7ff"
+		},
+		{
+			"type": "text",
+			"id": "typing-indicator",
+			"left": 20,
+			"top": 470,
+			"text": "John is typing...",
+			"fontSize": 12,
+			"fill": "#9ca3af",
+			"fontStyle": "italic"
+		},
+		{
+			"type": "rect",
+			"id": "input-container",
+			"left": 0,
+			"top": 600,
+			"width": 600,
+			"height": 80,
+			"fill": "#ffffff",
+			"stroke": "#e5e7eb",
+			"strokeWidth": 1
+		},
+		{
+			"type": "rect",
+			"id": "input-field",
+			"left": 20,
+			"top": 620,
+			"width": 480,
+			"height": 40,
+			"fill": "#f9fafb",
+			"stroke": "#d1d5db",
+			"strokeWidth": 1,
+			"rx": 20,
+			"ry": 20
+		},
+		{
+			"type": "text",
+			"id": "input-placeholder",
+			"left": 40,
+			"top": 633,
+			"text": "Type a message...",
+			"fontSize": 14,
+			"fill": "#9ca3af"
+		},
+		{
+			"type": "rect",
+			"id": "attachment-button",
+			"left": 515,
+			"top": 625,
+			"width": 30,
+			"height": 30,
+			"fill": "#f3f4f6",
+			"rx": 15,
+			"ry": 15
+		},
+		{
+			"type": "text",
+			"id": "attachment-icon",
+			"left": 524,
+			"top": 635,
+			"text": "📎",
+			"fontSize": 14
+		},
+		{
+			"type": "rect",
+			"id": "send-button",
+			"left": 555,
+			"top": 625,
+			"width": 30,
+			"height": 30,
+			"fill": "#3b82f6",
+			"rx": 15,
+			"ry": 15
+		},
+		{
+			"type": "text",
+			"id": "send-icon",
+			"left": 564,
+			"top": 635,
+			"text": "→",
+			"fontSize": 14,
+			"fill": "#ffffff"
+		}
+	]
 }
