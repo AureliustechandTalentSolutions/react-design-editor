@@ -34,15 +34,15 @@ The repository combines a robust canvas-based design editor with advanced AI cap
 
 ## Repository Metadata
 
-| Property | Value |
-|----------|-------|
-| **Version** | 0.0.76 |
-| **Language** | TypeScript |
-| **Framework** | React 16.14.0 |
-| **License** | MIT |
-| **Node Version** | 18.x - 20.x |
-| **Package Manager** | npm |
-| **Original Author** | salgum1114 |
+| Property            | Value                          |
+| ------------------- | ------------------------------ |
+| **Version**         | 0.0.76                         |
+| **Language**        | TypeScript                     |
+| **Framework**       | React 16.14.0                  |
+| **License**         | MIT                            |
+| **Node Version**    | 18.x - 20.x                    |
+| **Package Manager** | npm                            |
+| **Original Author** | salgum1114                     |
 | **Fork Maintainer** | AureliustechandTalentSolutions |
 
 ## Key Features
@@ -148,44 +148,44 @@ react-design-editor/
 
 ### Core Technologies
 
-| Technology | Version | Purpose |
-|------------|---------|---------|
-| **React** | 16.14.0 | UI framework |
-| **TypeScript** | 4.7.4 | Type safety |
-| **Fabric.js** | 4.6.0 | Canvas manipulation |
-| **Ant Design** | 3.15.0 | UI component library |
-| **Anthropic Claude SDK** | 0.24.0 | AI integration |
-| **Zustand** | 4.5.0 | State management |
-| **Zod** | 3.22.0 | Schema validation |
-| **Immer** | 10.0.0 | Immutable state |
-| **i18next** | 19.0.0 | Internationalization |
-| **Framer Motion** | 11.0.0 | Animations |
+| Technology               | Version | Purpose              |
+| ------------------------ | ------- | -------------------- |
+| **React**                | 16.14.0 | UI framework         |
+| **TypeScript**           | 4.7.4   | Type safety          |
+| **Fabric.js**            | 4.6.0   | Canvas manipulation  |
+| **Ant Design**           | 3.15.0  | UI component library |
+| **Anthropic Claude SDK** | 0.24.0  | AI integration       |
+| **Zustand**              | 4.5.0   | State management     |
+| **Zod**                  | 3.22.0  | Schema validation    |
+| **Immer**                | 10.0.0  | Immutable state      |
+| **i18next**              | 19.0.0  | Internationalization |
+| **Framer Motion**        | 11.0.0  | Animations           |
 
 ### Build & Development Tools
 
-| Tool | Version | Purpose |
-|------|---------|---------|
-| **Webpack** | 5.99.9 | Module bundler |
-| **Vite** | 6.3.5 | Fast build tool |
-| **Vitest** | 4.0.17 | Unit testing |
-| **ESLint** | 8.3.0 | Code linting |
-| **Prettier** | 3.5.3 | Code formatting |
-| **Husky** | 9.1.7 | Git hooks |
-| **TypeDoc** | 0.17.4 | API documentation |
-| **Babel** | 7.27.3 | JavaScript compiler |
+| Tool         | Version | Purpose             |
+| ------------ | ------- | ------------------- |
+| **Webpack**  | 5.99.9  | Module bundler      |
+| **Vite**     | 6.3.5   | Fast build tool     |
+| **Vitest**   | 4.0.17  | Unit testing        |
+| **ESLint**   | 8.3.0   | Code linting        |
+| **Prettier** | 3.5.3   | Code formatting     |
+| **Husky**    | 9.1.7   | Git hooks           |
+| **TypeDoc**  | 0.17.4  | API documentation   |
+| **Babel**    | 7.27.3  | JavaScript compiler |
 
 ### Testing Stack
 
-| Tool | Version | Purpose |
-|------|---------|---------|
-| **Vitest** | 4.0.17 | Test runner |
-| **@testing-library/react** | 14.2.0 | React testing |
-| **@testing-library/user-event** | 14.6.1 | User interaction testing |
-| **happy-dom** | 20.1.0 | DOM implementation |
-| **MSW** | 2.2.0 | API mocking |
-| **@axe-core/react** | 4.11.0 | A11y testing |
-| **Playwright** | 1.57.0 | E2E testing |
-| **@vitest/coverage-v8** | 4.0.17 | Code coverage |
+| Tool                            | Version | Purpose                  |
+| ------------------------------- | ------- | ------------------------ |
+| **Vitest**                      | 4.0.17  | Test runner              |
+| **@testing-library/react**      | 14.2.0  | React testing            |
+| **@testing-library/user-event** | 14.6.1  | User interaction testing |
+| **happy-dom**                   | 20.1.0  | DOM implementation       |
+| **MSW**                         | 2.2.0   | API mocking              |
+| **@axe-core/react**             | 4.11.0  | A11y testing             |
+| **Playwright**                  | 1.57.0  | E2E testing              |
+| **@vitest/coverage-v8**         | 4.0.17  | Code coverage            |
 
 ## Core Libraries
 
@@ -205,16 +205,16 @@ console.log(tokens.colors.primary); // '#1890ff'
 
 // Update tokens
 tokenManager.updateTokens({
-  colors: {
-    primary: '#0066cc',
-    secondary: '#00cc66'
-  }
+	colors: {
+		primary: '#0066cc',
+		secondary: '#00cc66',
+	},
 });
 
 // Apply tokens to canvas objects
 tokenManager.applyTokensToObject(canvasObject, {
-  fill: 'primary',
-  borderRadius: 'md'
+	fill: 'primary',
+	borderRadius: 'md',
 });
 ```
 
@@ -235,8 +235,8 @@ console.log(result.violations); // Array of violations
 
 // Check color contrast
 const contrastRatio = a11yChecker.checkColorContrast(
-  '#000000', // foreground
-  '#ffffff'  // background
+	'#000000', // foreground
+	'#ffffff', // background
 );
 console.log(contrastRatio); // 21 (passes WCAG AA)
 
@@ -253,7 +253,7 @@ import { HistoryManager } from '@/libs/history';
 
 // Initialize history manager
 const history = new HistoryManager({
-  maxStackSize: 50
+	maxStackSize: 50,
 });
 
 // Save state
@@ -292,16 +292,16 @@ const loginTemplate = templates.getTemplate('modern-login');
 
 // Apply template to canvas
 templates.applyTemplate(canvas, 'modern-login', {
-  colors: { primary: '#0066cc' },
-  platform: 'web'
+	colors: { primary: '#0066cc' },
+	platform: 'web',
 });
 
 // Save custom template
 templates.saveTemplate({
-  id: 'my-custom-template',
-  name: 'My Custom Template',
-  category: 'custom',
-  data: canvas.toJSON()
+	id: 'my-custom-template',
+	name: 'My Custom Template',
+	category: 'custom',
+	data: canvas.toJSON(),
 });
 ```
 
@@ -337,16 +337,11 @@ shortcuts.unregister('ctrl+z');
 Control feature availability at runtime.
 
 ```typescript
-import { 
-  isFeatureEnabled, 
-  enableFeature,
-  disableFeature,
-  getAllFeatureFlags 
-} from '@/config/featureFlags';
+import { isFeatureEnabled, enableFeature, disableFeature, getAllFeatureFlags } from '@/config/featureFlags';
 
 // Check if feature is enabled
 if (isFeatureEnabled('enableA11yChecker')) {
-  // Run accessibility checks
+	// Run accessibility checks
 }
 
 // Enable a feature
@@ -387,14 +382,14 @@ import { generateUIFromPrompt, exportToReact } from 'react-design-editor';
 
 // Generate UI from natural language
 const design = await generateUIFromPrompt(
-  'Create a modern login form with email, password, social login buttons, and forgot password link',
-  { style: 'modern', platform: 'web', complexity: 'medium' }
+	'Create a modern login form with email, password, social login buttons, and forgot password link',
+	{ style: 'modern', platform: 'web', complexity: 'medium' },
 );
 
 // Export to React with Tailwind
 const code = await exportToReact(design, {
-  styling: 'tailwind',
-  typescript: true
+	styling: 'tailwind',
+	typescript: true,
 });
 ```
 
@@ -402,46 +397,48 @@ const code = await exportToReact(design, {
 
 ### Available Scripts
 
-| Script | Description |
-|--------|-------------|
-| `npm start` | Start development server on port 4000 |
-| `npm run start:dev` | Start Webpack dev server |
-| `npm test` | Run tests in watch mode |
-| `npm run test:ui` | Run tests with Vitest UI |
-| `npm run test:coverage` | Generate test coverage report |
-| `npm run test:watch` | Run tests in watch mode |
-| `npm run build` | Production build with Webpack & TypeDoc |
-| `npm run build:lib` | Library build with Vite & TypeScript |
-| `npm run build:types` | Build type declarations |
-| `npm run lint` | Run ESLint with auto-fix |
-| `npm run lint:check` | Check for linting issues |
-| `npm run lint:fix` | Fix all linting issues |
-| `npm run format` | Format code with Prettier |
-| `npm run format:check` | Check code formatting |
-| `npm run format:fix` | Fix code formatting |
-| `npm run typecheck` | Run TypeScript type checking |
-| `npm run validate` | Run typecheck, lint, and tests |
-| `npm run quality` | Run quality gate checks |
-| `npm run clean` | Remove build artifacts |
-| `npm run clean:dist` | Remove dist folder |
-| `npm run audit:deps` | Audit dependencies for vulnerabilities |
-| `npm run audit:todos` | Scan for TODO comments |
-| `npm run deploy` | Build library and publish to npm |
-| `npm run ghpages` | Deploy docs to GitHub Pages |
-| `npm run serve` | Serve docs on port 4001 |
-| `npm run typedoc` | Generate TypeDoc documentation |
-| `npm run prepare` | Install Husky git hooks |
-| `npm run precommit` | Run lint-staged on commit |
+| Script                  | Description                             |
+| ----------------------- | --------------------------------------- |
+| `npm start`             | Start development server on port 4000   |
+| `npm run start:dev`     | Start Webpack dev server                |
+| `npm test`              | Run tests in watch mode                 |
+| `npm run test:ui`       | Run tests with Vitest UI                |
+| `npm run test:coverage` | Generate test coverage report           |
+| `npm run test:watch`    | Run tests in watch mode                 |
+| `npm run build`         | Production build with Webpack & TypeDoc |
+| `npm run build:lib`     | Library build with Vite & TypeScript    |
+| `npm run build:types`   | Build type declarations                 |
+| `npm run lint`          | Run ESLint with auto-fix                |
+| `npm run lint:check`    | Check for linting issues                |
+| `npm run lint:fix`      | Fix all linting issues                  |
+| `npm run format`        | Format code with Prettier               |
+| `npm run format:check`  | Check code formatting                   |
+| `npm run format:fix`    | Fix code formatting                     |
+| `npm run typecheck`     | Run TypeScript type checking            |
+| `npm run validate`      | Run typecheck, lint, and tests          |
+| `npm run quality`       | Run quality gate checks                 |
+| `npm run clean`         | Remove build artifacts                  |
+| `npm run clean:dist`    | Remove dist folder                      |
+| `npm run audit:deps`    | Audit dependencies for vulnerabilities  |
+| `npm run audit:todos`   | Scan for TODO comments                  |
+| `npm run deploy`        | Build library and publish to npm        |
+| `npm run ghpages`       | Deploy docs to GitHub Pages             |
+| `npm run serve`         | Serve docs on port 4001                 |
+| `npm run typedoc`       | Generate TypeDoc documentation          |
+| `npm run prepare`       | Install Husky git hooks                 |
+| `npm run precommit`     | Run lint-staged on commit               |
 
 ### Code Quality Tools
 
 #### ESLint Configuration
+
 - Extends: Airbnb, Airbnb TypeScript, Prettier
 - TypeScript rules enabled
 - React and React Hooks plugins
 - Import resolver for TypeScript paths
 
 #### Prettier Configuration
+
 - Single quotes
 - Tab width: 2
 - Print width: 100
@@ -449,41 +446,47 @@ const code = await exportToReact(design, {
 - Arrow parens: avoid
 
 #### Husky Git Hooks
+
 - Pre-commit: Runs lint-staged
 - Validates TypeScript types
 - Runs ESLint on staged files
 - Formats code with Prettier
 
 #### Lint-staged
+
 Automatically runs on staged files:
+
 - TypeScript files: ESLint + Prettier
 - CSS/Less/JSON/Markdown: Prettier
 
 ### Development Workflow
 
 1. **Create a feature branch**
-   ```bash
-   git checkout -b feature/my-feature
-   ```
+
+    ```bash
+    git checkout -b feature/my-feature
+    ```
 
 2. **Make changes and test**
-   ```bash
-   npm test              # Run tests
-   npm run typecheck     # Check types
-   npm run lint:check    # Check linting
-   ```
+
+    ```bash
+    npm test              # Run tests
+    npm run typecheck     # Check types
+    npm run lint:check    # Check linting
+    ```
 
 3. **Commit changes**
-   ```bash
-   git add .
-   git commit -m "feat: add new feature"
-   # Husky automatically runs lint-staged
-   ```
+
+    ```bash
+    git add .
+    git commit -m "feat: add new feature"
+    # Husky automatically runs lint-staged
+    ```
 
 4. **Push and create PR**
-   ```bash
-   git push origin feature/my-feature
-   ```
+    ```bash
+    git push origin feature/my-feature
+    ```
 
 ## CI/CD Pipelines
 
@@ -492,11 +495,12 @@ Automatically runs on staged files:
 Runs on: Push to `master`, Pull requests to `master`
 
 **Jobs:**
+
 - **Build** (Ubuntu, Node 18.x)
-  - Checkout code
-  - Install dependencies
-  - Run ESLint
-  - Build library with Vite
+    - Checkout code
+    - Install dependencies
+    - Run ESLint
+    - Build library with Vite
 
 **Purpose:** Ensures the codebase builds successfully on every push/PR.
 
@@ -505,13 +509,14 @@ Runs on: Push to `master`, Pull requests to `master`
 Runs on: Push to `master`/`main`, Pull requests to `master`/`main`
 
 **Jobs:**
+
 - **Test** (Ubuntu, Node 18.x & 20.x)
-  - Checkout code
-  - Install dependencies with caching
-  - TypeScript type checking
-  - ESLint check
-  - Prettier format check
-  - Run tests with coverage
+    - Checkout code
+    - Install dependencies with caching
+    - TypeScript type checking
+    - ESLint check
+    - Prettier format check
+    - Run tests with coverage
 
 **Purpose:** Comprehensive quality checks including tests, linting, formatting, and type safety.
 
@@ -524,6 +529,7 @@ Automates project board management and issue handling.
 ### Quality Gates
 
 The `npm run quality` command runs:
+
 - Dependency security audit
 - TODO comment scanning
 - Code complexity analysis
@@ -533,19 +539,20 @@ The `npm run quality` command runs:
 
 ## Feature Flags
 
-| Feature | Status | Description |
-|---------|--------|-------------|
-| `enableImageToUI` | 🔴 Disabled | Convert images to UI designs |
-| `enableVoiceCommands` | 🔴 Disabled | Voice-controlled design editing |
-| `enableCollaboration` | 🔴 Disabled | Real-time collaborative editing |
-| `enableAdvancedExport` | 🟢 Enabled | Multi-framework code export |
-| `enableTemplateLibrary` | 🟢 Enabled | Pre-built UI templates |
-| `enableA11yChecker` | 🟢 Enabled | Accessibility compliance checking |
-| `enableDesignSystemTokens` | 🟢 Enabled | Design token management |
-| `enableHistoryManager` | 🟢 Enabled | Undo/redo functionality |
-| `enableKeyboardShortcuts` | 🟢 Enabled | Keyboard navigation and commands |
+| Feature                    | Status      | Description                       |
+| -------------------------- | ----------- | --------------------------------- |
+| `enableImageToUI`          | 🔴 Disabled | Convert images to UI designs      |
+| `enableVoiceCommands`      | 🔴 Disabled | Voice-controlled design editing   |
+| `enableCollaboration`      | 🔴 Disabled | Real-time collaborative editing   |
+| `enableAdvancedExport`     | 🟢 Enabled  | Multi-framework code export       |
+| `enableTemplateLibrary`    | 🟢 Enabled  | Pre-built UI templates            |
+| `enableA11yChecker`        | 🟢 Enabled  | Accessibility compliance checking |
+| `enableDesignSystemTokens` | 🟢 Enabled  | Design token management           |
+| `enableHistoryManager`     | 🟢 Enabled  | Undo/redo functionality           |
+| `enableKeyboardShortcuts`  | 🟢 Enabled  | Keyboard navigation and commands  |
 
 **Toggle at runtime:**
+
 ```typescript
 import { enableFeature, disableFeature } from '@/config/featureFlags';
 
@@ -573,12 +580,12 @@ npm run test:watch
 
 ### Test Coverage Metrics
 
-| Metric | Coverage | Status |
-|--------|----------|--------|
-| **Statements** | 91.35% | 🟢 Excellent |
-| **Functions** | 100% | 🟢 Perfect |
-| **Branches** | 77.41% | 🟡 Good |
-| **Lines** | 93.18% | 🟢 Excellent |
+| Metric         | Coverage | Status       |
+| -------------- | -------- | ------------ |
+| **Statements** | 91.35%   | 🟢 Excellent |
+| **Functions**  | 100%     | 🟢 Perfect   |
+| **Branches**   | 77.41%   | 🟡 Good      |
+| **Lines**      | 93.18%   | 🟢 Excellent |
 
 ### Testing Tools
 
@@ -608,21 +615,21 @@ src/
 
 ### Available Documentation
 
-| Document | Description | Path |
-|----------|-------------|------|
-| **API Reference** | AI UI Generator API docs | [docs/api/ai-ui-generator.md](./docs/api/ai-ui-generator.md) |
-| **Architecture** | System architecture overview | [docs/architecture/ai-ui-generator.md](./docs/architecture/ai-ui-generator.md) |
-| **User Guide** | End-user documentation | [docs/guides/ai-ui-generator-user-guide.md](./docs/guides/ai-ui-generator-user-guide.md) |
-| **Developer Guide** | Development documentation | [docs/guides/ai-ui-generator-developer-guide.md](./docs/guides/ai-ui-generator-developer-guide.md) |
-| **Prompt Library** | Example prompts and patterns | [docs/examples/prompt-library.md](./docs/examples/prompt-library.md) |
-| **Changelog** | Version history | [CHANGELOG.md](./CHANGELOG.md) |
-| **Roadmap** | Feature roadmap | [ROADMAP.md](./ROADMAP.md) |
-| **Contributing** | Contribution guidelines | [CONTRIBUTING.md](./CONTRIBUTING.md) |
-| **Technical Debt** | Known issues tracker | [TECH_DEBT.md](./TECH_DEBT.md) |
-| **Code Quality** | Quality metrics | [CODE_QUALITY_SUMMARY.md](./CODE_QUALITY_SUMMARY.md) |
-| **DevOps Setup** | CI/CD documentation | [DEVOPS_SETUP.md](./DEVOPS_SETUP.md) |
-| **Project Board** | Project management | [PROJECT_BOARD.md](./PROJECT_BOARD.md) |
-| **Sprint Planning** | Sprint documentation | [SPRINT.md](./SPRINT.md) |
+| Document            | Description                  | Path                                                                                               |
+| ------------------- | ---------------------------- | -------------------------------------------------------------------------------------------------- |
+| **API Reference**   | AI UI Generator API docs     | [docs/api/ai-ui-generator.md](./docs/api/ai-ui-generator.md)                                       |
+| **Architecture**    | System architecture overview | [docs/architecture/ai-ui-generator.md](./docs/architecture/ai-ui-generator.md)                     |
+| **User Guide**      | End-user documentation       | [docs/guides/ai-ui-generator-user-guide.md](./docs/guides/ai-ui-generator-user-guide.md)           |
+| **Developer Guide** | Development documentation    | [docs/guides/ai-ui-generator-developer-guide.md](./docs/guides/ai-ui-generator-developer-guide.md) |
+| **Prompt Library**  | Example prompts and patterns | [docs/examples/prompt-library.md](./docs/examples/prompt-library.md)                               |
+| **Changelog**       | Version history              | [CHANGELOG.md](./CHANGELOG.md)                                                                     |
+| **Roadmap**         | Feature roadmap              | [ROADMAP.md](./ROADMAP.md)                                                                         |
+| **Contributing**    | Contribution guidelines      | [CONTRIBUTING.md](./CONTRIBUTING.md)                                                               |
+| **Technical Debt**  | Known issues tracker         | [TECH_DEBT.md](./TECH_DEBT.md)                                                                     |
+| **Code Quality**    | Quality metrics              | [CODE_QUALITY_SUMMARY.md](./CODE_QUALITY_SUMMARY.md)                                               |
+| **DevOps Setup**    | CI/CD documentation          | [DEVOPS_SETUP.md](./DEVOPS_SETUP.md)                                                               |
+| **Project Board**   | Project management           | [PROJECT_BOARD.md](./PROJECT_BOARD.md)                                                             |
+| **Sprint Planning** | Sprint documentation         | [SPRINT.md](./SPRINT.md)                                                                           |
 
 ### Generating Documentation
 
@@ -646,34 +653,35 @@ The repository maintains a transparent [Technical Debt Tracker](./TECH_DEBT.md) 
 
 ### Current Debt Summary
 
-| Priority | Count | Examples |
-|----------|-------|----------|
-| **High** | 4 | Console.log statements in production code |
-| **Medium** | 6 | TODO comments for incomplete features, security vulnerabilities |
-| **Low** | 0 | - |
+| Priority   | Count | Examples                                                        |
+| ---------- | ----- | --------------------------------------------------------------- |
+| **High**   | 4     | Console.log statements in production code                       |
+| **Medium** | 6     | TODO comments for incomplete features, security vulnerabilities |
+| **Low**    | 0     | -                                                               |
 
 ### Key Issues
 
 1. **Console.log Statements** (High Priority)
-   - Location: `src/serviceWorker.ts`, various handler files
-   - Impact: Low (development artifacts)
-   - Effort: Small
+    - Location: `src/serviceWorker.ts`, various handler files
+    - Impact: Low (development artifacts)
+    - Effort: Small
 
 2. **Incomplete Features** (Medium Priority)
-   - Polygon resize functionality
-   - Object scaling guidelines
-   - Element positioning issues
-   - Impact: Medium (affects user experience)
-   - Effort: Medium
+    - Polygon resize functionality
+    - Object scaling guidelines
+    - Element positioning issues
+    - Impact: Medium (affects user experience)
+    - Effort: Medium
 
 3. **Security Vulnerabilities** (Medium Priority)
-   - 35 npm package vulnerabilities (16 moderate, 16 high, 3 critical)
-   - Impact: High (security risk)
-   - Effort: Large (requires dependency updates and testing)
+    - 35 npm package vulnerabilities (16 moderate, 16 high, 3 critical)
+    - Impact: High (security risk)
+    - Effort: Large (requires dependency updates and testing)
 
 ### Debt Prevention
 
 The project follows these guidelines to prevent new debt:
+
 - No TODO comments without linked issues
 - No `@ts-ignore` without explanation
 - No `any` types without justification
@@ -699,11 +707,11 @@ Generate common UI patterns with natural language:
 
 ### Export Options
 
-| Framework | Styling Options | TypeScript |
-|-----------|----------------|------------|
-| **React/Next.js** | Tailwind CSS, CSS Modules, Styled Components | ✅ |
-| **Vue 3** | Tailwind CSS, CSS Modules | ✅ |
-| **HTML5** | Clean CSS, Tailwind CSS | ⚠️ JavaScript only |
+| Framework         | Styling Options                              | TypeScript         |
+| ----------------- | -------------------------------------------- | ------------------ |
+| **React/Next.js** | Tailwind CSS, CSS Modules, Styled Components | ✅                 |
+| **Vue 3**         | Tailwind CSS, CSS Modules                    | ✅                 |
+| **HTML5**         | Clean CSS, Tailwind CSS                      | ⚠️ JavaScript only |
 
 ### Style Presets
 
@@ -751,25 +759,25 @@ We welcome contributions from the community! Please see our [Contributing Guide]
 
 1. **Fork the repository**
 2. **Create a feature branch**
-   ```bash
-   git checkout -b feature/amazing-feature
-   ```
+    ```bash
+    git checkout -b feature/amazing-feature
+    ```
 3. **Make your changes**
-   - Follow the code style guidelines
-   - Add tests for new features
-   - Update documentation as needed
+    - Follow the code style guidelines
+    - Add tests for new features
+    - Update documentation as needed
 4. **Run quality checks**
-   ```bash
-   npm run validate
-   ```
+    ```bash
+    npm run validate
+    ```
 5. **Commit your changes**
-   ```bash
-   git commit -m "feat: add amazing feature"
-   ```
+    ```bash
+    git commit -m "feat: add amazing feature"
+    ```
 6. **Push to your fork**
-   ```bash
-   git push origin feature/amazing-feature
-   ```
+    ```bash
+    git push origin feature/amazing-feature
+    ```
 7. **Open a Pull Request**
 
 ### Contribution Guidelines
@@ -811,22 +819,26 @@ copies or substantial portions of the Software.
 This project builds upon and integrates several outstanding open-source projects:
 
 ### Original Project
+
 - **[react-design-editor](https://github.com/salgum1114/react-design-editor)** by [salgum1114](https://github.com/salgum1114)
-  - Foundation for canvas-based design editor
-  - Fabric.js integration and object handling
-  - Original architecture and design patterns
+    - Foundation for canvas-based design editor
+    - Fabric.js integration and object handling
+    - Original architecture and design patterns
 
 ### Core Technologies
+
 - **[Fabric.js](http://fabricjs.com/)** - Powerful HTML5 canvas library
 - **[React](https://reactjs.org/)** - UI component framework
 - **[Ant Design](https://ant.design/)** - Enterprise-class UI components
 - **[TypeScript](https://www.typescriptlang.org/)** - Type-safe JavaScript
 
 ### AI & ML
+
 - **[Anthropic Claude](https://www.anthropic.com/)** - AI language model powering UI generation
 - **[Claude SDK](https://github.com/anthropics/anthropic-sdk-typescript)** - TypeScript SDK for Claude API
 
 ### Development Tools
+
 - **[Vite](https://vitejs.dev/)** - Next-generation frontend tooling
 - **[Vitest](https://vitest.dev/)** - Fast unit test framework
 - **[Testing Library](https://testing-library.com/)** - Testing utilities
@@ -835,12 +847,14 @@ This project builds upon and integrates several outstanding open-source projects
 - **[Husky](https://typicode.github.io/husky/)** - Git hooks
 
 ### State Management & Utilities
+
 - **[Zustand](https://github.com/pmndrs/zustand)** - Lightweight state management
 - **[Immer](https://immerjs.github.io/immer/)** - Immutable state updates
 - **[Zod](https://zod.dev/)** - Schema validation
 - **[Lodash](https://lodash.com/)** - Utility functions
 
 ### Special Thanks
+
 - All contributors to the original react-design-editor project
 - The open-source community for their invaluable tools and libraries
 - Beta testers and early adopters for feedback and bug reports
@@ -851,9 +865,9 @@ This project builds upon and integrates several outstanding open-source projects
 
 **Made with ❤️ by [AureliustechandTalentSolutions](https://github.com/AureliustechandTalentSolutions)**
 
-[Report Bug](https://github.com/AureliustechandTalentSolutions/react-design-editor/issues) · 
-[Request Feature](https://github.com/AureliustechandTalentSolutions/react-design-editor/issues) · 
-[Documentation](./docs/README.md) · 
+[Report Bug](https://github.com/AureliustechandTalentSolutions/react-design-editor/issues) ·
+[Request Feature](https://github.com/AureliustechandTalentSolutions/react-design-editor/issues) ·
+[Documentation](./docs/README.md) ·
 [Roadmap](./ROADMAP.md)
 
 </div>
