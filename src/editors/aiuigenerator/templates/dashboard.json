@@ -1,115 +1,115 @@
 {
-  "name": "Dashboard Template",
-  "description": "Modern dashboard layout with sidebar navigation and analytics cards",
-  "category": "dashboard",
-  "version": "1.0.0",
-  "objects": [
-    {
-      "type": "rect",
-      "id": "sidebar",
-      "left": 0,
-      "top": 0,
-      "width": 250,
-      "height": 800,
-      "fill": "#1f2937",
-      "selectable": true
-    },
-    {
-      "type": "text",
-      "id": "logo",
-      "left": 20,
-      "top": 30,
-      "text": "Dashboard",
-      "fontSize": 24,
-      "fontWeight": "bold",
-      "fill": "#ffffff"
-    },
-    {
-      "type": "rect",
-      "id": "card1",
-      "left": 300,
-      "top": 50,
-      "width": 300,
-      "height": 150,
-      "fill": "#ffffff",
-      "stroke": "#e5e7eb",
-      "strokeWidth": 1,
-      "rx": 8,
-      "ry": 8
-    },
-    {
-      "type": "text",
-      "id": "card1-title",
-      "left": 320,
-      "top": 70,
-      "text": "Total Users",
-      "fontSize": 16,
-      "fill": "#6b7280"
-    },
-    {
-      "type": "text",
-      "id": "card1-value",
-      "left": 320,
-      "top": 100,
-      "text": "12,543",
-      "fontSize": 32,
-      "fontWeight": "bold",
-      "fill": "#111827"
-    },
-    {
-      "type": "rect",
-      "id": "card2",
-      "left": 650,
-      "top": 50,
-      "width": 300,
-      "height": 150,
-      "fill": "#ffffff",
-      "stroke": "#e5e7eb",
-      "strokeWidth": 1,
-      "rx": 8,
-      "ry": 8
-    },
-    {
-      "type": "text",
-      "id": "card2-title",
-      "left": 670,
-      "top": 70,
-      "text": "Revenue",
-      "fontSize": 16,
-      "fill": "#6b7280"
-    },
-    {
-      "type": "text",
-      "id": "card2-value",
-      "left": 670,
-      "top": 100,
-      "text": "$45,231",
-      "fontSize": 32,
-      "fontWeight": "bold",
-      "fill": "#111827"
-    },
-    {
-      "type": "rect",
-      "id": "chart-area",
-      "left": 300,
-      "top": 250,
-      "width": 650,
-      "height": 400,
-      "fill": "#ffffff",
-      "stroke": "#e5e7eb",
-      "strokeWidth": 1,
-      "rx": 8,
-      "ry": 8
-    },
-    {
-      "type": "text",
-      "id": "chart-title",
-      "left": 320,
-      "top": 270,
-      "text": "Analytics Overview",
-      "fontSize": 18,
-      "fontWeight": "bold",
-      "fill": "#111827"
-    }
-  ]
+	"name": "Dashboard Template",
+	"description": "Modern dashboard layout with sidebar navigation and analytics cards",
+	"category": "dashboard",
+	"version": "1.0.0",
+	"objects": [
+		{
+			"type": "rect",
+			"id": "sidebar",
+			"left": 0,
+			"top": 0,
+			"width": 250,
+			"height": 800,
+			"fill": "#1f2937",
+			"selectable": true
+		},
+		{
+			"type": "text",
+			"id": "logo",
+			"left": 20,
+			"top": 30,
+			"text": "Dashboard",
+			"fontSize": 24,
+			"fontWeight": "bold",
+			"fill": "#ffffff"
+		},
+		{
+			"type": "rect",
+			"id": "card1",
+			"left": 300,
+			"top": 50,
+			"width": 300,
+			"height": 150,
+			"fill": "#ffffff",
+			"stroke": "#e5e7eb",
+			"strokeWidth": 1,
+			"rx": 8,
+			"ry": 8
+		},
+		{
+			"type": "text",
+			"id": "card1-title",
+			"left": 320,
+			"top": 70,
+			"text": "Total Users",
+			"fontSize": 16,
+			"fill": "#6b7280"
+		},
+		{
+			"type": "text",
+			"id": "card1-value",
+			"left": 320,
+			"top": 100,
+			"text": "12,543",
+			"fontSize": 32,
+			"fontWeight": "bold",
+			"fill": "#111827"
+		},
+		{
+			"type": "rect",
+			"id": "card2",
+			"left": 650,
+			"top": 50,
+			"width": 300,
+			"height": 150,
+			"fill": "#ffffff",
+			"stroke": "#e5e7eb",
+			"strokeWidth": 1,
+			"rx": 8,
+			"ry": 8
+		},
+		{
+			"type": "text",
+			"id": "card2-title",
+			"left": 670,
+			"top": 70,
+			"text": "Revenue",
+			"fontSize": 16,
+			"fill": "#6b7280"
+		},
+		{
+			"type": "text",
+			"id": "card2-value",
+			"left": 670,
+			"top": 100,
+			"text": "$45,231",
+			"fontSize": 32,
+			"fontWeight": "bold",
+			"fill": "#111827"
+		},
+		{
+			"type": "rect",
+			"id": "chart-area",
+			"left": 300,
+			"top": 250,
+			"width": 650,
+			"height": 400,
+			"fill": "#ffffff",
+			"stroke": "#e5e7eb",
+			"strokeWidth": 1,
+			"rx": 8,
+			"ry": 8
+		},
+		{
+			"type": "text",
+			"id": "chart-title",
+			"left": 320,
+			"top": 270,
+			"text": "Analytics Overview",
+			"fontSize": 18,
+			"fontWeight": "bold",
+			"fill": "#111827"
+		}
+	]
 }

@@ -5,10 +5,12 @@
 
 import { Layout, message, Spin, Tabs } from 'antd';
 import React, { Component } from 'react';
+
 import Canvas, { CanvasInstance } from '../../canvas/Canvas';
 import { Content } from '../../components/layout';
-import { GeneratedDesign, GenerateOptions } from '../../types/aiui';
 import { generateUIFromPrompt, isAIAvailable } from '../../libs/ai';
+import { GeneratedDesign, GenerateOptions } from '../../types/aiui';
+
 import AIAssistant from './AIAssistant';
 import CodePreview from './CodePreview';
 import ComponentLibrary from './ComponentLibrary';
@@ -119,11 +121,7 @@ class AIUIEditor extends Component<any, IState> {
 		const { activePanel, currentDesign, selectedItem } = this.state;
 
 		return (
-			<Tabs
-				activeKey={activePanel}
-				onChange={key => this.setState({ activePanel: key })}
-				size="small"
-			>
+			<Tabs activeKey={activePanel} onChange={key => this.setState({ activePanel: key })} size="small">
 				<TabPane tab="Prompt" key="prompt">
 					<PromptInput onGenerate={this.handleGenerate} loading={this.state.loading} />
 				</TabPane>

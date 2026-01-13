@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react';
+
 import { DesignTemplate, TemplateLibrary } from '../../libs/templates/TemplateLibrary';
 
 // Import template JSON files
+import chatInterfaceTemplate from './templates/chat-interface.json';
 import dashboardTemplate from './templates/dashboard.json';
 import landingPageTemplate from './templates/landing-page.json';
 import loginFormTemplate from './templates/login-form.json';
-import productCardTemplate from './templates/product-card.json';
-import pricingTableTemplate from './templates/pricing-table.json';
-import settingsPageTemplate from './templates/settings-page.json';
 import mobileAppHomeTemplate from './templates/mobile-app-home.json';
-import chatInterfaceTemplate from './templates/chat-interface.json';
+import pricingTableTemplate from './templates/pricing-table.json';
+import productCardTemplate from './templates/product-card.json';
+import settingsPageTemplate from './templates/settings-page.json';
 
 interface TemplateGalleryProps {
 	onSelectTemplate: (template: DesignTemplate) => void;
@@ -200,10 +201,7 @@ export const TemplateGallery: React.FC<TemplateGalleryProps> = ({ onSelectTempla
 							<div style={styles.previewPlaceholder}>Template Preview</div>
 						</div>
 						<div style={styles.modalActions}>
-							<button
-								style={styles.selectButton}
-								onClick={() => handleSelectTemplate(previewTemplate)}
-							>
+							<button style={styles.selectButton} onClick={() => handleSelectTemplate(previewTemplate)}>
 								Use This Template
 							</button>
 							<button style={styles.cancelButton} onClick={() => setPreviewTemplate(null)}>
