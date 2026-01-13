@@ -186,6 +186,7 @@ export class AccessibilityChecker {
 
 		const [r, g, b] = [rgb.r, rgb.g, rgb.b].map(val => {
 			const v = val / 255;
+			return v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4;
 			return v <= SRGB_THRESHOLD
 				? v / SRGB_LOW_DIVISOR
 				: ((v + SRGB_OFFSET) / SRGB_DIVISOR) ** SRGB_GAMMA;

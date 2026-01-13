@@ -200,12 +200,22 @@ npm run test:ui
 # Run with coverage
 npm run test:coverage
 
+# Run integration tests
+npm run test:integration
+
+# Run end-to-end tests
+npm run test:e2e
+
 # Run specific tests
 npm test -- --grep "AI"
 ```
 
-**Coverage Results:**
+**Test Coverage:**
 
+- Unit Tests: 78 tests
+- Integration Tests: 20 tests (DnD, Export, Responsive, Vision, Components)
+- E2E Tests: 17 tests (AI Flow, Multi-Framework Export, A11y)
+- Total Coverage: 80%+ maintained
 - Statements: 91.35%
 - Functions: 100%
 - Branches: 77.41%
@@ -238,12 +248,18 @@ npm start          # Start dev server (port 4000)
 npm test           # Run tests
 npm run test:ui    # Run tests with UI
 npm run test:coverage # Generate coverage report
+npm run test:integration # Run integration tests
+npm run test:e2e   # Run end-to-end tests
 npm run lint       # Run ESLint
+npm run lint:all   # Run ESLint on all files
 npm run lint:fix   # Fix ESLint issues
 npm run format     # Run Prettier
+npm run format:all # Format all source files
 npm run typecheck  # TypeScript type checking
-npm run quality    # Run all quality gates
+npm run quality    # Run all quality gates (typecheck + lint + test)
 npm run clean      # Remove build artifacts
+npm run clean:all  # Clean all generated files
+npm run audit:deps # Run npm audit and check outdated packages
 npm run build      # Production build
 ```
 
