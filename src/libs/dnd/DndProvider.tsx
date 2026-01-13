@@ -1,3 +1,8 @@
+import React from 'react';
+import {
+	DndContext,
+	DragEndEvent,
+	DragStartEvent,
 /**
  * DnD Provider
  * Reusable drag-and-drop context wrapper using @dnd-kit
@@ -11,6 +16,20 @@ import {
 	PointerSensor,
 	useSensor,
 	useSensors,
+	closestCenter,
+} from '@dnd-kit/core';
+import { sortableKeyboardCoordinates } from '@dnd-kit/sortable';
+
+interface DndProviderProps {
+	children: React.ReactNode;
+	onDragEnd: (event: DragEndEvent) => void;
+	onDragStart?: (event: DragStartEvent) => void;
+}
+
+function DndProvider({ children, onDragEnd, onDragStart }: DndProviderProps) {
+	const sensors = useSensors(
+		useSensor(PointerSensor, {
+			activationConstraint: { distance: 8 },
 	DragEndEvent,
 	DragStartEvent,
 	DragOverEvent,
@@ -48,6 +67,10 @@ const DndProvider: React.FC<DndProviderProps> = ({ children, onDragStart, onDrag
 			{children}
 		</DndContext>
 	);
+}
+
+export default DndProvider;
+export { DndProvider };
 };
 
 export default DndProvider;
