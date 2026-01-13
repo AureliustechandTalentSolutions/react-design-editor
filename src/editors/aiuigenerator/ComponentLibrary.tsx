@@ -5,6 +5,7 @@
 
 import { Card, Collapse, message } from 'antd';
 import React from 'react';
+
 import Icon from '../../components/icon/Icon';
 import { componentLibrary, getComponentsByCategory } from '../../libs/design-system/components';
 
@@ -68,7 +69,9 @@ const ComponentLibrary: React.FC<IProps> = ({ onAddComponent }) => {
 											<Icon name={component.icon} prefix="fas" />
 											<div>
 												<div style={{ fontWeight: 500, fontSize: 13 }}>{component.name}</div>
-												<div style={{ fontSize: 11, color: '#6b7280' }}>{component.description}</div>
+												<div style={{ fontSize: 11, color: '#6b7280' }}>
+													{component.description}
+												</div>
 											</div>
 										</div>
 									))}

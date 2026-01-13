@@ -5,6 +5,7 @@
 
 import { Button, Card, message } from 'antd';
 import React from 'react';
+
 import Icon from '../../components/icon/Icon';
 import { getColorPalette, tokens } from '../../libs/design-system/tokens';
 
@@ -41,7 +42,14 @@ const StyleExplorer: React.FC<IProps> = ({ onApplyPalette }) => {
 					const colors = getColorPalette(palette.name);
 					return (
 						<div key={palette.key} style={{ marginBottom: 16 }}>
-							<div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
+							<div
+								style={{
+									display: 'flex',
+									justifyContent: 'space-between',
+									alignItems: 'center',
+									marginBottom: 8,
+								}}
+							>
 								<strong>{palette.name}</strong>
 								<Button
 									size="small"

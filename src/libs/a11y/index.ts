@@ -8,3 +8,14 @@ export type {
 	FixSuggestionsResult,
 } from './AccessibilityChecker';
 export { useAccessibilityCheck } from './useAccessibilityCheck';
+	FixSuggestion,
+	FixSuggestionsResult,
+	A11yReport,
+	AxeResult,
+	AxeViolation,
+	AxePass,
+	AxeIncomplete,
+	AxeNode,
+} from './AccessibilityChecker';
+export { useAccessibilityCheck, useComplianceStatus } from './useAccessibilityCheck';
+export type { UseAccessibilityCheckOptions, AccessibilityCheckState } from './useAccessibilityCheck';

@@ -4,16 +4,13 @@
  */
 
 import { ExportedCode, ExportOptions } from '../../types/aiui';
+
 import { cssObjectToString, fabricToCSS, fabricToTailwind, formatCode, generateId, kebabToPascal } from './utils';
 
 /**
- * Generate Vue component from Fabric.js objects
+ * Generate Vue 3 Composition API component with script setup
  */
-const generateVueComponent = (
-	objects: any[],
-	options: ExportOptions,
-	componentName: string
-): string => {
+const generateVueComponent = (objects: any[], options: ExportOptions, componentName: string): string => {
 	const { styling, typescript } = options;
 	const useTailwind = styling === 'tailwind';
 
@@ -41,22 +38,29 @@ const generateVueComponent = (
 	const elements = objects.map((obj, index) => renderObject(obj, index)).join('\n    ');
 
 	const scriptLang = typescript ? ' lang="ts"' : '';
+
+	// Use script setup syntax for Vue 3 Composition API
+	// Include reactive features only if components have interactivity
+	const hasInteractivity = objects.some(obj => obj.interactive || obj.onClick);
+	
+	const scriptSetup = hasInteractivity 
+		? `<script setup${scriptLang}>
+import { ref } from 'vue';
+
+// Component state
+const isActive = ref(false);
+</script>`
+		: `<script setup${scriptLang}>
+// Vue 3 Composition API component
+</script>`;
+
 	const component = `<template>
   <div class="container">
     ${elements}
   </div>
 </template>
 
-<script${scriptLang}>
-import { defineComponent } from 'vue';
-
-export default defineComponent({
-  name: '${componentName}',
-  setup() {
-    return {};
-  },
-});
-</script>
+${scriptSetup}
 
 <style${styling === 'css-modules' ? ' module' : ''} scoped>
 .container {
@@ -66,6 +70,13 @@ export default defineComponent({
 }
 
 ${styling !== 'tailwind' ? generateVueCSS(objects) : ''}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .container {
+    padding: 15px;
+  }
+}
 </style>
 `;
 
