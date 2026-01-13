@@ -1,174 +1,174 @@
 {
-  "name": "Landing Page Template",
-  "description": "Modern landing page with hero section and feature cards",
-  "category": "marketing",
-  "version": "1.0.0",
-  "objects": [
-    {
-      "type": "rect",
-      "id": "header",
-      "left": 0,
-      "top": 0,
-      "width": 1200,
-      "height": 80,
-      "fill": "#ffffff",
-      "stroke": "#e5e7eb",
-      "strokeWidth": 1
-    },
-    {
-      "type": "text",
-      "id": "logo-text",
-      "left": 50,
-      "top": 30,
-      "text": "YourBrand",
-      "fontSize": 24,
-      "fontWeight": "bold",
-      "fill": "#1f2937"
-    },
-    {
-      "type": "rect",
-      "id": "hero",
-      "left": 0,
-      "top": 80,
-      "width": 1200,
-      "height": 500,
-      "fill": "#3b82f6"
-    },
-    {
-      "type": "text",
-      "id": "hero-title",
-      "left": 100,
-      "top": 250,
-      "text": "Build Amazing Products",
-      "fontSize": 48,
-      "fontWeight": "bold",
-      "fill": "#ffffff"
-    },
-    {
-      "type": "text",
-      "id": "hero-subtitle",
-      "left": 100,
-      "top": 320,
-      "text": "Create stunning designs with AI-powered tools",
-      "fontSize": 20,
-      "fill": "#e0e7ff"
-    },
-    {
-      "type": "rect",
-      "id": "cta-button",
-      "left": 100,
-      "top": 380,
-      "width": 200,
-      "height": 50,
-      "fill": "#ffffff",
-      "rx": 8,
-      "ry": 8
-    },
-    {
-      "type": "text",
-      "id": "cta-text",
-      "left": 150,
-      "top": 395,
-      "text": "Get Started",
-      "fontSize": 18,
-      "fontWeight": "bold",
-      "fill": "#3b82f6"
-    },
-    {
-      "type": "rect",
-      "id": "feature1",
-      "left": 100,
-      "top": 650,
-      "width": 300,
-      "height": 200,
-      "fill": "#ffffff",
-      "stroke": "#e5e7eb",
-      "strokeWidth": 1,
-      "rx": 8,
-      "ry": 8
-    },
-    {
-      "type": "text",
-      "id": "feature1-title",
-      "left": 120,
-      "top": 680,
-      "text": "Fast & Efficient",
-      "fontSize": 22,
-      "fontWeight": "bold",
-      "fill": "#1f2937"
-    },
-    {
-      "type": "text",
-      "id": "feature1-desc",
-      "left": 120,
-      "top": 720,
-      "text": "Build faster with our\noptimized tools",
-      "fontSize": 16,
-      "fill": "#6b7280"
-    },
-    {
-      "type": "rect",
-      "id": "feature2",
-      "left": 450,
-      "top": 650,
-      "width": 300,
-      "height": 200,
-      "fill": "#ffffff",
-      "stroke": "#e5e7eb",
-      "strokeWidth": 1,
-      "rx": 8,
-      "ry": 8
-    },
-    {
-      "type": "text",
-      "id": "feature2-title",
-      "left": 470,
-      "top": 680,
-      "text": "AI-Powered",
-      "fontSize": 22,
-      "fontWeight": "bold",
-      "fill": "#1f2937"
-    },
-    {
-      "type": "text",
-      "id": "feature2-desc",
-      "left": 470,
-      "top": 720,
-      "text": "Leverage AI for\nsmart design",
-      "fontSize": 16,
-      "fill": "#6b7280"
-    },
-    {
-      "type": "rect",
-      "id": "feature3",
-      "left": 800,
-      "top": 650,
-      "width": 300,
-      "height": 200,
-      "fill": "#ffffff",
-      "stroke": "#e5e7eb",
-      "strokeWidth": 1,
-      "rx": 8,
-      "ry": 8
-    },
-    {
-      "type": "text",
-      "id": "feature3-title",
-      "left": 820,
-      "top": 680,
-      "text": "Responsive",
-      "fontSize": 22,
-      "fontWeight": "bold",
-      "fill": "#1f2937"
-    },
-    {
-      "type": "text",
-      "id": "feature3-desc",
-      "left": 820,
-      "top": 720,
-      "text": "Works on all\ndevices seamlessly",
-      "fontSize": 16,
-      "fill": "#6b7280"
-    }
-  ]
+	"name": "Landing Page Template",
+	"description": "Modern landing page with hero section and feature cards",
+	"category": "marketing",
+	"version": "1.0.0",
+	"objects": [
+		{
+			"type": "rect",
+			"id": "header",
+			"left": 0,
+			"top": 0,
+			"width": 1200,
+			"height": 80,
+			"fill": "#ffffff",
+			"stroke": "#e5e7eb",
+			"strokeWidth": 1
+		},
+		{
+			"type": "text",
+			"id": "logo-text",
+			"left": 50,
+			"top": 30,
+			"text": "YourBrand",
+			"fontSize": 24,
+			"fontWeight": "bold",
+			"fill": "#1f2937"
+		},
+		{
+			"type": "rect",
+			"id": "hero",
+			"left": 0,
+			"top": 80,
+			"width": 1200,
+			"height": 500,
+			"fill": "#3b82f6"
+		},
+		{
+			"type": "text",
+			"id": "hero-title",
+			"left": 100,
+			"top": 250,
+			"text": "Build Amazing Products",
+			"fontSize": 48,
+			"fontWeight": "bold",
+			"fill": "#ffffff"
+		},
+		{
+			"type": "text",
+			"id": "hero-subtitle",
+			"left": 100,
+			"top": 320,
+			"text": "Create stunning designs with AI-powered tools",
+			"fontSize": 20,
+			"fill": "#e0e7ff"
+		},
+		{
+			"type": "rect",
+			"id": "cta-button",
+			"left": 100,
+			"top": 380,
+			"width": 200,
+			"height": 50,
+			"fill": "#ffffff",
+			"rx": 8,
+			"ry": 8
+		},
+		{
+			"type": "text",
+			"id": "cta-text",
+			"left": 150,
+			"top": 395,
+			"text": "Get Started",
+			"fontSize": 18,
+			"fontWeight": "bold",
+			"fill": "#3b82f6"
+		},
+		{
+			"type": "rect",
+			"id": "feature1",
+			"left": 100,
+			"top": 650,
+			"width": 300,
+			"height": 200,
+			"fill": "#ffffff",
+			"stroke": "#e5e7eb",
+			"strokeWidth": 1,
+			"rx": 8,
+			"ry": 8
+		},
+		{
+			"type": "text",
+			"id": "feature1-title",
+			"left": 120,
+			"top": 680,
+			"text": "Fast & Efficient",
+			"fontSize": 22,
+			"fontWeight": "bold",
+			"fill": "#1f2937"
+		},
+		{
+			"type": "text",
+			"id": "feature1-desc",
+			"left": 120,
+			"top": 720,
+			"text": "Build faster with our\noptimized tools",
+			"fontSize": 16,
+			"fill": "#6b7280"
+		},
+		{
+			"type": "rect",
+			"id": "feature2",
+			"left": 450,
+			"top": 650,
+			"width": 300,
+			"height": 200,
+			"fill": "#ffffff",
+			"stroke": "#e5e7eb",
+			"strokeWidth": 1,
+			"rx": 8,
+			"ry": 8
+		},
+		{
+			"type": "text",
+			"id": "feature2-title",
+			"left": 470,
+			"top": 680,
+			"text": "AI-Powered",
+			"fontSize": 22,
+			"fontWeight": "bold",
+			"fill": "#1f2937"
+		},
+		{
+			"type": "text",
+			"id": "feature2-desc",
+			"left": 470,
+			"top": 720,
+			"text": "Leverage AI for\nsmart design",
+			"fontSize": 16,
+			"fill": "#6b7280"
+		},
+		{
+			"type": "rect",
+			"id": "feature3",
+			"left": 800,
+			"top": 650,
+			"width": 300,
+			"height": 200,
+			"fill": "#ffffff",
+			"stroke": "#e5e7eb",
+			"strokeWidth": 1,
+			"rx": 8,
+			"ry": 8
+		},
+		{
+			"type": "text",
+			"id": "feature3-title",
+			"left": 820,
+			"top": 680,
+			"text": "Responsive",
+			"fontSize": 22,
+			"fontWeight": "bold",
+			"fill": "#1f2937"
+		},
+		{
+			"type": "text",
+			"id": "feature3-desc",
+			"left": 820,
+			"top": 720,
+			"text": "Works on all\ndevices seamlessly",
+			"fontSize": 16,
+			"fill": "#6b7280"
+		}
+	]
 }
